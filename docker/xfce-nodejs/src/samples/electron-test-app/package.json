@@ -1,0 +1,17 @@
+{
+    "name": "electron-test-app",
+    "version": "1.0.0",
+    "description": "Electron Test App",
+    "main": "main.js",
+    "scripts": {
+      "start": "electron --no-sandbox .",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Tester",
+    "license": "ISC",
+    "devDependencies": {
+      "electron": "^11.2.3"
+    }
+  }
+  
