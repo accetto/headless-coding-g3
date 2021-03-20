@@ -66,7 +66,7 @@ More information about the image generations can be found in the [sibling projec
 The main features and components of the images in the default configuration are:
 
 - utilities **ping**, **wget**, **sudo**, **dconf-editor**, [curl][curl], [git][git] (Ubuntu distribution)
-- utility **gdebi** which lets you to install local `.deb` packages with automatic resolution and installation of their dependencies (Ubuntu distribution)
+- utility **gdebi** for installing local `.deb` packages with automatic dependency resolution (Ubuntu distribution)
 - current version of JSON processor [jq][jq]
 - light-weight [Xfce][xfce] desktop environment (Ubuntu distribution)
 - current version of high-performance [TigerVNC][tigervnc] server and client
