@@ -18,8 +18,56 @@
 
 ***
 
+### TL;DR
+
+Updating [npm][npm]:
+
+```shell
+### globally
+npm install -g npm
+
+### checking the versions
+node -v
+npm -v
+npx -v
+```
+
+Installing [TypeScript][typescript]:
+
+```shell
+### globally
+npm install -g typescript
+
+### checking the version
+tsc --version
+```
+
+Installing [Angular][angular]:
+
+```shell
+### globally
+npm install -g @angular/cli
+
+### checking the version
+ng --version
+```
+
+Installing [Electron][electron]:
+
+```shell
+### local installation inside a project works usually better
+npm install --save-dev electron
+
+### apps need to be started with '--no-sandbox' option
+electron-test-app --no-sandbox %U
+```
+
+### Table of content
+
 - [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
   - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
+    - [TL;DR](#tldr)
+    - [Table of content](#table-of-content)
     - [Image tags](#image-tags)
     - [Ports](#ports)
     - [Volumes](#volumes)

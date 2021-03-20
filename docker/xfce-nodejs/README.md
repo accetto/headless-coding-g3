@@ -36,6 +36,48 @@ The fastest way to build the images locally:
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
+Updating [npm][npm]:
+
+```shell
+### globally
+npm install -g npm
+
+### checking the versions
+node -v
+npm -v
+npx -v
+```
+
+Installing [TypeScript][typescript]:
+
+```shell
+### globally
+npm install -g typescript
+
+### checking the version
+tsc --version
+```
+
+Installing [Angular][angular]:
+
+```shell
+### globally
+npm install -g @angular/cli
+
+### checking the version
+ng --version
+```
+
+Installing [Electron][electron]:
+
+```shell
+### local installation inside a project works usually better
+npm install --save-dev electron
+
+### apps need to be started with '--no-sandbox' option
+electron-test-app --no-sandbox %U
+```
+
 ### Table of contents
 
 - [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
