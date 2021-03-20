@@ -15,7 +15,7 @@ All images can also contain the current [Chromium][chromium] or [Firefox][firefo
 
 Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron][electron] usually requires only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
 
-## TL;DR
+### TL;DR
 
 The fastest way to build the images locally:
 
@@ -40,7 +40,7 @@ Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
 - [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
   - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
-  - [TL;DR](#tldr)
+    - [TL;DR](#tldr)
     - [Table of contents](#table-of-contents)
     - [Image tags](#image-tags)
     - [Ports](#ports)
@@ -48,8 +48,8 @@ Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
     - [Version sticker](#version-sticker)
   - [Using headless containers](#using-headless-containers)
     - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
-  - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
-  - [Startup options and help](#startup-options-and-help)
+    - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
+    - [Startup options and help](#startup-options-and-help)
   - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
   - [Credits](#credits)
 
@@ -217,11 +217,11 @@ It is also possible to provide the password through the links:
 
 This image supports several ways of overriding the VNC/noVNV parameters. The [sibling image README file][sibling-readme-xfce] describes how to do it.
 
-## Running containers in background or foreground
+### Running containers in background or foreground
 
 The [sibling image README file][sibling-readme-xfce] describes how to run the containers in the background (detached) of foreground (interactively).
 
-## Startup options and help
+### Startup options and help
 
 The startup options and help are also described in the [sibling image README file][sibling-readme-xfce].
 

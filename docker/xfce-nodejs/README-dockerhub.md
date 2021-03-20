@@ -18,6 +18,18 @@
 
 ***
 
+- [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
+  - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
+    - [Image tags](#image-tags)
+    - [Ports](#ports)
+    - [Volumes](#volumes)
+  - [Using headless containers](#using-headless-containers)
+    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
+    - [Startup options and help](#startup-options-and-help)
+    - [More information](#more-information)
+  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
+  - [Credits](#credits)
+
 This repository contains Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, the JavaScript-based platform [Node.js][nodejs] with [npm][npm] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
@@ -56,7 +68,7 @@ The history of notable changes is documented in the [CHANGELOG][this-changelog].
 
 ![container-screenshot][this-screenshot-container]
 
-## Image tags
+### Image tags
 
 The included resources allow building of almost any combination of the following selectable features:
 
@@ -124,7 +136,7 @@ Therefore only the following image tags will be regularly built and published on
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 
-## Ports
+### Ports
 
 Following **TCP** ports are exposed by default:
 
@@ -136,7 +148,7 @@ The VNC/noVNC default ports and also some other parameters can be overridden sev
 
 The [Node.js][nodejs] server default port can be overridden at the **image build-time** by the build argument `ARG_NODEJS_PORT` or at the **container startup-time** by the environment variable `NODEJS_PORT`.
 
-## Volumes
+### Volumes
 
 The containers do not create or use any external volumes by default.
 
@@ -162,15 +174,15 @@ Note that they will be copied locally only if the local directory, you have moun
 
 More information about using headless containers can be found in the [full-length README][this-readme-full] file on GitHub.
 
-## Overriding VNC/noVNC parameters
+### Overriding VNC/noVNC parameters
 
 This image supports several ways of overriding the VNC/noVNV parameters. The [sibling image README file][sibling-readme-xfce] describes how to do it.
 
-## Startup options and help
+### Startup options and help
 
 The startup options and help are also described in the [sibling image README file][sibling-readme-xfce].
 
-## More information
+### More information
 
 More information about these images can be found in the [full-length README][this-readme-full] file on GitHub.
 
