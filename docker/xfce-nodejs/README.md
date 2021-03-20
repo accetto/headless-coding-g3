@@ -101,15 +101,35 @@ You can build all possible variations of the images locally, but it would not be
 
 Therefore only the following image tags will be regularly built and published on Docker Hub (with `Node.js LTS` by default):
 
-- `latest` is identical to `vnc-novnc`
-- `vnc` implements only VNC
-- `vnc-novnc` implements VNC and noVNC
-- `vnc-novnc-chromium` adds Chromium
-- `vnc-novnc-vscode-chromium` adds VSCode and Chromium
-- `vnc-novnc-firefox-plus` adds Firefox and the plus features
-- `vnc-novnc-vscode-firefox-plus` adds Firefox and the plus features
-- `current-vnc-novnc` with Node.js `Current`
-- `current-vnc-novnc-vscode-chromium` with Node.js `Current`, VSCode and Chromium
+- images with [Node.js LTS][nodejs]
+  - base images
+    - `latest` is identical to `vnc-novnc`
+    - `vnc` implements only VNC
+    - `vnc-novnc` implements VNC and noVNC
+  - adding [Visual Studio Code][vscode]
+    - `vnc-vscode`
+    - `vnc-novnc-vscode`
+  - adding [Visual Studio Code][vscode] and [Chromium Browser][chromium]
+    - `vnc-vscode-chromium`
+    - `vnc-novnc-vscode-chromium`
+  - adding only [Chromium Browser][chromium]
+    - `vnc-chromium`
+    - `vnc-novnc-chromium`
+- images with [Node.js Current][nodejs]
+  - base images
+    - `current-vnc-novnc`
+
+The following image tags will not be built or published on Docker Hub, but they can be built any time locally from the same [source repository][this-github]:
+
+- images with [Node.js LTS][nodejs]
+  - adding [Firefox][firefox] with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
+    - `vnc-novnc-firefox` and `vnc-novnc-firefox-plus`
+  - adding [Visual Studio Code][vscode] and [Firefox][firefox] with optional **plus features**
+    - `vnc-novnc-vscode-firefox` and `vnc-novnc-vscode-firefox-plus`
+  - other images
+    - various combinations of other, more subtle, features (see the hook script `env.rc`)
+- images with [Node.js Current][nodejs]
+  - the same spectrum of images as by the `LTS` version, only their tags would start with the prefix `current-`
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 

@@ -56,7 +56,7 @@ The history of notable changes is documented in the [CHANGELOG][this-changelog].
 
 ![container-screenshot][this-screenshot-container]
 
-### Image tags
+## Image tags
 
 The included resources allow building of almost any combination of the following selectable features:
 
@@ -66,11 +66,11 @@ The included resources allow building of almost any combination of the following
 - optional **Chromium** or **Firefox** browser with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
 - optional **screenshooting** and **thumbnailing** support
 
-There are also other, more subtle, optional features.
+There are also other, more subtle, optional features. Check the hook script `env.rc` if you are interested about them.
 
 You can build all possible variations of the images locally, but it would not be reasonable to do the same on Docker Hub.
 
-Therefore only the following image tags will be regularly built and published on Docker Hub (with `Node.js LTS` by default):
+Therefore only the following image tags will be regularly built and published on Docker Hub (with [Node.js][nodejs] `LTS` by default):
 
 - `latest` is identical to `vnc-novnc`
 
@@ -87,41 +87,104 @@ Therefore only the following image tags will be regularly built and published on
     ![badge_vnc-novnc_created][badge_vnc-novnc_created]
     [![badge_vnc-novnc_version-sticker][badge_vnc-novnc_version-sticker]][link_vnc-novnc_version-sticker-verbose]
 
-- `vnc-novnc-chromium` adds Chromium
+- `vnc-vscode` adds [Visual Studio Code][vscode], implements only VNC
+
+    ![badge_vnc-vscode_created][badge_vnc-vscode_created]
+    [![badge_vnc-vscode_version-sticker][badge_vnc-vscode_version-sticker]][link_vnc-vscode_version-sticker-verbose]
+
+- `vnc-novnc-vscode` adds [Visual Studio Code][vscode], implements VNC and noVNC
+
+    ![badge_vnc-novnc-vscode_created][badge_vnc-novnc-vscode_created]
+    [![badge_vnc-novnc-vscode_version-sticker][badge_vnc-novnc-vscode_version-sticker]][link_vnc-novnc-vscode_version-sticker-verbose]
+
+- `vnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements only VNC
+
+    ![badge_vnc-vscode-chromium_created][badge_vnc-vscode-chromium_created]
+    [![badge_vnc-vscode-chromium_version-sticker][badge_vnc-vscode-chromium_version-sticker]][link_vnc-vscode-chromium_version-sticker-verbose]
+
+- `vnc-novnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements VNC and noVNC
 
     ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
     [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
 
-- `vnc-novnc-vscode-chromium` adds VSCode and Chromium
+- `vnc-chromium` adds only [Chromium Browser][chromium], implements only VNC
 
-    ![badge_vnc-novnc-vscode-chromium_created][badge_vnc-novnc-vscode-chromium_created]
-    [![badge_vnc-novnc-vscode-chromium_version-sticker][badge_vnc-novnc-vscode-chromium_version-sticker]][link_vnc-novnc-vscode-chromium_version-sticker-verbose]
+    ![badge_vnc-chromium_created][badge_vnc-chromium_created]
+    [![badge_vnc-chromium_version-sticker][badge_vnc-chromium_version-sticker]][link_vnc-chromium_version-sticker-verbose]
 
-- `vnc-novnc-firefox-plus` adds Firefox and the plus features
+- `vnc-novnc-chromium` adds only [Chromium Browser][chromium], implements VNC and noVNC
 
-    ![badge_vnc-novnc-firefox-plus_created][badge_vnc-novnc-firefox-plus_created]
-    [![badge_vnc-novnc-firefox-plus_version-sticker][badge_vnc-novnc-firefox-plus_version-sticker]][link_vnc-novnc-firefox-plus_version-sticker-verbose]
+    ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
+    [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
 
-- `vnc-novnc-vscode-firefox-plus` adds Firefox and the plus features
-
-    ![badge_vnc-novnc-vscode-firefox-plus_created][badge_vnc-novnc-vscode-firefox-plus_created]
-    [![badge_vnc-novnc-vscode-firefox-plus_version-sticker][badge_vnc-novnc-vscode-firefox-plus_version-sticker]][link_vnc-novnc-vscode-firefox-plus_version-sticker-verbose]
-
-- `current-vnc-novnc` with Node.js `Current`
+- `current-vnc-novnc` with [Node.js][nodejs] `Current`
 
     ![badge_current-vnc-novnc_created][badge_current-vnc-novnc_created]
     [![badge_current-vnc-novnc_version-sticker][badge_current-vnc-novnc_version-sticker]][link_current-vnc-novnc_version-sticker-verbose]
 
-- `current-vnc-novnc-vscode-chromium` with Node.js `Current`, VSCode and Chromium
-
-    ![badge_current-vnc-novnc-vscode-chromium_created][badge_current-vnc-novnc-vscode-chromium_created]
-    [![badge_current-vnc-novnc-vscode-chromium_version-sticker][badge_current-vnc-novnc-vscode-chromium_version-sticker]][link_current-vnc-novnc-vscode-chromium_version-sticker-verbose]
-
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 
-### More information
+## Ports
+
+Following **TCP** ports are exposed by default:
+
+- **5901** is used for access over **VNC**
+- **6901** is used for access over [noVNC][novnc]
+- **3000** is used by the [Node.js][nodejs] server
+
+The VNC/noVNC default ports and also some other parameters can be overridden several ways as it is described in the [sibling image README file][sibling-readme-xfce].
+
+The [Node.js][nodejs] server default port can be overridden at the **image build-time** by the build argument `ARG_NODEJS_PORT` or at the **container startup-time** by the environment variable `NODEJS_PORT`.
+
+## Volumes
+
+The containers do not create or use any external volumes by default.
+
+Both **named volumes** and **bind mounts** can be used. More about volumes can be found in [Docker documentation][docker-doc] (e.g. [Manage data in Docker][docker-doc-managing-data]).
+
+However, the container's mounting point `/srv/projects/` is intended for sharing the projects between the container and the host computer:
+
+```shell
+docker run -v /my_local_projects:/srv/projects ...
+
+### or using the newer syntax
+docker run --mount source=/my_local_projects,target=/srv/projects ...
+```
+
+The container's directory `/srv/projects` already contains the following simple testing applications:
+
+- nodejs-test-app
+- electron-test-app
+
+Note that they will be copied locally only if the local directory, you have mounted, has been empty.
+
+## Using headless containers
+
+More information about using headless containers can be found in the [full-length README][this-readme-full] file on GitHub.
+
+## Overriding VNC/noVNC parameters
+
+This image supports several ways of overriding the VNC/noVNV parameters. The [sibling image README file][sibling-readme-xfce] describes how to do it.
+
+## Startup options and help
+
+The startup options and help are also described in the [sibling image README file][sibling-readme-xfce].
+
+## More information
 
 More information about these images can be found in the [full-length README][this-readme-full] file on GitHub.
+
+## Issues, Wiki and Discussions
+
+If you have found a problem or you just have a question, please check the [Issues][this-issues], the [sibling Issues][sibling-issues] and the [sibling Wiki][sibling-wiki] first. Please do not overlook the closed issues.
+
+If you do not find a solution, you can file a new issue. The better you describe the problem, the bigger the chance it'll be solved soon.
+
+If you have a question or an idea and you don't want to open an issue, you can use the [sibling Discussions][sibling-discussions].
+
+## Credits
+
+Credit goes to all the countless people and companies, who contribute to open source community and make so many dreamy things real.
 
 ***
 
