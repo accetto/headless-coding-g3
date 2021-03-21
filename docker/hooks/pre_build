@@ -22,9 +22,9 @@ main() {
 
     case "${_blend}" in
 
-        ### -------------------
-        ### headless-drawing-g3
-        ### -------------------
+        ### -------------------------
+        ### ubuntu-vnc-xfce-nodejs-g3
+        ### -------------------------
 
         nodejs-vnc* | nodejs-current-vnc* | latest-nodejs )
 
@@ -57,9 +57,9 @@ main() {
             set +x
             ;;
 
-        ### -------------------
-        ### headless-drawing-g3
-        ### -------------------
+        ### --------------------------------
+        ### headless-coding-g3 (base images)
+        ### --------------------------------
 
         ### These base images will not be built or published on Docker Hub.
 

@@ -25,9 +25,9 @@ main() {
 
     case "${_blend}" in
 
-        ### ------------------
-        ### headless-coding-g3
-        ### ------------------
+        ### -------------------------
+        ### ubuntu-vnc-xfce-nodejs-g3
+        ### -------------------------
 
         nodejs-vnc* | nodejs-current-vnc* | latest-nodejs )
 
