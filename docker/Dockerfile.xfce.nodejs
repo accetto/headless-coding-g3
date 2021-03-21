@@ -409,10 +409,10 @@ ARG ARG_VERSION_STICKER
 LABEL \
     org.opencontainers.image.authors="accetto" \
     org.opencontainers.image.created="${ARG_CREATED}" \
-    org.opencontainers.image.description="Headless Ubuntu/Xfce/VNC/noVNC/Chromium/Firefox containers for programming" \
+    org.opencontainers.image.description="Headless Ubuntu/Xfce/VNC/noVNC/Chromium/Firefox containers for Node.js programming" \
     org.opencontainers.image.documentation="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.source="https://github.com/accetto/headless-coding-g3" \
-    org.opencontainers.image.title="accetto/headless-coding-g3" \
+    org.opencontainers.image.title="accetto/ubuntu-vnc-xfce-nodejs-g3" \
     org.opencontainers.image.url="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.vendor="https://github.com/accetto" \
     org.opencontainers.image.version="${ARG_DOCKER_TAG}"
