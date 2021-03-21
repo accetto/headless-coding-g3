@@ -157,6 +157,9 @@ Therefore only the following image tags will be regularly built and published on
   - adding only [Chromium Browser][chromium]
     - `vnc-chromium`
     - `vnc-novnc-chromium`
+  - adding [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
+    - `vnc-vscode-firefox-plus`
+    - `vnc-novnc-vscode-firefox-plus`
 - images with [Node.js Current][nodejs]
   - base images
     - `current-vnc-novnc`
@@ -165,9 +168,11 @@ The following image tags will not be built or published on Docker Hub, but they 
 
 - images with [Node.js LTS][nodejs]
   - adding [Firefox][firefox] with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
+    - `vnc-firefox` and `vnc-firefox-plus`
     - `vnc-novnc-firefox` and `vnc-novnc-firefox-plus`
-  - adding [Visual Studio Code][vscode] and [Firefox][firefox] with optional **plus features**
-    - `vnc-novnc-vscode-firefox` and `vnc-novnc-vscode-firefox-plus`
+  - adding [Visual Studio Code][vscode] and [Firefox][firefox]
+    - `vnc-vscode-firefox`
+    - `vnc-novnc-vscode-firefox`
   - other images
     - various combinations of other, more subtle, features (see the hook script `env.rc`)
 - images with [Node.js Current][nodejs]

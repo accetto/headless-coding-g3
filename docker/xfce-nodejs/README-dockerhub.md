@@ -177,7 +177,17 @@ Therefore only the following image tags will be regularly built and published on
     ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
     [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
 
-- `current-vnc-novnc` with [Node.js][nodejs] `Current`
+- `vnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements only VNC
+
+    ![badge_vnc-vscode-firefox-plus_created][badge_vnc-vscode-firefox-plus_created]
+    [![badge_vnc-vscode-firefox-plus_version-sticker][badge_vnc-vscode-firefox-plus_version-sticker]][link_vnc-vscode-firefox-plus_version-sticker-verbose]
+
+- `vnc-novnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements VNC and noVNC
+
+    ![badge_vnc-novnc-vscode-firefox-plus_created][badge_vnc-novnc-vscode-firefox-plus_created]
+    [![badge_vnc-novnc-vscode-firefox-plus_version-sticker][badge_vnc-novnc-vscode-firefox-plus_version-sticker]][link_vnc-novnc-vscode-firefox-plus_version-sticker-verbose]
+
+- `current-vnc-novnc` with [Node.js][nodejs] `Current`, implements VNC and noVNC
 
     ![badge_current-vnc-novnc_created][badge_current-vnc-novnc_created]
     [![badge_current-vnc-novnc_version-sticker][badge_current-vnc-novnc_version-sticker]][link_current-vnc-novnc_version-sticker-verbose]
