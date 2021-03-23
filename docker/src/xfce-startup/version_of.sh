@@ -89,6 +89,22 @@ case "$1" in
         ### source example: psql (PostgreSQL) 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
         echo $(psql --version 2>/dev/null | grep -Po -m1 '(?<=psql \(PostgreSQL\)\s)[0-9.]+')
         ;;
+    python )
+        ### source example: Python 3.8.5
+        echo $(python --version 2>/dev/null | grep -Po -m1 '[0-9.]+$')
+        ;;
+    python-pip )
+        ### source example: pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
+        echo $(python -m pip --version 2>/dev/null | grep -Po -m1 '(?<=pip\s)[0-9.]+')
+        ;;
+    python3 )
+        ### source example: Python 3.8.5
+        echo $(python3 --version 2>/dev/null | grep -Po -m1 '[0-9.]+$')
+        ;;
+    python3-pip )
+        ### source example: pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
+        echo $(python3 -m pip --version 2>/dev/null | grep -Po -m1 '(?<=pip\s)[0-9.]+')
+        ;;
     ristretto )
         ### source example: ristretto 0.8.2
         echo $(ristretto --version 2>/dev/null | grep -Po -m1 '[0-9.]+$')
