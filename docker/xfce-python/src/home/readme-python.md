@@ -1,6 +1,6 @@
 # Readme `Python`
 
-This Docker image comes with only a few Python modules by intention. That allows you to choose the modules and the way of installation that suite you best.
+This Docker image comes with only a few Python modules installed by intention. That allows you to choose the modules and the way of installation that suite you best.
 
 ## Updating `pip` and setup tools
 
@@ -11,9 +11,9 @@ python -m pip install --upgrade pip setuptools wheel
 
 ```
 
-## Installing modules
+## Installing libraries and Python modules
 
-Some modules can be installed by `apt-get`, for example:
+Additional libraries and some Python modules can be installed by `apt-get`, for example:
 
 ```shell
 ### apt cache needs to be refreshed only once
@@ -23,14 +23,17 @@ sudo apt-get update
 sudo apt-get install python3-numpy
 ```
 
-Other modules can be installed by `pip`, for example:
+Other Python modules can be installed by `pip`, for example:
 
 ```shell
 ### framework for building CLI applications
+pip install typer
+
+### or also
 python -m pip install typer
 ```
 
-## Installing GUI frameworks
+## Installing Python GUI frameworks
 
 The following GUI frameworks are mutually exclusive, you need only one of them. There are sorted from the simplest one. The simple test applications can be found in `/srv/projects/`.
 
@@ -43,8 +46,8 @@ sudo apt-get update
 ### install Tkinter
 sudo apt-get -y install python3-tk
 
-### optional: built-in test should open a window
-python -m tkinter
+### optional check: built-in test should open a window
+### python -m tkinter
 ```
 
 Installing `wxPython`:
@@ -94,15 +97,23 @@ pip install pyside2
 sudo apt-get -y install qttools5-dev-tools
 ```
 
-## Other tips
-
-You can check the installed `Python` version by:
+Installing `Kivy`:
 
 ```shell
-python --version
+### apt cache needs to be refreshed only once
+sudo apt-get update
 
-### or also
-python3 --version
+### install required libraries
+sudo apt-get -y install libgl1 libmtdev1
+
+### install Kivy
+pip install kivy[base]
+
+### optional: Kivy examples
+### /home/headless/.local/share/kivy-examples/
+pip install kivy_examples
 ```
 
-You start by following the [Python Documentation](https://www.python.org/doc/).
+## What next
+
+You can start by checking the [Python Documentation](https://www.python.org/doc/).
