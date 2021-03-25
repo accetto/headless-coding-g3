@@ -57,6 +57,45 @@ main() {
             set +x
             ;;
 
+        ### -------------------------
+        ### ubuntu-vnc-xfce-python-g3
+        ### -------------------------
+
+        python-vnc* | latest-python )
+
+            set -x
+            docker build $@ \
+                -f "${DOCKERFILE_PATH}" \
+                    --build-arg BUILDKIT_INLINE_CACHE=1 \
+                    --build-arg BASEIMAGE="${BASEIMAGE}" \
+                    --build-arg BASETAG="${BASETAG}" \
+                    \
+                    ${FEATURES_BUILD_SLIM:+--build-arg ARG_APT_NO_RECOMMENDS=1} \
+                    ${FEATURES_SCREENSHOOTING:+--build-arg ARG_FEATURES_SCREENSHOOTING=1} \
+                    ${FEATURES_THUMBNAILING:+--build-arg ARG_FEATURES_THUMBNAILING=1} \
+                    ${FEATURES_USER_GROUP_OVERRIDE:+--build-arg ARG_FEATURES_USER_GROUP_OVERRIDE=1} \
+                    \
+                    ${FEATURES_NOVNC:+--build-arg ARG_MERGE_STAGE_VNC_BASE="stage_novnc"} \
+                    \
+                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_VERSION=${CHROMIUM_VERSION}} \
+                    ${FEATURES_CHROMIUM:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_chromium"} \
+                    \
+                    ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \
+                    ${FEATURES_FIREFOX_PLUS:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox_plus"} \
+                    \
+                    ${FEATURES_PYTHON_KIVY:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_kivy"} \
+                    ${FEATURES_PYTHON_PYQT5:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_pyqt5"} \
+                    ${FEATURES_PYTHON_PYSIDE2:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_pyside2"} \
+                    ${FEATURES_PYTHON_TKINTER:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_tkinter"} \
+                    ${FEATURES_PYTHON_WXPYTHON:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_wxpython"} \
+                    \
+                    ${FEATURES_PYTHON:+--build-arg ARG_FINAL_STAGE_BASE="merge_stage_pyton"} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
+                    \
+                -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"
+            set +x
+            ;;
+
         ### --------------------------------
         ### headless-coding-g3 (base images)
         ### --------------------------------
