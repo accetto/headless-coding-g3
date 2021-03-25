@@ -175,11 +175,6 @@ Therefore only the following image tags will be regularly built and published on
     ![badge_vnc-novnc-vscode-firefox-plus_created][badge_vnc-novnc-vscode-firefox-plus_created]
     [![badge_vnc-novnc-vscode-firefox-plus_version-sticker][badge_vnc-novnc-vscode-firefox-plus_version-sticker]][link_vnc-novnc-vscode-firefox-plus_version-sticker-verbose]
 
-- `current-vnc-novnc` with [Node.js][nodejs] `Current`, implements VNC and noVNC
-
-    ![badge_current-vnc-novnc_created][badge_current-vnc-novnc_created]
-    [![badge_current-vnc-novnc_version-sticker][badge_current-vnc-novnc_version-sticker]][link_current-vnc-novnc_version-sticker-verbose]
-
 The [source repository][this-github] contains also the branch `bonus-images-python-gui-frameworks`, which allows building images already including the most popular Python GUI frameworks (see above). Those images could be occasionally pushed to Docker Hub, but there will be no effort to do it regularly. However, you can built them locally any time.
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
