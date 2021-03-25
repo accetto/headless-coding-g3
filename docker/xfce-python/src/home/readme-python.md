@@ -8,7 +8,6 @@ You can update pip and the related setup tools by:
 
 ```shell
 python -m pip install --upgrade pip setuptools wheel
-
 ```
 
 ## Installing libraries and Python modules
@@ -26,8 +25,15 @@ sudo apt-get install python3-numpy
 Other Python modules can be installed by `pip`, for example:
 
 ```shell
+### framework for easy logging
+pip install loguru
+
 ### framework for building CLI applications
-python -m pip install typer
+pip install typer
+
+### or also
+### python -m pip install loguru
+### python -m pip install typer
 ```
 
 ## Installing Python GUI frameworks
@@ -43,8 +49,8 @@ sudo apt-get update
 ### install Tkinter
 sudo apt-get -y install python3-tk
 
-### optional: built-in test should open a window
-python -m tkinter
+### optional check: built-in test should open a window
+### python -m tkinter
 ```
 
 Installing `wxPython`:
@@ -114,3 +120,5 @@ pip install kivy_examples
 ## What next
 
 You can start by checking the [Python Documentation](https://www.python.org/doc/).
+
+There are also some sample applications in `/srv/projects/`.
