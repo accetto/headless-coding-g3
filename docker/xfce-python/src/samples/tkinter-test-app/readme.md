@@ -1,6 +1,6 @@
 # Readme `tkinter-test-app`
 
-This is a very simple test application for Python GUI framework `Tkinter` (Tk interface).
+This is a very simple test application for the Python GUI framework `Tkinter` (Tk interface).
 
 ## Prerequisites
 
@@ -14,3 +14,7 @@ This test application should open a simple window:
 ### PWD = /srv/projects/tkinter-test-app
 python ./main.py
 ```
+
+## What next
+
+You can start by checking the [Tkinter documentation](https://docs.python.org/3/library/tkinter.html).

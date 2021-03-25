@@ -1,6 +1,6 @@
 # Readme `pyqt-test-app`
 
-This is a very simple test application for Python GUI framework `PyQt5`.
+This is a very simple test application for the Python GUI framework `PyQt5`.
 
 ## Prerequisites
 
@@ -14,3 +14,7 @@ This test application should open a simple window:
 ### PWD = /srv/projects/pqt-test-app
 python ./main.py
 ```
+
+## What next
+
+You can start by checking the [PyQt5 documentation](https://riverbankcomputing.com/static/Docs/PyQt5).
