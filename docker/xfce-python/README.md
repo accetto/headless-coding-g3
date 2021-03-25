@@ -1,6 +1,6 @@
-# Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development
+# Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development
 
-## accetto/ubuntu-vnc-xfce-nodejs-g3
+## accetto/ubuntu-vnc-xfce-python-g3
 
 [Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Docker Readme][this-readme-dockerhub] - [Changelog][this-changelog] - [Project Readme][this-readme-project] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
 
@@ -9,11 +9,11 @@
 ![badge-github-release][badge-github-release]
 ![badge-github-release-date][badge-github-release-date]
 
-This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, the JavaScript-based platform [Node.js][nodejs] with [npm][npm] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
+This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, [Python][python] programming language with its package installer [pip][pip] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
 
-Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron][electron] usually requires only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
+Adding more tools like, for example, the most popular Python GUI frameworks [TKinter][tkinter], [PyQt5][pyqt5], [PyQT for Python][pyside] (`PySide2` or `PySide6`), [wxPython][wxpython] or [Kivy][kivy] usually requires only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
 
 ### TL;DR
 
@@ -21,67 +21,38 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
-./docker/hooks/build dev nodejs-vnc
-./docker/hooks/build dev nodejs-vnc-chromium
-./docker/hooks/build dev nodejs-vnc-vscode
-./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-novnc
-./docker/hooks/build dev nodejs-vnc-novnc-chromium
-./docker/hooks/build dev nodejs-vnc-novnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-plus
-./docker/hooks/build dev nodejs-current-vnc-vscode
+./docker/hooks/build dev python-vnc
+./docker/hooks/build dev python-vnc-chromium
+./docker/hooks/build dev python-vnc-vscode
+./docker/hooks/build dev python-vnc-vscode-chromium
+./docker/hooks/build dev python-vnc-novnc
+./docker/hooks/build dev python-vnc-novnc-chromium
+./docker/hooks/build dev python-vnc-novnc-vscode-chromium
+./docker/hooks/build dev python-vnc-vscode-firefox
+./docker/hooks/build dev python-vnc-vscode-firefox-plus
+### and so on ...
+
+### from the branch 'bonus-images-python-gui-frameworks'
+./docker/hooks/build dev python-vnc-tkinter
+./docker/hooks/build dev python-vnc-wxpython
+./docker/hooks/build dev python-vnc-pyqt5
+./docker/hooks/build dev python-vnc-pyside2
+./docker/hooks/build dev python-vnc-pyside6
+./docker/hooks/build dev python-vnc-kivy
+./docker/hooks/build dev python-vnc-tkinter-vscode
+./docker/hooks/build dev python-vnc-tkinter-vscode-chromium
+./docker/hooks/build dev python-vnc-novnc-tkinter
 ### and so on ...
 ```
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
-Updating [npm][npm]:
-
-```shell
-### globally
-npm install -g npm
-
-### checking the versions
-node -v
-npm -v
-npx -v
-```
-
-Installing [TypeScript][typescript]:
-
-```shell
-### globally
-npm install -g typescript
-
-### checking the version
-tsc --version
-```
-
-Installing [Angular][angular]:
-
-```shell
-### globally
-npm install -g @angular/cli
-
-### checking the version
-ng --version
-```
-
-Installing [Electron][electron]:
-
-```shell
-### local installation inside a project works usually better
-npm install --save-dev electron
-
-### apps need to be started with '--no-sandbox' option
-electron-test-app --no-sandbox %U
-```
+The [python-readme][this-readme-python] describes how to install additional Python modules and GUI frameworks. The simple test applications are in `/srv/projects/`.
 
 ### Table of contents
 
-- [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
-  - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
+- [Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development](#headless-ubuntuxfce-container-with-vncnovnc-for-python-development)
+  - [accetto/ubuntu-vnc-xfce-python-g3](#accettoubuntu-vnc-xfce-python-g3)
     - [TL;DR](#tldr)
     - [Table of contents](#table-of-contents)
     - [Image tags](#image-tags)
@@ -95,9 +66,7 @@ electron-test-app --no-sandbox %U
   - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
   - [Credits](#credits)
 
-This is the **third generation** (G3) of my headless images. They replace the **second generation** (G2) of similar images from the GitHub repository [accetto/xubuntu-vnc][accetto-github-xubuntu-vnc], which will be archived.
-
-More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
+This is the **third generation** (G3) of my headless images. More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
 
 **Remark:** The images can optionally contain the current `Chromium Browser` version from the `Ubuntu 18.04 LTS` distribution. This is because the version for `Ubuntu 20.04 LTS` depends on `snap`, which is not working correctly in Docker at this time. They can also optionally contain the latest version of the current [Firefox][firefox] browser for `Ubuntu 20.04 LTS`.
 
@@ -121,7 +90,7 @@ The main features and components of the images in the default configuration are:
 - optionally the current version of [Chromium Browser][chromium] open-source web browser (from the `Ubuntu 18.04 LTS` distribution)
 - optionally the current version of [Firefox][firefox] web browser and optionally also some additional **plus** features described in the [sibling image README][sibling-readme-xfce-firefox]
 
-All images include the `LTS` or the `current` version of [Node.js][nodejs] with [npm][npm] and optionally also the current version of the free open-source developer editor [Visual Studio Code][vscode].
+All images include [Python][python] with [pip][pip] package installer (Ubuntu distribution) and optionally also the current version of the free open-source developer editor [Visual Studio Code][vscode].
 
 The history of notable changes is documented in the [CHANGELOG][this-changelog].
 
@@ -132,7 +101,7 @@ The history of notable changes is documented in the [CHANGELOG][this-changelog].
 The included resources allow building of almost any combination of the following selectable features:
 
 - **VNC** server with optional **noVNC** access
-- **LTS** or **current** version of **Node.js**
+- **Python** with **pip** package installer
 - optional **Visual Studio Code** editor
 - optional **Chromium** or **Firefox** browser with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
 - optional **screenshooting** and **thumbnailing** support
@@ -141,9 +110,9 @@ There are also other, more subtle, optional features. Check the hook script `env
 
 You can build all possible variations of the images locally, but it would not be reasonable to do the same on Docker Hub.
 
-Therefore only the following image tags will be regularly built and published on Docker Hub (with `Node.js LTS` by default):
+Therefore only the following image tags will be regularly built and published on Docker Hub:
 
-- images with [Node.js LTS][nodejs]
+- images with [Python][python] from Ubuntu distribution
   - base images
     - `latest` is identical to `vnc-novnc`
     - `vnc` implements only VNC
@@ -160,13 +129,10 @@ Therefore only the following image tags will be regularly built and published on
   - adding [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
     - `vnc-vscode-firefox-plus`
     - `vnc-novnc-vscode-firefox-plus`
-- images with [Node.js Current][nodejs]
-  - base images
-    - `current-vnc-novnc`
 
 The following image tags will not be built or published on Docker Hub, but they can be built any time locally from the same [source repository][this-github]:
 
-- images with [Node.js LTS][nodejs]
+- images with [Python][python] from Ubuntu distribution
   - adding [Firefox][firefox] with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
     - `vnc-firefox` and `vnc-firefox-plus`
     - `vnc-novnc-firefox` and `vnc-novnc-firefox-plus`
@@ -175,8 +141,8 @@ The following image tags will not be built or published on Docker Hub, but they 
     - `vnc-novnc-vscode-firefox`
   - other images
     - various combinations of other, more subtle, features (see the hook script `env.rc`)
-- images with [Node.js Current][nodejs]
-  - the same spectrum of images as by the `LTS` version, only their tags would start with the prefix `current-`
+
+The [source repository][this-github] contains also the branch `bonus-images-python-gui-frameworks`, which allows building images already including the most popular Python GUI frameworks (see above). Those images could be occasionally pushed to Docker Hub, but there will be no effort to do it regularly. However, you can built them locally any time.
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 
@@ -186,11 +152,8 @@ Following **TCP** ports are exposed by default:
 
 - **5901** is used for access over **VNC**
 - **6901** is used for access over [noVNC][novnc]
-- **3000** is used by the [Node.js][nodejs] server
 
 The VNC/noVNC default ports and also some other parameters can be overridden several ways as it is described in the [sibling image README file][sibling-readme-xfce].
-
-The [Node.js][nodejs] server default port can be overridden at the **image build-time** by the build argument `ARG_NODEJS_PORT` or at the **container startup-time** by the environment variable `NODEJS_PORT`.
 
 ### Volumes
 
@@ -209,8 +172,13 @@ docker run --mount source=/my_local_projects,target=/srv/projects ...
 
 The container's directory `/srv/projects` already contains the following simple testing applications:
 
-- nodejs-test-app
-- electron-test-app
+- loguru-test-app
+- typer-cli-test-app
+- tkinter-test-app
+- wx-test-app
+- pyqt-test-app
+- pyside-test-app
+- kivy-test-app
 
 Note that they will be copied locally only if the local directory, you have mounted, has been empty.
 
@@ -291,8 +259,9 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
-[this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+[this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
+[this-readme-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/src/home/readme-python.md
 
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 [sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
@@ -304,10 +273,10 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- Docker image specific -->
 
-[this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3/
-[this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
+[this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3/
+[this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-nodejs/ubuntu-vnc-xfce-nodejs.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-python/ubuntu-vnc-xfce-python.jpg
 
 <!-- Previous generations -->
 
@@ -322,23 +291,27 @@ Credit goes to all the countless people and companies, who contribute to open so
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
 
-[angular]: https://angular.io/
 [chromium]: https://www.chromium.org/Home
 [curl]: http://manpages.ubuntu.com/manpages/bionic/man1/curl.1.html
-[electron]: https://www.electronjs.org/
 [firefox]: https://www.mozilla.org
 [git]: https://git-scm.com/
-[nodejs]: https://www.nodejs.org/
 [jq]: https://stedolan.github.io/jq/
+[kivy]: https://kivy.org/#home
 [mousepad]: https://github.com/codebrainz/mousepad
 [nano]: https://www.nano-editor.org/
 [novnc]: https://github.com/kanaka/noVNC
 [npm]: https://www.npmjs.com/
+[pip]: https://pip.pypa.io/en/stable/
+[pyqt5]: https://www.riverbankcomputing.com/software/pyqt/
+[pyside]: https://doc.qt.io/qtforpython/
+[python]: https://www.python.org/
 [tigervnc]: http://tigervnc.org
 [tightvnc]: http://www.tightvnc.com
 [tini]: https://github.com/krallin/tini
+[tkinter]: https://wiki.python.org/moin/TkInter
 [typescript]: https://www.typescriptlang.org/
 [vscode]: https://code.visualstudio.com/
+[wxpython]: https://wxpython.org/
 [xfce]: http://www.xfce.org
 
 <!-- github badges common -->
@@ -349,6 +322,6 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- docker badges specific -->
 
-[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/ubuntu-vnc-xfce-nodejs-g3?icon=docker&label=pulls
+[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=pulls
 
-[badge-docker-stars]: https://badgen.net/docker/stars/accetto/ubuntu-vnc-xfce-nodejs-g3?icon=docker&label=stars
+[badge-docker-stars]: https://badgen.net/docker/stars/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=stars

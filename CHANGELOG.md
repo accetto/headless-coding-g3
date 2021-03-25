@@ -1,10 +1,14 @@
 # CHANGELOG
 
-## Project `accetto/headless-drawing-g3`
+## Project `accetto/headless-coding-g3`
 
 [Docker Hub][this-docker] - [Git Hub][this-github] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
 
 ***
+
+### Release 21.03.1
+
+- added **xfce-python** into [accetto/ubuntu-vnc-xfce-python-g3][accetto-ubuntu-vnc-xfce-python-g3]
 
 ### Release 21.03
 
@@ -21,3 +25,4 @@
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 
 [accetto-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+[accetto-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
