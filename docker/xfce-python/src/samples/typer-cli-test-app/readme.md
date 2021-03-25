@@ -7,7 +7,7 @@ This is a very simple CLI application with Python `typer` module.
 First install `typer`:
 
 ```shell
-python -m pip install typer
+pip install typer
 ```
 
 ## Starting test application
