@@ -21,4 +21,4 @@ python ./main.py
 
 ## What next
 
-You can start by checking the [Loguru](https://github.com/Delgan/loguru) documentation.
+You can start by checking the [Loguru documentation](https://github.com/Delgan/loguru).

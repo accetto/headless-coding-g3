@@ -86,6 +86,7 @@ main() {
                     ${FEATURES_PYTHON_KIVY:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_kivy"} \
                     ${FEATURES_PYTHON_PYQT5:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_pyqt5"} \
                     ${FEATURES_PYTHON_PYSIDE2:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_pyside2"} \
+                    ${FEATURES_PYTHON_PYSIDE6:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_pyside6"} \
                     ${FEATURES_PYTHON_TKINTER:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_tkinter"} \
                     ${FEATURES_PYTHON_WXPYTHON:+--build-arg ARG_MERGE_STAGE_PYTHON_BASE="stage_python_wxpython"} \
                     \

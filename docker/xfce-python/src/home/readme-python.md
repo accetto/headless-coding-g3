@@ -36,16 +36,24 @@ pip install typer
 ### python -m pip install typer
 ```
 
+You can also check the [Loguru documentation](https://github.com/Delgan/loguru) and the [Typer documentation](https://typer.tiangolo.com).
+
 ## Installing Python GUI frameworks
 
-The following GUI frameworks are mutually exclusive, you need only one of them. There are sorted from the simplest one. The simple test applications can be found in `/srv/projects/`.
+The following GUI frameworks are mutually exclusive and you need only one of them. The simple test applications can be found in `/srv/projects/`.
 
-Installing `Tkinter`:
+Before installing any of the following frameworks you have to refresh the `apt` cache first:
 
 ```shell
 ### apt cache needs to be refreshed only once
 sudo apt-get update
+```
 
+### Tkinter
+
+Installing `Tkinter`:
+
+```shell
 ### install Tkinter
 sudo apt-get -y install python3-tk
 
@@ -53,12 +61,13 @@ sudo apt-get -y install python3-tk
 ### python -m tkinter
 ```
 
+You can start by checking the [Tkinter documentation](https://docs.python.org/3/library/tkinter.html).
+
+### wxPython
+
 Installing `wxPython`:
 
 ```shell
-### apt cache needs to be refreshed only once
-sudo apt-get update
-
 ### install required libraries
 sudo apt-get -y install libsdl2-2.0-0 libxtst6
 
@@ -68,12 +77,13 @@ pip install -U \
     wxPython
 ```
 
+You can start by checking the [wxPython documentation](https://wxpython.org/).
+
+### PyQt5
+
 Installing `PyQt5`:
 
 ```shell
-### apt cache needs to be refreshed only once
-sudo apt-get update
-
 ### install required libraries
 sudo apt-get -y install libqt5gui5
 
@@ -84,12 +94,13 @@ pip install pyqt5
 sudo apt-get -y install qttools5-dev-tools
 ```
 
+You can start by checking the [PyQt5 documentation](https://riverbankcomputing.com/static/Docs/PyQt5).
+
+### Qt for Python (PySide2 and PySide6)
+
 Installing `PySide2`:
 
 ```shell
-### apt cache needs to be refreshed only once
-sudo apt-get update
-
 ### install required libraries
 sudo apt-get -y install libqt5gui5
 
@@ -100,12 +111,23 @@ pip install pyside2
 sudo apt-get -y install qttools5-dev-tools
 ```
 
+Installing `PySide6`:
+
+```shell
+### install required libraries
+sudo apt-get -y install libqt5gui5 libopengl0
+
+### install PySide6
+pip install pyside6
+```
+
+You can start by checking the [Qt for Python documentation](https://doc.qt.io/qtforpython) and also the part about [Porting Applications from PySide2 to PySide6](https://doc.qt.io/qtforpython/porting_from2.html).
+
+### Kivy
+
 Installing `Kivy`:
 
 ```shell
-### apt cache needs to be refreshed only once
-sudo apt-get update
-
 ### install required libraries
 sudo apt-get -y install libgl1 libmtdev1
 
@@ -116,6 +138,8 @@ pip install kivy[base]
 ### /home/headless/.local/share/kivy-examples/
 pip install kivy_examples
 ```
+
+You can start by checking the [Kivy documentation](https://kivy.org/doc/stable).
 
 ## What next
 

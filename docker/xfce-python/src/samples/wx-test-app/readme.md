@@ -1,6 +1,6 @@
 # Readme `wx-test-app`
 
-This is a very simple test application for Python GUI framework `wxPython`.
+This is a very simple test application for the Python GUI framework `wxPython`.
 
 ## Prerequisites
 
@@ -14,3 +14,7 @@ This test application should open a simple window:
 ### PWD = /srv/projects/wx-test-app
 python ./main.py
 ```
+
+## What next
+
+You can start by checking the [wxPython documentation](https://wxpython.org/).

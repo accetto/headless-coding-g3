@@ -381,6 +381,26 @@ RUN \
         pyside2
 
 
+########################
+### stage_python_pyside6
+########################
+
+FROM stage_python as stage_python_pyside6
+ARG ARG_APT_NO_RECOMMENDS
+
+ENV FEATURES_PYTHON_PYSIDE6=1
+
+RUN \
+    --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
+        libopengl0 \
+        libqt5gui5 \
+        qttools5-dev-tools \
+    && pip install \
+        pyside6
+
+
 #####################
 ### stage_python_kivy
 #####################

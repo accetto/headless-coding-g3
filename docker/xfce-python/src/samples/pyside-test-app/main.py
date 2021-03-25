@@ -1,5 +1,8 @@
 import sys
+
+### enable the correct framework version
 from PySide2 import QtCore, QtWidgets
+# from PySide6 import QtCore, QtWidgets
 
 app = QtWidgets.QApplication(sys.argv)
 
