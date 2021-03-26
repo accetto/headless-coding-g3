@@ -1,6 +1,12 @@
 ### This workflow triggers auto-building on Docker Hub.
 name: dockerhub-autobuild
-# on:
+on:
+  workflow_dispatch:
+    inputs:
+      dummy:
+        description: 'dummy'
+        required: false
+        default: 'dummy'
   # release:
   #   ### published: a release, pre-release, or draft of a release is published
   #   ### unpublished: a release or pre-release is deleted
