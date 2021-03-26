@@ -46,6 +46,12 @@ The sample application `electron-test-app` is already prepared for that, as it c
     },
 ```
 
+The sample application can be then started by:
+
+```shell
+npm start
+```
+
 You also need to add `--no-sandbox` to the desktop launchers. For example:
 
 ```shell
