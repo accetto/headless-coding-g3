@@ -38,7 +38,7 @@ main() {
                     "${_readme_context}" "${POST_PUSH_WORKFLOW_BRANCH}" \
                     "${created}" "${version_sticker}" "${version_sticker_verbose}" 1
             else
-                echo "Skipping build workflow trigger. Required variables not set or readme publishing prohibited."
+                echo "Skipping post-push workflow trigger. Required variables not set or readme publishing prohibited."
             fi
         fi
     else
@@ -79,7 +79,7 @@ main() {
                     "${created}" "${version_sticker}" "${version_sticker_verbose}" 1
 
             else
-                echo "Skipping build workflow trigger. Required variables not set or readme publishing prohibited."
+                echo "Skipping post-push workflow trigger. Required variables not set or readme publishing prohibited."
             fi
         else
             echo "Skipping gist update. Required variables not set."
