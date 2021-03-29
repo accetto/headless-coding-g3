@@ -32,7 +32,12 @@ This is a sibling project to the project [accetto/ubuntu-vnc-xfce-g3][sibling-gi
 There are currently resources for the following Docker images:
 
 - [accetto/ubuntu-vnc-xfce-nodejs-g3][accetto-docker-ubuntu-vnc-xfce-nodejs-g3]
+  - [full Readme][this-readme-image-nodejs]
+  - [Dockerfile][this-dockerfile-nodejs]
 - [accetto/ubuntu-vnc-xfce-python-g3][accetto-docker-ubuntu-vnc-xfce-python-g3]
+  - [full Readme][this-readme-image-python]
+  - [Dockerfile][this-dockerfile-python]
+  - [Dockerfile][this-dockerfile-python-bonus-gui-frameworks] for bonus images with GUI frameworks (bonus branch)
 
 The fastest way to build the images locally:
 
@@ -77,7 +82,7 @@ The fastest way to build the images locally:
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
-## Bonus base images
+## Implicit base images
 
 This project contains also resources for building the base images without the applications for programming. Because those images would be actually equivalent to the images from the [sibling project][sibling-github], they will not be built or published on Docker Hub. However, you can build them yourself locally any time you wish.
 
@@ -97,11 +102,25 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 ***
 
+<!-- this project -->
+
 [this-docker]: https://hub.docker.com/u/accetto/
 
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
+
+[this-dockerfile-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
+[this-readme-image-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-nodejs/README.md
+
+[this-dockerfile-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
+[this-dockerfile-python-bonus-gui-frameworks]: https://github.com/accetto/headless-coding-g3/blob/bonus-images-python-gui-frameworks/docker/Dockerfile.xfce.python
+[this-readme-image-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/README.md
+
+[accetto-docker-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+[accetto-docker-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
+
+<!-- sibling project -->
 
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 [sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
@@ -109,8 +128,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 [sibling-readme]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/README.md
 [sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
 
-[accetto-docker-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
-[accetto-docker-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
+<!-- external links -->
 
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
 
