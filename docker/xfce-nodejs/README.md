@@ -13,7 +13,7 @@ This repository contains resources for building Docker images based on [Ubuntu 2
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
 
-Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron][electron] usually requires only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
+Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron][electron] usually requires only a single or just a few commands. The instructions are in the [provided README files](https://github.com/accetto/headless-coding-g3/tree/master/docker/xfce-nodejs/src/home) and some simple test applications are also already included.
 
 ### TL;DR
 
@@ -286,13 +286,15 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 ***
 
-<!-- GitHub project common -->
+<!-- this project -->
 
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
 [this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
+
+<!-- sibling project -->
 
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 [sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/

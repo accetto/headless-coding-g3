@@ -13,7 +13,7 @@ This repository contains resources for building Docker images based on [Ubuntu 2
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
 
-Adding more tools like, for example, the most popular Python GUI frameworks [TKinter][tkinter], [PyQt5][pyqt5], [PyQT for Python][pyside] (`PySide2` or `PySide6`), [wxPython][wxpython] or [Kivy][kivy] usually requires only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
+Adding more tools like, for example, the web frameworks [Flask][flask] and [Bottle][bottle] or the most popular Python GUI frameworks [TKinter][tkinter], [PyQt5][pyqt5], [PyQT for Python][pyside] (`PySide2` or `PySide6`), [wxPython][wxpython] or [Kivy][kivy] usually requires only a single or just a few commands. The instructions are in the [provided README file](https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/src/home/) and some simple test applications are also already included.
 
 ### TL;DR
 
@@ -254,14 +254,15 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 ***
 
-<!-- GitHub project common -->
+<!-- this project -->
 
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
 [this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
-[this-readme-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/src/home/readme-python.md
+
+<!-- sibling project -->
 
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 [sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
@@ -291,9 +292,11 @@ Credit goes to all the countless people and companies, who contribute to open so
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
 
+[bottle]: https://bottlepy.org/
 [chromium]: https://www.chromium.org/Home
 [curl]: http://manpages.ubuntu.com/manpages/bionic/man1/curl.1.html
 [firefox]: https://www.mozilla.org
+[flask]: https://palletsprojects.com/p/flask/
 [git]: https://git-scm.com/
 [jq]: https://stedolan.github.io/jq/
 [kivy]: https://kivy.org/#home
