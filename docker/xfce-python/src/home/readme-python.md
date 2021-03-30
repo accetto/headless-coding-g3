@@ -38,7 +38,33 @@ pip install typer
 
 You can also check the [Loguru documentation](https://github.com/Delgan/loguru) and the [Typer documentation](https://typer.tiangolo.com).
 
-## Installing Python GUI frameworks
+## Installing web frameworks
+
+The simple test applications can be found in `/srv/projects/`.
+
+**Hint**: It is recommended to use an image that includes also **Chromium** or **Firefox** web browser. Then you can test your web application  inside the container.
+
+### Flask
+
+The `Flask` web framework can be installed by:
+
+```shell
+pip install flask
+```
+
+You can start by checking the [Flask documentation](https://palletsprojects.com/p/flask/).
+
+### Bottle
+
+The `Bottle` web framework can be installed by:
+
+```shell
+pip install bottle
+```
+
+You can start by checking the [Bottle documentation](https://bottlepy.org/).
+
+## Installing GUI frameworks
 
 The following GUI frameworks are mutually exclusive and you need only one of them. The simple test applications can be found in `/srv/projects/`.
 
