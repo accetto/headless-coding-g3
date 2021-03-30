@@ -16,7 +16,7 @@ The test application can be started by:
 
 ```shell
 ### PWD = /srv/projects/typer-cli-test-app
-python ./main.py hello Joe
+python main.py hello Joe
 ```
 
 ## What next

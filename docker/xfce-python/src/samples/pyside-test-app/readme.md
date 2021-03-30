@@ -20,7 +20,7 @@ The application should open a simple window:
 
 ```shell
 ### PWD = /srv/projects/pyside-test-app
-python ./main.py
+python main.py
 ```
 
 ## What next

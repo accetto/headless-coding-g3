@@ -16,7 +16,7 @@ The test application can be started by:
 
 ```shell
 ### PWD = /srv/projects/loguru-test-app
-python ./main.py
+python main.py
 ```
 
 ## What next
