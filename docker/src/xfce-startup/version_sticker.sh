@@ -8,6 +8,7 @@ chromium=$("${STARTUPDIR}/version_of.sh" chromium)
 firefox=$("${STARTUPDIR}/version_of.sh" firefox)
 nodejs=$("${STARTUPDIR}/version_of.sh" nodejs)
 npm=$("${STARTUPDIR}/version_of.sh" npm)
+postman=$("${STARTUPDIR}/version_of.sh" postman)
 vscode=$("${STARTUPDIR}/version_of.sh" vscode)
 
 python=$("${STARTUPDIR}/version_of.sh" python)
@@ -39,6 +40,7 @@ main() {
                     if [ -n "${firefox}" ] ; then echo "Firefox ${firefox}" ; fi
                     if [ -n "${nodejs}" ] ; then echo "Node.js ${nodejs}" ; fi
                     if [ -n "${npm}" ] ; then echo "npm ${npm}" ; fi
+                    if [ -n "${postman}" ] ; then echo "Postman ${postman}" ; fi
                     if [ -n "${python}" ] ; then echo "Python ${python}" ; fi
                     if [ -n "${python_pip}" ] ; then echo "python-pip ${python_pip}" ; fi
                     echo "Ubuntu ${ubuntu}"
@@ -84,6 +86,8 @@ main() {
 
                     if [ -n "${npm}" ] ; then echo "npm ${npm}" ; fi
 
+                    if [ -n "${postman}" ] ; then echo "Postman ${postman}" ; fi
+
                     if [ -n "${python}" ] ; then echo "Python ${python}" ; fi
 
                     if [ -n "${python_pip}" ] ; then echo "python-pip ${python_pip}" ; fi
@@ -117,6 +121,10 @@ main() {
             sticker="${sticker}"-"nodejs${nodejs}"-"npm${npm}"
         elif [ -n "${python}" ] ; then
             sticker="${sticker}"-"python${python}"-"pip${python_pip}"
+        fi
+
+        if [ -n "${postman}" ] ; then
+            sticker="${sticker}"-"postman${postman}"
         fi
 
         if [ -n "${vscode}" ] ; then

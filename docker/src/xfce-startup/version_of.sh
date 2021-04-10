@@ -85,6 +85,14 @@ case "$1" in
         ### source example: 6.9.0
         echo $(npm --version 2>/dev/null  | grep -Po -m1 '[0-9.]+$')
         ;;
+    postman )
+        # jq -r '.version' /opt/Postman/app/resources/app/package.json
+        POSTMAN_PATH=$(which postman)
+        JQ_PATH=$(which jq)
+        if [ -n "${POSTMAN_PATH}" ] && [ -n "${JQ_PATH}" ] ; then
+            jq -r '.version' /opt/Postman/app/resources/app/package.json 2>/dev/null
+        fi
+        ;;
     psql | postgresql | postgre-sql | postgre )
         ### source example: psql (PostgreSQL) 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
         echo $(psql --version 2>/dev/null | grep -Po -m1 '(?<=psql \(PostgreSQL\)\s)[0-9.]+')
