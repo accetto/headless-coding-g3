@@ -283,11 +283,13 @@ ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_NODEJS_VERSION
 ARG ARG_NODEJS_PORT
 ARG ARG_PROJECTS_DIR
+ARG ARG_SAMPLES_DIR
 
 ENV \
     FEATURES_NODEJS=1 \
     NODEJS_PORT=${ARG_NODEJS_PORT:-3000} \
-    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects}
+    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects} \
+    SAMPLES_DIR=${ARG_SAMPLES_DIR:-/srv/samples}
  
 RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
@@ -312,11 +314,12 @@ RUN \
 
 COPY ./xfce-nodejs/src/home/readme*.md "${HOME}"/
 
+### this creates the projects directory
 WORKDIR "${PROJECTS_DIR}"
 
-COPY ./xfce-nodejs/src/samples "${PROJECTS_DIR}"/
+COPY ./xfce-nodejs/src/samples "${SAMPLES_DIR}"/
 
-RUN chmod -R g+w "${PROJECTS_DIR}"
+RUN chmod -R g+w "${PROJECTS_DIR}" "${SAMPLES_DIR}"
 
 EXPOSE ${NODEJS_PORT}
 

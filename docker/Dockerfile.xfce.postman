@@ -280,10 +280,14 @@ FROM ${ARG_MERGE_STAGE_BROWSER_BASE} as merge_stage_browser
 
 FROM merge_stage_browser as stage_postman
 ARG ARG_APT_NO_RECOMMENDS
+ARG ARG_PROJECTS_DIR
+ARG ARG_SAMPLES_DIR
 
 ENV \
     FEATURES_POSTMAN=1 \
-    POSTMAN_PATH=/opt
+    POSTMAN_PATH=/opt \
+    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects} \
+    SAMPLES_DIR=${ARG_SAMPLES_DIR:-/srv/samples}
 
 RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
@@ -301,6 +305,15 @@ RUN \
 
 COPY ./xfce-postman/src/home/Desktop "${HOME}"/Desktop/
 COPY ./xfce-postman/src/home/readme*.md "${HOME}"/
+
+### this creates the projects directory
+WORKDIR "${PROJECTS_DIR}"
+
+### only one of these lines is required
+# COPY ./xfce-postman/src/samples "${SAMPLES_DIR}"/
+RUN mkdir -p "${SAMPLES_DIR}"
+
+RUN chmod -R g+w "${PROJECTS_DIR}" "${SAMPLES_DIR}"
 
 
 ###############
