@@ -300,6 +300,7 @@ RUN \
     && ln -s "${POSTMAN_PATH}"/Postman/Postman /usr/local/bin/postman
 
 COPY ./xfce-postman/src/home/Desktop "${HOME}"/Desktop/
+COPY ./xfce-postman/src/home/readme*.md "${HOME}"/
 
 
 ###############
