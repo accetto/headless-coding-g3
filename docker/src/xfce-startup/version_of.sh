@@ -87,10 +87,8 @@ case "$1" in
         ;;
     postman )
         # jq -r '.version' /opt/Postman/app/resources/app/package.json
-        POSTMAN_PATH=$(which postman)
-        JQ_PATH=$(which jq)
-        if [ -n "${POSTMAN_PATH}" ] && [ -n "${JQ_PATH}" ] ; then
-            jq -r '.version' /opt/Postman/app/resources/app/package.json 2>/dev/null
+        if [ -n "$(which postman)" ] && [ -n "$(which jq)" ] ; then
+            jq -r '.version' "${POSTMAN_PATH}"/Postman/app/resources/app/package.json 2>/dev/null
         fi
         ;;
     psql | postgresql | postgre-sql | postgre )

@@ -281,7 +281,9 @@ FROM ${ARG_MERGE_STAGE_BROWSER_BASE} as merge_stage_browser
 FROM merge_stage_browser as stage_postman
 ARG ARG_APT_NO_RECOMMENDS
 
-ENV FEATURES_POSTMAN=1
+ENV \
+    FEATURES_POSTMAN=1 \
+    POSTMAN_PATH=/opt
 
 RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
@@ -294,8 +296,8 @@ RUN \
         libxcb-dri3-0 \
         libxss1 \
         libxtst6 \
-    && wget -qO- https://dl.pstmn.io/download/latest/linux64 | tar -xz -C /opt \
-    && ln -s /opt/Postman/Postman /usr/local/bin/postman
+    && wget -qO- https://dl.pstmn.io/download/latest/linux64 | tar -xz -C "${POSTMAN_PATH}" \
+    && ln -s "${POSTMAN_PATH}"/Postman/Postman /usr/local/bin/postman
 
 COPY ./xfce-postman/src/home/Desktop "${HOME}"/Desktop/
 
@@ -353,7 +355,7 @@ ARG ARG_VERSION_STICKER
 LABEL \
     org.opencontainers.image.authors="accetto" \
     org.opencontainers.image.created="${ARG_CREATED}" \
-    org.opencontainers.image.description="Headless Ubuntu/Xfce/VNC/noVNC/Chromium/Firefox containers with Postman" \
+    org.opencontainers.image.description="Headless Ubuntu/Xfce/VNC/noVNC/Chromium/Firefox containers with Postman desktop app" \
     org.opencontainers.image.documentation="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.source="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.title="accetto/ubuntu-vnc-xfce-postman-g3" \
