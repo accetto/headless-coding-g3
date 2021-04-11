@@ -237,8 +237,6 @@ The container's directory `/srv/samples` already contains the following simple t
 - nodejs-test-app
 - electron-test-app
 
-Note that they will be copied locally only if the local directory, you have mounted, has been empty.
-
 ## Using headless containers
 
 More information about using headless containers can be found in the [full-length README][this-readme-full] file on GitHub.
