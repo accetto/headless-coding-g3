@@ -17,6 +17,17 @@ Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron
 
 ### TL;DR
 
+I try to keep the images slim. Consequently you can encounter missing dependencies while adding more applications yourself. You can track the missing libraries on the [Ubuntu Packages Search][ubuntu-packages-search] page and install them subsequently.
+
+You can also try to fix it by executing the following (the default `sudo` password is **headless**):
+
+```shell
+### apt cache needs to be updated only once
+sudo apt-get update
+
+sudo apt --fix-broken install
+```
+
 The fastest way to build the images locally:
 
 ```shell
@@ -320,6 +331,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 <!-- External links -->
 
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
+[ubuntu-packages-search]: https://packages.ubuntu.com/
 
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/

@@ -9,6 +9,10 @@ Useful links from **this project's** GitHub repository [accetto/headless-coding-
   - [full Readme][this-readme-image-nodejs] file on GitHub
   - [image repository][this-dockerhub-image-nodejs] on Docker Hub
   - [Dockerfile][this-dockerfile-nodejs] on GitHub
+- images with **Postman**
+  - [full Readme][this-readme-image-postman] file on GitHub
+  - [image repository][this-dockerhub-image-postman] on Docker Hub
+  - [Dockerfile][this-dockerfile-postman] on GitHub
 - images with **Python**
   - [full Readme][this-readme-image-python] file on GitHub
   - [image repository][this-dockerhub-image-python] on Docker Hub
@@ -42,6 +46,10 @@ Useful links from the **sibling project's** GitHub repository [accetto/ubuntu-vn
 [this-dockerfile-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
 [this-readme-image-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-nodejs/README.md
 [this-dockerhub-image-nodejs]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+
+[this-dockerfile-postman]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.postman
+[this-readme-image-postman]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-postman/README.md
+[this-dockerhub-image-postman]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
 
 [this-dockerfile-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 [this-dockerfile-python-bonus-gui-frameworks]: https://github.com/accetto/headless-coding-g3/blob/bonus-images-python-gui-frameworks/docker/Dockerfile.xfce.python

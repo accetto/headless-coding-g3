@@ -29,11 +29,25 @@ This is a sibling project to the project [accetto/ubuntu-vnc-xfce-g3][sibling-gi
 
 ## TL;DR
 
+I try to keep the images slim. Consequently you can encounter missing dependencies while adding more applications yourself. You can track the missing libraries on the [Ubuntu Packages Search][ubuntu-packages-search] page and install them subsequently.
+
+You can also try to fix it by executing the following (the default `sudo` password is **headless**):
+
+```shell
+### apt cache needs to be updated only once
+sudo apt-get update
+
+sudo apt --fix-broken install
+```
+
 There are currently resources for the following Docker images:
 
 - [accetto/ubuntu-vnc-xfce-nodejs-g3][accetto-docker-ubuntu-vnc-xfce-nodejs-g3]
   - [full Readme][this-readme-image-nodejs]
   - [Dockerfile][this-dockerfile-nodejs]
+- [accetto/ubuntu-vnc-xfce-postman-g3][accetto-docker-ubuntu-vnc-xfce-postman-g3]
+  - [full Readme][this-readme-image-postman]
+  - [Dockerfile][this-dockerfile-postman]
 - [accetto/ubuntu-vnc-xfce-python-g3][accetto-docker-ubuntu-vnc-xfce-python-g3]
   - [full Readme][this-readme-image-python]
   - [Dockerfile][this-dockerfile-python]
@@ -55,7 +69,15 @@ The fastest way to build the images locally:
 ./docker/hooks/build dev nodejs-current-vnc-vscode
 ### and so on ...
 
-### PWD = project root
+./docker/hooks/build dev postman-vnc
+./docker/hooks/build dev postman-vnc-chromium
+./docker/hooks/build dev postman-vnc-firefox
+./docker/hooks/build dev postman-vnc-firefox-plus
+./docker/hooks/build dev postman-vnc-novnc
+./docker/hooks/build dev postman-vnc-novnc-chromium
+./docker/hooks/build dev postman-vnc-novnc-firefox
+./docker/hooks/build dev postman-vnc-novnc-firefox-plus
+
 ./docker/hooks/build dev python-vnc
 ./docker/hooks/build dev python-vnc-chromium
 ./docker/hooks/build dev python-vnc-vscode
@@ -113,11 +135,15 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-dockerfile-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
 [this-readme-image-nodejs]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-nodejs/README.md
 
+[this-dockerfile-postman]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.postman
+[this-readme-image-postman]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-postman/README.md
+
 [this-dockerfile-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 [this-dockerfile-python-bonus-gui-frameworks]: https://github.com/accetto/headless-coding-g3/blob/bonus-images-python-gui-frameworks/docker/Dockerfile.xfce.python
 [this-readme-image-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/README.md
 
 [accetto-docker-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+[accetto-docker-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
 [accetto-docker-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
 
 <!-- sibling project -->
@@ -131,6 +157,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 <!-- external links -->
 
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
+[ubuntu-packages-search]: https://packages.ubuntu.com/
 
 [chromium]: https://www.chromium.org/Home
 [firefox]: https://www.mozilla.org
@@ -161,5 +188,3 @@ Credit goes to all the countless people and companies, who contribute to open so
 [badge-github-closed-issues]: https://badgen.net/github/closed-issues/accetto/headless-coding-g3?icon=github&label=closed%20issues
 
 [badge-github-open-issues]: https://badgen.net/github/open-issues/accetto/headless-coding-g3?icon=github&label=open%20issues
-
-<!-- Appendix -->
