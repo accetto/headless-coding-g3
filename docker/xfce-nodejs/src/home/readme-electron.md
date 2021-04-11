@@ -2,7 +2,7 @@
 
 This Docker image **does not** come with any pre-installed `electron` version by intention. That allows you to choose the version and the way of installation that suite you best.
 
-Everything else you need is already included. There is also a simple application in the folder `/srv/projects/samples/electron-test-app/`. You can test it including the packaging and installing the result package, all inside the container.
+Everything else you need is already included. There is also a simple application in the folder `/srv/samples/electron-test-app/`. You can test it including the packaging and installing the result package, all inside the container.
 
 You can start by following the [Electron Quick Start Guide](https://www.electronjs.org/docs/tutorial/quick-start).
 
@@ -96,7 +96,7 @@ sudo apt-get update
 Then you can install the `deb` package using `gdebi`:
 
 ```shell
-cd /srv/projects/samples/electron-test-app/out/make/deb/x64/
+cd /srv/samples/electron-test-app/out/make/deb/x64/
 sudo gdebi electron-test-app_1.0.0_amd64.deb
 ```
 

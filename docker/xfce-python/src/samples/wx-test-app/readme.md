@@ -11,7 +11,7 @@ First ensure that `Tkinter` is correctly installed. The installation is describe
 This test application should open a simple window:
 
 ```shell
-### PWD = /srv/projects/wx-test-app
+### PWD = /srv/samples/wx-test-app
 python main.py
 ```
 

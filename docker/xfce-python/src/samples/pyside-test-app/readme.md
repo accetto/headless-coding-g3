@@ -19,7 +19,7 @@ from PySide2 import QtCore, QtWidgets
 The application should open a simple window:
 
 ```shell
-### PWD = /srv/projects/pyside-test-app
+### PWD = /srv/samples/pyside-test-app
 python main.py
 ```
 

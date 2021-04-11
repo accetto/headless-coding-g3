@@ -50,7 +50,7 @@ The fastest way to build the images locally:
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
-The [python-readme][this-readme-python] describes how to install additional Python modules and GUI frameworks. The simple test applications are in `/srv/projects/`.
+The [python-readme][this-readme-python] describes how to install additional Python modules and GUI frameworks. The simple test applications are in `/srv/samples/`.
 
 ### Table of contents
 
@@ -203,7 +203,7 @@ docker run -v /my_local_projects:/srv/projects ...
 docker run --mount source=/my_local_projects,target=/srv/projects ...
 ```
 
-The container's directory `/srv/projects` already contains the following simple testing applications:
+The container's directory `/srv/samples` already contains the following simple testing applications:
 
 - loguru-test-app
 - typer-cli-test-app

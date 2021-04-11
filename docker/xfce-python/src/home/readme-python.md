@@ -40,7 +40,7 @@ You can also check the [Loguru documentation](https://github.com/Delgan/loguru) 
 
 ## Installing web frameworks
 
-The simple test applications can be found in `/srv/projects/`.
+The simple test applications can be found in `/srv/samples/`.
 
 **Hint**: It is recommended to use an image that includes also **Chromium** or **Firefox** web browser. Then you can test your web application  inside the container.
 
@@ -66,7 +66,7 @@ You can start by checking the [Bottle documentation](https://bottlepy.org/).
 
 ## Installing GUI frameworks
 
-The following GUI frameworks are mutually exclusive and you need only one of them. The simple test applications can be found in `/srv/projects/`.
+The following GUI frameworks are mutually exclusive and you need only one of them. The simple test applications can be found in `/srv/samples/`.
 
 Before installing any of the following frameworks you have to refresh the `apt` cache first:
 
@@ -171,4 +171,4 @@ You can start by checking the [Kivy documentation](https://kivy.org/doc/stable).
 
 You can start by checking the [Python Documentation](https://www.python.org/doc/).
 
-There are also some sample applications in `/srv/projects/`.
+There are also some sample applications in `/srv/samples/`.

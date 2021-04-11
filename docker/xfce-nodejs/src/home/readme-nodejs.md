@@ -1,5 +1,7 @@
 # Readme `Node.js`
 
+## Updating `npm`
+
 You can update `npm` by:
 
 ```shell
@@ -14,6 +16,6 @@ npm -v
 npx -v
 ```
 
-There is a sample application `nodejs-test-app` in `/srv/projects/samples`.
+## What next
 
-There may be also other **README** files in the home directory.
+There is a sample application `nodejs-test-app` in `/srv/samples`. You can try it following the [Node.js Guides](https://nodejs.org/en/docs/guides/).

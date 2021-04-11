@@ -11,7 +11,7 @@ First ensure that `PyQt5` is correctly installed. The installation is described 
 This test application should open a simple window:
 
 ```shell
-### PWD = /srv/projects/pqt-test-app
+### PWD = /srv/samples/pqt-test-app
 python main.py
 ```
 

@@ -17,7 +17,7 @@ pip install bottle
 The test application can be started by:
 
 ```shell
-### PWD = /srv/projects/bottle-test-app
+### PWD = /srv/samples/bottle-test-app
 python app.py
 ```
 

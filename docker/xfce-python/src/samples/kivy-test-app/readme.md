@@ -13,7 +13,7 @@ First ensure that `Kivy` is correctly installed. The installation is described i
 This test application should open a simple window:
 
 ```shell
-### PWD = /srv/projects/kivy-test-app
+### PWD = /srv/samples/kivy-test-app
 python main.py
 ```
 

@@ -15,7 +15,7 @@ pip install loguru
 The test application can be started by:
 
 ```shell
-### PWD = /srv/projects/loguru-test-app
+### PWD = /srv/samples/loguru-test-app
 python main.py
 ```
 

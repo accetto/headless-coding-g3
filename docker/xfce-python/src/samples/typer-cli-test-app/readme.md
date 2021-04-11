@@ -15,7 +15,7 @@ pip install typer
 The test application can be started by:
 
 ```shell
-### PWD = /srv/projects/typer-cli-test-app
+### PWD = /srv/samples/typer-cli-test-app
 python main.py hello Joe
 ```
 

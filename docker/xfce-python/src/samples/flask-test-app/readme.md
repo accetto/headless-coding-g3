@@ -17,7 +17,7 @@ pip install flask
 The test application can be started by:
 
 ```shell
-### PWD = /srv/projects/flask-test-app
+### PWD = /srv/samples/flask-test-app
 flask run
 ```
 

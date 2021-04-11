@@ -207,7 +207,7 @@ docker run -v /my_local_projects:/srv/projects ...
 docker run --mount source=/my_local_projects,target=/srv/projects ...
 ```
 
-The container's directory `/srv/projects` already contains the following simple testing applications:
+The container's directory `/srv/samples` already contains the following simple testing applications:
 
 - nodejs-test-app
 - electron-test-app
