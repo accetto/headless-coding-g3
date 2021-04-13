@@ -16,10 +16,10 @@ on:
     # - cron:  '*/5 * * * *'
     ### at 00:15 on every Saturday
     #- cron:  '15 0 * * 6'
-    ### disarmed for now  
-    # - cron: '0 0 1 1 *'
     ### testing multiple builder repos
-    - cron: '*/5 * * * *'
+    # - cron: '*/5 * * * *'
+    ### disarmed, scheduler not triggering again  
+    - cron: '0 0 1 1 *'
 jobs:
   call-dockerhub:
     runs-on: ubuntu-latest
