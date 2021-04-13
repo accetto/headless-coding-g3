@@ -17,7 +17,9 @@ on:
     ### at 00:15 on every Saturday
     #- cron:  '15 0 * * 6'
     ### disarmed because of TigerVNC distribution problems  
-    - cron: '0 0 1 1 *'
+    #- cron: '0 0 1 1 *'
+    ### testing multiple builder repos
+    - cron: '20 20 * * *'
 jobs:
   call-dockerhub:
     runs-on: ubuntu-latest
@@ -44,3 +46,6 @@ jobs:
         run: |
           echo "Call webhook"
           curl -X POST -s -o /dev/null --write-out "%{http_code}" ${{ secrets.DockerHubWebhookBuildRelease }}
+          if [ -n "${{ secrets.DockerHubWebhookBuildRelease_1 }}" ] ; then 
+            curl -X POST -s -o /dev/null --write-out "%{http_code}" ${{ secrets.DockerHubWebhookBuildRelease_1 }}
+          fi
