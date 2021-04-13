@@ -19,7 +19,7 @@ on:
     ### disarmed because of TigerVNC distribution problems  
     #- cron: '0 0 1 1 *'
     ### testing multiple builder repos
-    - cron: '20 20 * * *'
+    - cron: '25 18 * * *'
 jobs:
   call-dockerhub:
     runs-on: ubuntu-latest
