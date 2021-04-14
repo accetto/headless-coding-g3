@@ -6,6 +6,13 @@
 
 ***
 
+### Release 21.04.1
+
+- circumventing limit of 25 auto-builder rules on Docker Hub
+  - using two builder repositories
+  - workflow `dockerhub-autobuild.yml` triggers both of them
+  - see also updated [sibling project Wiki][sibling-wiki] (pages  [Building stages][sibling-wiki-building-stages] and [How CI works][sibling-wiki-how-ci-works])
+
 ### Release 21.04
 
 - added **xfce-postman** into [accetto/ubuntu-vnc-xfce-postman-g3][accetto-ubuntu-vnc-xfce-postman-g3]
@@ -37,6 +44,9 @@
 
 [sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
+
+[sibling-wiki-building-stages]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Building-stages
+[sibling-wiki-how-ci-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-CI-works
 
 [accetto-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [accetto-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
