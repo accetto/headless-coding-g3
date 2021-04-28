@@ -6,6 +6,10 @@
 
 ***
 
+### Release 21.04.2
+
+- TigerVNC from [Release Mirror on accetto/tigervnc][accetto-tigervnc-release-mirror] because **Bintray** is closing on 2021-05-01
+
 ### Release 21.04.1
 
 - circumventing limit of 25 auto-builder rules on Docker Hub
@@ -51,3 +55,5 @@
 [accetto-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [accetto-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
 [accetto-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
+
+[accetto-tigervnc-release-mirror]: https://github.com/accetto/tigervnc/releases
