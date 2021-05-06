@@ -87,8 +87,7 @@ This is the **third generation** (G3) of my headless images. More information ab
 
 The main features and components of the images in the default configuration are:
 
-- utilities **ping**, **wget**, **sudo**, **dconf-editor**, [curl][curl], [git][git] (Ubuntu distribution)
-- utility **gdebi** for installing local `.deb` packages with automatic dependency resolution (Ubuntu distribution)
+- utilities **ping**, **wget**, **sudo**, [curl][curl], [git][git] (Ubuntu distribution)
 - current version of JSON processor [jq][jq]
 - light-weight [Xfce][xfce] desktop environment (Ubuntu distribution)
 - current version of high-performance [TigerVNC][tigervnc] server and client
