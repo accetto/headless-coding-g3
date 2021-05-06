@@ -6,6 +6,10 @@
 
 ***
 
+### Release 21.05
+
+- packages **dconf-editor** and **gdebi-core** have been removed
+
 ### Release 21.04.2
 
 - TigerVNC from [Release Mirror on accetto/tigervnc][accetto-tigervnc-release-mirror] because **Bintray** is closing on 2021-05-01
