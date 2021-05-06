@@ -296,7 +296,6 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         curl \
         git \
-        libxshmfence1 \
         xz-utils
         # fakeroot \
         # gdebi-core \
@@ -339,7 +338,8 @@ RUN \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         gpg \
-        libasound2
+        libasound2 \
+        libxshmfence1
         # curl \
 
 RUN \
