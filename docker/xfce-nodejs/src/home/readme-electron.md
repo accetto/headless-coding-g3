@@ -23,7 +23,7 @@ You can install `electron` globally or locally for a particular project. Local i
 Example of installing `electron` in the project `electron-test-app`:
 
 ```shell
-cd /usr/src/electron-test-app/
+cd /srv/samples/electron-test-app/
 npm install --save-dev electron
 ```
 
@@ -83,7 +83,7 @@ Then you can package the application:
 npm run make
 ```
 
-The result `deb` and `rpm` packages will be stored into the sub-folders of the `out` directory.
+The result `deb` and `rpm` packages will be stored into the sub-folders of the `/srv/samples/electron-test-app/out/make/` directory.
 
 ## Installing `electron` packages
 
@@ -97,7 +97,7 @@ Then you can install the `deb` package using `gdebi`:
 
 ```shell
 cd /srv/samples/electron-test-app/out/make/deb/x64/
-sudo gdebi electron-test-app_1.0.0_amd64.deb
+sudo apt-get install -y ./electron-test-app_1.0.0_amd64.deb
 ```
 
 The application launcher **electron-test-app** will be created in the `Accessories` group. Drag-and-drop it onto the desktop. Then right click it, choose `Edit Launcher` and add the `--no-sandbox` option to the launcher command. After saving it you can start the application with the launcher.
