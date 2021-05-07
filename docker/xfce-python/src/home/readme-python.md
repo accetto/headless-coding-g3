@@ -145,4 +145,4 @@ You can start by checking the [Kivy documentation](https://kivy.org/doc/stable).
 
 You can start by checking the [Python Documentation](https://www.python.org/doc/).
 
-There are also some sample applications in `/srv/projects/`.
+There are also some sample applications in `/srv/samples/`.

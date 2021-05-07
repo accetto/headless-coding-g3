@@ -95,7 +95,6 @@ RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
-        dconf-editor \
         mousepad \
         ${ARG_FEATURES_SCREENSHOOTING:+ristretto xfce4-screenshooter} \
         ${ARG_FEATURES_THUMBNAILING:+tumbler}
@@ -113,8 +112,10 @@ ARG ARG_VNC_PW
 ARG ARG_VNC_RESOLUTION
 ARG ARG_VNC_VIEW_ONLY
 
+### Bintray has been deprecated and disabled since 2021-05-01
+# wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
 RUN \
-    wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
+    wget -qO- https://github.com/accetto/tigervnc/releases/download/v1.11.0-mirror/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
     && ln -s /usr/libexec/vncserver /usr/bin/vncserver \
     && sed -i 's/exec(@cmd);/print "@cmd";\nexec(@cmd);/g' /usr/libexec/vncserver
 
@@ -206,12 +207,10 @@ RUN \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" -P /tmp \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" -P /tmp \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser-l10n_${CHROMIUM_VERSION}_all.deb" -P /tmp \
-    && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         "/tmp/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser-l10n_${CHROMIUM_VERSION}_all.deb" \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y -f install \
     && rm \
         "/tmp/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" \
@@ -283,18 +282,19 @@ ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_NODEJS_VERSION
 ARG ARG_NODEJS_PORT
 ARG ARG_PROJECTS_DIR
+ARG ARG_SAMPLES_DIR
 
 ENV \
     FEATURES_NODEJS=1 \
     NODEJS_PORT=${ARG_NODEJS_PORT:-3000} \
-    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects}
+    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects} \
+    SAMPLES_DIR=${ARG_SAMPLES_DIR:-/srv/samples}
  
 RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         curl \
-        gdebi-core \
         git \
         xz-utils
         # fakeroot \
@@ -312,11 +312,12 @@ RUN \
 
 COPY ./xfce-nodejs/src/home/readme*.md "${HOME}"/
 
+### this creates the projects directory
 WORKDIR "${PROJECTS_DIR}"
 
-COPY ./xfce-nodejs/src/samples "${PROJECTS_DIR}"/
+COPY ./xfce-nodejs/src/samples "${SAMPLES_DIR}"/
 
-RUN chmod -R g+w "${PROJECTS_DIR}"
+RUN chmod -R g+w "${PROJECTS_DIR}" "${SAMPLES_DIR}"
 
 EXPOSE ${NODEJS_PORT}
 
@@ -337,7 +338,8 @@ RUN \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         gpg \
-        libasound2
+        libasound2 \
+        libxshmfence1
         # curl \
 
 RUN \

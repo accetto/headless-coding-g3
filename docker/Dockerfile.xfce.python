@@ -8,7 +8,6 @@ ARG ARG_MERGE_STAGE_BROWSER_BASE=merge_stage_vnc
 ARG ARG_MERGE_STAGE_PYTHON_BASE=stage_python
 ARG ARG_FINAL_STAGE_BASE=merge_stage_browser
 
-
 ###############
 ### stage_cache
 ###############
@@ -96,7 +95,6 @@ RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
-        dconf-editor \
         mousepad \
         ${ARG_FEATURES_SCREENSHOOTING:+ristretto xfce4-screenshooter} \
         ${ARG_FEATURES_THUMBNAILING:+tumbler}
@@ -114,8 +112,10 @@ ARG ARG_VNC_PW
 ARG ARG_VNC_RESOLUTION
 ARG ARG_VNC_VIEW_ONLY
 
+### Bintray has been deprecated and disabled since 2021-05-01
+# wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
 RUN \
-    wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
+    wget -qO- https://github.com/accetto/tigervnc/releases/download/v1.11.0-mirror/tigervnc-1.11.0.x86_64.tar.gz | tar xz --strip 1 -C / \
     && ln -s /usr/libexec/vncserver /usr/bin/vncserver \
     && sed -i 's/exec(@cmd);/print "@cmd";\nexec(@cmd);/g' /usr/libexec/vncserver
 
@@ -207,12 +207,10 @@ RUN \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" -P /tmp \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" -P /tmp \
     && wget -q "http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser-l10n_${CHROMIUM_VERSION}_all.deb" -P /tmp \
-    && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         "/tmp/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser-l10n_${CHROMIUM_VERSION}_all.deb" \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y -f install \
     && rm \
         "/tmp/chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_amd64.deb" \
         "/tmp/chromium-browser_${CHROMIUM_VERSION}_amd64.deb" \
@@ -282,12 +280,14 @@ FROM ${ARG_MERGE_STAGE_BROWSER_BASE} as merge_stage_browser
 FROM merge_stage_browser as stage_python
 ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_PROJECTS_DIR
+ARG ARG_SAMPLES_DIR
 
 ENV \
     FEATURES_BUILD_SLIM_PYTHON=${ARG_APT_NO_RECOMMENDS:+1} \
     FEATURES_PYTHON=1 \
     PATH=${HOME}/.local/bin:${PATH} \
-    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects}
+    PROJECTS_DIR=${ARG_PROJECTS_DIR:-/srv/projects} \
+    SAMPLES_DIR=${ARG_SAMPLES_DIR:-/srv/samples}
 
 RUN \
     --mount=type=cache,target=/var/cache/apt,from=stage_cache,source=/var/cache/apt \
@@ -302,11 +302,12 @@ RUN \
 
 COPY ./xfce-python/src/home/readme*.md "${HOME}"/
 
+### this creates the projects directory
 WORKDIR "${PROJECTS_DIR}"
 
-COPY ./xfce-python/src/samples "${PROJECTS_DIR}"/
+COPY ./xfce-python/src/samples "${SAMPLES_DIR}"/
 
-RUN chmod -R g+w "${PROJECTS_DIR}"
+RUN chmod -R g+w "${PROJECTS_DIR}" "${SAMPLES_DIR}"
 
 
 ########################
@@ -446,7 +447,8 @@ RUN \
     --mount=type=cache,target=/var/lib/apt,from=stage_cache,source=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ${ARG_APT_NO_RECOMMENDS:+--no-install-recommends} \
         gpg \
-        libasound2
+        libasound2 \
+        libxshmfence1
         # curl \
 
 RUN \
