@@ -6,6 +6,11 @@
 
 ***
 
+### Release 21.05.1
+
+- **Dockerfile stage diagrams** added (see the readme files)
+- script `release_of.sh` improved
+
 ### Release 21.05
 
 - packages **dconf-editor** and **gdebi-core** have been removed
