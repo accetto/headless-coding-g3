@@ -58,6 +58,8 @@ The fastest way to build the images locally:
     - [Startup options and help](#startup-options-and-help)
   - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
   - [Credits](#credits)
+  - [Diagrams](#diagrams)
+    - [Dockerfile.xfce.postman](#dockerfilexfcepostman)
 
 This is the **third generation** (G3) of my headless images. More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
 
@@ -205,6 +207,12 @@ If you have a question or an idea and you don't want to open an issue, you can u
 
 Credit goes to all the countless people and companies, who contribute to open source community and make so many dreamy things real.
 
+## Diagrams
+
+### Dockerfile.xfce.postman
+
+![Dockerfile.xfce.postman stages][this-diagram-dockerfile-stages-postman]
+
 ***
 
 <!-- this project -->
@@ -229,6 +237,8 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.postman
+
+[this-diagram-dockerfile-stages-postman]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.postman.png
 
 [this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-postman/ubuntu-vnc-xfce-postman.jpg
 

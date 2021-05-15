@@ -105,6 +105,8 @@ electron-test-app --no-sandbox %U
     - [Startup options and help](#startup-options-and-help)
   - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
   - [Credits](#credits)
+  - [Diagrams](#diagrams)
+    - [Dockerfile.xfce.nodejs](#dockerfilexfcenodejs)
 
 This is the **third generation** (G3) of my headless images. They replace the **second generation** (G2) of similar images from the GitHub repository [accetto/xubuntu-vnc][accetto-github-xubuntu-vnc], which will be archived.
 
@@ -294,6 +296,12 @@ If you have a question or an idea and you don't want to open an issue, you can u
 
 Credit goes to all the countless people and companies, who contribute to open source community and make so many dreamy things real.
 
+## Diagrams
+
+### Dockerfile.xfce.nodejs
+
+![Dockerfile.xfce.nodejs stages][this-diagram-dockerfile-stages-nodejs]
+
 ***
 
 <!-- this project -->
@@ -318,6 +326,8 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
+
+[this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.nodejs.png
 
 [this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-nodejs/ubuntu-vnc-xfce-nodejs.jpg
 

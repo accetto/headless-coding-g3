@@ -45,13 +45,19 @@ There are currently resources for the following Docker images:
 - [accetto/ubuntu-vnc-xfce-nodejs-g3][accetto-docker-ubuntu-vnc-xfce-nodejs-g3]
   - [full Readme][this-readme-image-nodejs]
   - [Dockerfile][this-dockerfile-nodejs]
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-nodejs]
 - [accetto/ubuntu-vnc-xfce-postman-g3][accetto-docker-ubuntu-vnc-xfce-postman-g3]
   - [full Readme][this-readme-image-postman]
   - [Dockerfile][this-dockerfile-postman]
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-postman]
 - [accetto/ubuntu-vnc-xfce-python-g3][accetto-docker-ubuntu-vnc-xfce-python-g3]
   - [full Readme][this-readme-image-python]
   - [Dockerfile][this-dockerfile-python]
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python]
   - [Dockerfile][this-dockerfile-python-bonus-gui-frameworks] for bonus images with GUI frameworks (bonus branch)
+  - [Dockerfile stages diagram (bonus branch)][this-diagram-dockerfile-stages-python-bonus]
+- `accetto/ubuntu-vnc-xfce-python-g3` base images (not published on Docker Hub)
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-xfce]
 
 The fastest way to build the images locally:
 
@@ -145,6 +151,15 @@ Credit goes to all the countless people and companies, who contribute to open so
 [accetto-docker-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [accetto-docker-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
 [accetto-docker-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
+
+<!-- diagrams -->
+
+[this-diagram-dockerfile-stages-xfce]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.png
+[this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.nodejs.png
+[this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.python.png
+[this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.python-bonus.png
+[this-diagram-dockerfile-stages-postman]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.postman.png
+
 
 <!-- sibling project -->
 
