@@ -300,10 +300,10 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 
-[this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.python.png
-[this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.python-bonus.png
+[this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python.png
+[this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python-bonus.png
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-python/ubuntu-vnc-xfce-python.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/ubuntu-vnc-xfce-python.jpg
 
 <!-- Previous generations -->
 

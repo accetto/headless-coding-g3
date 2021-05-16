@@ -9,16 +9,20 @@ Useful links from **this project's** GitHub repository [accetto/headless-coding-
   - [full Readme][this-readme-image-nodejs] file on GitHub
   - [image repository][this-dockerhub-image-nodejs] on Docker Hub
   - [Dockerfile][this-dockerfile-nodejs] on GitHub
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-nodejs] on GitHub
 - images with **Postman**
   - [full Readme][this-readme-image-postman] file on GitHub
   - [image repository][this-dockerhub-image-postman] on Docker Hub
   - [Dockerfile][this-dockerfile-postman] on GitHub
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-postman] on GitHub
 - images with **Python**
   - [full Readme][this-readme-image-python] file on GitHub
   - [image repository][this-dockerhub-image-python] on Docker Hub
   - [Dockerfile][this-dockerfile-python] on GitHub
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python] on GitHub
 - bonus images with **Python** and GUI frameworks
   - [Dockerfile][this-dockerfile-python-bonus-gui-frameworks] on GitHub (branch `bonus-images-python-gui-frameworks`)
+  - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python-bonus] (bonus branch) on GitHub
 
 Useful links from the **sibling project's** GitHub repository [accetto/ubuntu-vnc-xfce-g3][sibling-home]:
 
@@ -55,6 +59,14 @@ Useful links from the **sibling project's** GitHub repository [accetto/ubuntu-vn
 [this-dockerfile-python-bonus-gui-frameworks]: https://github.com/accetto/headless-coding-g3/blob/bonus-images-python-gui-frameworks/docker/Dockerfile.xfce.python
 [this-readme-image-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/README.md
 [this-dockerhub-image-python]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
+
+<!-- diagrams -->
+
+[this-diagram-dockerfile-stages-xfce]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.png
+[this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.nodejs.png
+[this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python.png
+[this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python-bonus.png
+[this-diagram-dockerfile-stages-postman]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.postman.png
 
 <!-- sibling project -->
 

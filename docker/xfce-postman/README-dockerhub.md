@@ -207,7 +207,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.postman
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-postman/ubuntu-vnc-xfce-postman.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/ubuntu-vnc-xfce-postman.jpg
 
 <!-- Previous generations -->
 

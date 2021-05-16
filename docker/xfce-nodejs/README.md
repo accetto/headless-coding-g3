@@ -327,9 +327,9 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.nodejs
 
-[this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/Dockerfile.xfce.nodejs.png
+[this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.nodejs.png
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/xfce-nodejs/ubuntu-vnc-xfce-nodejs.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/ubuntu-vnc-xfce-nodejs.jpg
 
 <!-- Previous generations -->
 
