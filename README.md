@@ -56,7 +56,7 @@ There are currently resources for the following Docker images:
   - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python]
   - [Dockerfile][this-dockerfile-python-bonus-gui-frameworks] for bonus images with GUI frameworks (bonus branch)
   - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python-bonus] (bonus branch)
-- `accetto/ubuntu-vnc-xfce-python-g3` base images (not published on Docker Hub)
+- `accetto/headless-coding-g3` base images (not published on Docker Hub)
   - [Dockerfile stages diagram][this-diagram-dockerfile-stages-xfce]
 
 The fastest way to build the images locally:
