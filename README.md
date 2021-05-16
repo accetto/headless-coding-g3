@@ -2,6 +2,8 @@
 
 ## Project `accetto/headless-coding-g3`
 
+### Branch: `bonus-images-python-gui-frameworks`
+
 ***
 
 [Docker Hub][this-docker] - [Changelog][this-changelog] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
@@ -19,6 +21,10 @@
 ![badge-github-workflow-dockerhub-autobuild][badge-github-workflow-dockerhub-autobuild]
 ![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push]
 
+***
+**Attention:** This README file has been modified for the branch `bonus-images-python-gui-frameworks`.
+***
+
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment and [VNC][tigervnc]/[noVNC][novnc] servers for headless use and selected applications for programming. Adding more tools requires usually only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
 
 All images can optionally include also the web browsers [Chromium][chromium] or [Firefox][firefox].
@@ -29,32 +35,39 @@ This is a sibling project to the project [accetto/ubuntu-vnc-xfce-g3][sibling-gi
 
 ## TL;DR
 
-There are currently resources for the following Docker images:
-
-- [accetto/ubuntu-vnc-xfce-nodejs-g3][accetto-docker-ubuntu-vnc-xfce-nodejs-g3]
-
 The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
-./docker/hooks/build dev nodejs-vnc
-./docker/hooks/build dev nodejs-vnc-chromium
-./docker/hooks/build dev nodejs-vnc-vscode
-./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-novnc
-./docker/hooks/build dev nodejs-vnc-novnc-chromium
-./docker/hooks/build dev nodejs-vnc-novnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-plus
-./docker/hooks/build dev nodejs-current-vnc-vscode
+./docker/hooks/build dev python-vnc
+./docker/hooks/build dev python-vnc-chromium
+./docker/hooks/build dev python-vnc-vscode
+./docker/hooks/build dev python-vnc-vscode-chromium
+./docker/hooks/build dev python-vnc-novnc
+./docker/hooks/build dev python-vnc-novnc-chromium
+./docker/hooks/build dev python-vnc-novnc-vscode-chromium
+./docker/hooks/build dev python-vnc-vscode-firefox
+./docker/hooks/build dev python-vnc-vscode-firefox-plus
+### and so on ...
+
+### from the branch 'bonus-images-python-gui-frameworks'
+./docker/hooks/build dev python-vnc-tkinter
+./docker/hooks/build dev python-vnc-wxpython
+./docker/hooks/build dev python-vnc-pyqt5
+./docker/hooks/build dev python-vnc-pyside2
+./docker/hooks/build dev python-vnc-pyside6
+./docker/hooks/build dev python-vnc-kivy
+./docker/hooks/build dev python-vnc-tkinter-vscode
+./docker/hooks/build dev python-vnc-tkinter-vscode-chromium
+./docker/hooks/build dev python-vnc-novnc-tkinter
 ### and so on ...
 ```
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
-## Bonus base images
+## Bonus Python images
 
-This project contains also resources for building the base images without the applications for programming. Because those images would be actually equivalent to the images from the [sibling project][sibling-github], they will not be built or published on Docker Hub. However, you can build them yourself locally any time you wish.
+This branch contains resources for building the images that already include the popular `Python` GUI frameworks (see above).
 
 ## Issues, Wiki and Discussions
 
