@@ -6,6 +6,12 @@
 
 ***
 
+### Release 21.05.2
+
+- fix in script `release_of.sh`
+  - because `wget` is not available on Docker Hub
+- all images moved to `docker/doc/images`
+
 ### Release 21.05.1
 
 - **Dockerfile stage diagrams** added (see the readme files)
