@@ -22,7 +22,9 @@
 ![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push]
 
 ***
+
 **Attention:** This README file has been modified for the branch `bonus-images-python-gui-frameworks`.
+
 ***
 
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment and [VNC][tigervnc]/[noVNC][novnc] servers for headless use and selected applications for programming. Adding more tools requires usually only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.

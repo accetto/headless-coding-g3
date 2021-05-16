@@ -2,12 +2,20 @@
 
 ## accetto/ubuntu-vnc-xfce-python-g3
 
+### Branch: `bonus-images-python-gui-frameworks`
+
 [Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Docker Readme][this-readme-dockerhub] - [Changelog][this-changelog] - [Project Readme][this-readme-project] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
 
 ![badge-docker-pulls][badge-docker-pulls]
 ![badge-docker-stars][badge-docker-stars]
 ![badge-github-release][badge-github-release]
 ![badge-github-release-date][badge-github-release-date]
+
+***
+
+**Attention:** This README file has been modified for the branch `bonus-images-python-gui-frameworks`.
+
+***
 
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, [Python][python] programming language with its package installer [pip][pip] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
 
@@ -64,6 +72,7 @@ The [python-readme][this-readme-python] describes how to install additional Pyth
 
 - [Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development](#headless-ubuntuxfce-container-with-vncnovnc-for-python-development)
   - [accetto/ubuntu-vnc-xfce-python-g3](#accettoubuntu-vnc-xfce-python-g3)
+    - [Branch: `bonus-images-python-gui-frameworks`](#branch-bonus-images-python-gui-frameworks)
     - [TL;DR](#tldr)
     - [Table of contents](#table-of-contents)
     - [Image tags](#image-tags)
