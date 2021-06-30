@@ -45,21 +45,7 @@ The fastest way to build the images locally:
 ./docker/hooks/build dev postman-vnc-novnc-firefox-plus
 ```
 
-### Table of contents
-
-- [Headless Ubuntu/Xfce container with VNC/noVNC and Postman desktop app](#headless-ubuntuxfce-container-with-vncnovnc-and-postman-desktop-app)
-  - [accetto/ubuntu-vnc-xfce-postman-g3](#accettoubuntu-vnc-xfce-postman-g3)
-    - [TL;DR](#tldr)
-    - [Table of contents](#table-of-contents)
-    - [Image tags](#image-tags)
-    - [Ports](#ports)
-    - [Volumes](#volumes)
-  - [Using headless containers](#using-headless-containers)
-    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
-    - [Startup options and help](#startup-options-and-help)
-    - [More information](#more-information)
-  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
-  - [Credits](#credits)
+### Introduction
 
 This is the **third generation** (G3) of my headless images. More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
 

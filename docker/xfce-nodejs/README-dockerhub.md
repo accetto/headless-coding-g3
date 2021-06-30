@@ -31,6 +31,17 @@ sudo apt-get update
 sudo apt --fix-broken install
 ```
 
+Making [Visual Studio Code][vscode] settings and extensions persistent:
+
+```shell
+### bind these container folders to external volumes
+/home/headless/.config/Code
+/home/headless/.vscode/
+
+### Tip: Keep keyboard shortcuts consistent by setting the keyboard layout
+### before starting the Visual Studio Code.
+```
+
 Updating [npm][npm]:
 
 ```shell
@@ -73,21 +84,7 @@ npm install --save-dev electron
 electron-test-app --no-sandbox %U
 ```
 
-### Table of content
-
-- [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
-  - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
-    - [TL;DR](#tldr)
-    - [Table of content](#table-of-content)
-    - [Image tags](#image-tags)
-    - [Ports](#ports)
-    - [Volumes](#volumes)
-  - [Using headless containers](#using-headless-containers)
-    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
-    - [Startup options and help](#startup-options-and-help)
-    - [More information](#more-information)
-  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
-  - [Credits](#credits)
+### Introduction
 
 This repository contains Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, the JavaScript-based platform [Node.js][nodejs] with [npm][npm] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
 
@@ -235,6 +232,17 @@ The container's directory `/srv/samples` already contains the following simple t
 
 - nodejs-test-app
 - electron-test-app
+
+Note that they will be copied locally only if the local directory, you have mounted, has been empty.
+
+**Tip** If you use an image containing [Visual Studio Code][vscode] and you want to make your settings and extensions persistent, then bind the following container folder to external volumes:
+
+```shell
+/home/headless/.config/Code
+/home/headless/.vscode/
+```
+
+To keep the keyboard shortcuts consistent, change the keyboard layout to your preferred one before starting the [Visual Studio Code][vscode].
 
 ## Using headless containers
 

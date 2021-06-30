@@ -47,6 +47,17 @@ The fastest way to build the images locally:
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
+Making [Visual Studio Code][vscode] settings and extensions persistent:
+
+```shell
+### bind these container folders to external volumes
+/home/headless/.config/Code
+/home/headless/.vscode/
+
+### Tip: Keep keyboard shortcuts consistent by setting the keyboard layout
+### before starting the Visual Studio Code.
+```
+
 Updating [npm][npm]:
 
 ```shell
@@ -225,6 +236,15 @@ The container's directory `/srv/samples` already contains the following simple t
 - electron-test-app
 
 Note that they will be copied locally only if the local directory, you have mounted, has been empty.
+
+**Tip** If you use an image containing [Visual Studio Code][vscode] and you want to make your settings and extensions persistent, then bind the following container folder to external volumes:
+
+```shell
+/home/headless/.config/Code
+/home/headless/.vscode/
+```
+
+To keep the keyboard shortcuts consistent, change the keyboard layout to your preferred one before starting the [Visual Studio Code][vscode].
 
 ### Version sticker
 

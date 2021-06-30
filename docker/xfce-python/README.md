@@ -60,6 +60,17 @@ Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
 The [python-readme][this-readme-python] describes how to install additional Python modules and GUI frameworks. The simple test applications are in `/srv/samples/`.
 
+Making [Visual Studio Code][vscode] settings and extensions persistent:
+
+```shell
+### bind these container folders to external volumes
+/home/headless/.config/Code
+/home/headless/.vscode/
+
+### Tip: Keep keyboard shortcuts consistent by setting the keyboard layout
+### before starting the Visual Studio Code.
+```
+
 ### Table of contents
 
 - [Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development](#headless-ubuntuxfce-container-with-vncnovnc-for-python-development)
@@ -195,6 +206,15 @@ The container's directory `/srv/samples` already contains the following simple t
 
 Note that they will be copied locally only if the local directory, you have mounted, has been empty.
 
+**Tip** If you use an image containing [Visual Studio Code][vscode] and you want to make your settings and extensions persistent, then bind the following container folder to external volumes:
+
+```shell
+/home/headless/.config/Code
+/home/headless/.vscode/
+```
+
+To keep the keyboard shortcuts consistent, change the keyboard layout to your preferred one before starting the [Visual Studio Code][vscode].
+
 ### Version sticker
 
 Version sticker serves multiple purposes that are closer described in the [sibling Wiki][sibling-wiki]. Note that the usage of the version sticker has changed between the generations of images.
@@ -284,6 +304,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
 [this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
+[this-readme-python]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-python/src/home/readme-python.md
 
 <!-- sibling project -->
 
