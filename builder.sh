@@ -4,6 +4,7 @@ main() {
 
     local blend=${1?Need blend}
     local cmd=${2?Need command}
+    shift 2
 
     local log="scrap_builder.log"
 
@@ -11,12 +12,12 @@ main() {
 
         pre_build | build | push | post_push )
 
-            ./docker/hooks/"${cmd}" dev "${blend}"
+            ./docker/hooks/"${cmd}" dev "${blend}" $@
             ;;
 
         all )
 
-            ./docker/hooks/pre_build dev "${blend}" > "${log}"
+            ./docker/hooks/pre_build dev "${blend}" $@ > "${log}"
 
             if [[ $? -eq 0 ]] ; then
 
@@ -30,6 +31,7 @@ main() {
                         echo "-------------"
                         echo
 
+                        ### note that the rest-parameters are not included here
                         ./docker/hooks/"${c}" dev "${blend}"
 
                         if [[ $? -ne 0 ]] ; then exit ; fi
