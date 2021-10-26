@@ -6,6 +6,10 @@
 
 ***
 
+### Release 21.10
+
+- `Dockerfile.xfce.nodejs` and `Dockerfile.xfce.python` updated (VSCode stage)
+
 ### Release 21.08
 
 - `builder.sh` utility added
