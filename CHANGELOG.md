@@ -6,6 +6,10 @@
 
 ***
 
+### Release 22.01
+
+- Dockerfiles use **TigerVNC** releases from **SourceForge** website
+
 ### Release 21.10
 
 - `Dockerfile.xfce.nodejs` and `Dockerfile.xfce.python` updated (VSCode stage)
