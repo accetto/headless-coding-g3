@@ -298,6 +298,7 @@ RUN \
         libgbm1 \
         libnss3 \
         libxcb-dri3-0 \
+        libxshmfence1 \
         libxss1 \
         libxtst6 \
     && wget -qO- https://dl.pstmn.io/download/latest/linux64 | tar -xz -C "${POSTMAN_PATH}" \

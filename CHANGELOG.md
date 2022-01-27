@@ -6,6 +6,12 @@
 
 ***
 
+### Release 22.01.1
+
+- FIXED: `Dockerfile.xfce.postman`
+  - package `libxshmfence1` added
+  - it's required since Postman v9.8.3
+
 ### Release 22.01
 
 - Dockerfiles use **TigerVNC** releases from **SourceForge** website
