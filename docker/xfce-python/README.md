@@ -32,16 +32,16 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
+./docker/hooks/build dev python
+./docker/hooks/build dev python-chromium
+./docker/hooks/build dev python-vscode
+./docker/hooks/build dev python-vscode-chromium
+./docker/hooks/build dev python-vscode-firefox
 ./docker/hooks/build dev python-vnc
 ./docker/hooks/build dev python-vnc-chromium
 ./docker/hooks/build dev python-vnc-vscode
 ./docker/hooks/build dev python-vnc-vscode-chromium
-./docker/hooks/build dev python-vnc-novnc
-./docker/hooks/build dev python-vnc-novnc-chromium
-./docker/hooks/build dev python-vnc-novnc-vscode-chromium
 ./docker/hooks/build dev python-vnc-vscode-firefox
-./docker/hooks/build dev python-vnc-vscode-firefox-plus
-### and so on ...
 
 ### from the branch 'bonus-images-python-gui-frameworks'
 ./docker/hooks/build dev python-vnc-tkinter
@@ -55,6 +55,8 @@ The fastest way to build the images locally:
 ./docker/hooks/build dev python-vnc-novnc-tkinter
 ### and so on ...
 ```
+
+You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
@@ -136,35 +138,11 @@ You can build all possible variations of the images locally, but it would not be
 
 Therefore only the following image tags will be regularly built and published on Docker Hub:
 
-- images with [Python][python] from Ubuntu distribution
-  - base images
-    - `latest` is identical to `vnc-novnc`
-    - `vnc` implements only VNC
-    - `vnc-novnc` implements VNC and noVNC
-  - adding [Visual Studio Code][vscode]
-    - `vnc-vscode`
-    - `vnc-novnc-vscode`
-  - adding [Visual Studio Code][vscode] and [Chromium Browser][chromium]
-    - `vnc-vscode-chromium`
-    - `vnc-novnc-vscode-chromium`
-  - adding only [Chromium Browser][chromium]
-    - `vnc-chromium`
-    - `vnc-novnc-chromium`
-  - adding [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
-    - `vnc-vscode-firefox-plus`
-    - `vnc-novnc-vscode-firefox-plus`
-
-The following image tags will not be built or published on Docker Hub, but they can be built any time locally from the same [source repository][this-github]:
-
-- images with [Python][python] from Ubuntu distribution
-  - adding [Firefox][firefox] with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
-    - `vnc-firefox` and `vnc-firefox-plus`
-    - `vnc-novnc-firefox` and `vnc-novnc-firefox-plus`
-  - adding [Visual Studio Code][vscode] and [Firefox][firefox]
-    - `vnc-vscode-firefox`
-    - `vnc-novnc-vscode-firefox`
-  - other images
-    - various combinations of other, more subtle, features (see the hook script `env.rc`)
+- `latest` implements VNC and noVNC
+- `chromium` adds [Chromium Browser][chromium]
+- `vscode` adds [Visual Studio Code][vscode]
+- `vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium]
+- `vscode-firefox` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
 
 The [source repository][this-github] contains also the branch `bonus-images-python-gui-frameworks`, which allows building images already including the most popular Python GUI frameworks (see above). Those images could be occasionally pushed to Docker Hub, but there will be no effort to do it regularly. However, you can built them locally any time.
 

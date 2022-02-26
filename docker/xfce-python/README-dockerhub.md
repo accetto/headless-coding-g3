@@ -35,16 +35,16 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
+./docker/hooks/build dev python
+./docker/hooks/build dev python-chromium
+./docker/hooks/build dev python-vscode
+./docker/hooks/build dev python-vscode-chromium
+./docker/hooks/build dev python-vscode-firefox
 ./docker/hooks/build dev python-vnc
 ./docker/hooks/build dev python-vnc-chromium
 ./docker/hooks/build dev python-vnc-vscode
 ./docker/hooks/build dev python-vnc-vscode-chromium
-./docker/hooks/build dev python-vnc-novnc
-./docker/hooks/build dev python-vnc-novnc-chromium
-./docker/hooks/build dev python-vnc-novnc-vscode-chromium
 ./docker/hooks/build dev python-vnc-vscode-firefox
-./docker/hooks/build dev python-vnc-vscode-firefox-plus
-### and so on ...
 
 ### from the branch 'bonus-images-python-gui-frameworks'
 ./docker/hooks/build dev python-vnc-tkinter
@@ -58,6 +58,8 @@ The fastest way to build the images locally:
 ./docker/hooks/build dev python-vnc-novnc-tkinter
 ### and so on ...
 ```
+
+You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
@@ -127,60 +129,30 @@ You can build all possible variations of the images locally, but it would not be
 
 Therefore only the following image tags will be regularly built and published on Docker Hub:
 
-- `latest` is identical to `vnc-novnc`
+- `latest` implements VNC and noVNC
 
     ![badge_latest_created][badge_latest_created]
     [![badge_latest_version-sticker][badge_latest_version-sticker]][link_latest_version-sticker-verbose]
 
-- `vnc` implements only VNC
+- `chromium` adds only [Chromium Browser][chromium]
 
-    ![badge_vnc_created][badge_vnc_created]
-    [![badge_vnc_version-sticker][badge_vnc_version-sticker]][link_vnc_version-sticker-verbose]
+    ![badge_chromium_created][badge_chromium_created]
+    [![badge_chromium_version-sticker][badge_chromium_version-sticker]][link_chromium_version-sticker-verbose]
 
-- `vnc-novnc` implements VNC and noVNC
+- `vscode` adds [Visual Studio Code][vscode]
 
-    ![badge_vnc-novnc_created][badge_vnc-novnc_created]
-    [![badge_vnc-novnc_version-sticker][badge_vnc-novnc_version-sticker]][link_vnc-novnc_version-sticker-verbose]
+    ![badge_vscode_created][badge_vscode_created]
+    [![badge_vscode_version-sticker][badge_vscode_version-sticker]][link_vscode_version-sticker-verbose]
 
-- `vnc-vscode` adds [Visual Studio Code][vscode], implements only VNC
+- `vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium]
 
-    ![badge_vnc-vscode_created][badge_vnc-vscode_created]
-    [![badge_vnc-vscode_version-sticker][badge_vnc-vscode_version-sticker]][link_vnc-vscode_version-sticker-verbose]
+    ![badge_vscode-chromium_created][badge_vscode-chromium_created]
+    [![badge_vscode-chromium_version-sticker][badge_vscode-chromium_version-sticker]][link_vscode-chromium_version-sticker-verbose]
 
-- `vnc-novnc-vscode` adds [Visual Studio Code][vscode], implements VNC and noVNC
+- `vscode-firefox` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
 
-    ![badge_vnc-novnc-vscode_created][badge_vnc-novnc-vscode_created]
-    [![badge_vnc-novnc-vscode_version-sticker][badge_vnc-novnc-vscode_version-sticker]][link_vnc-novnc-vscode_version-sticker-verbose]
-
-- `vnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements only VNC
-
-    ![badge_vnc-vscode-chromium_created][badge_vnc-vscode-chromium_created]
-    [![badge_vnc-vscode-chromium_version-sticker][badge_vnc-vscode-chromium_version-sticker]][link_vnc-vscode-chromium_version-sticker-verbose]
-
-- `vnc-novnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements VNC and noVNC
-
-    ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
-    [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
-
-- `vnc-chromium` adds only [Chromium Browser][chromium], implements only VNC
-
-    ![badge_vnc-chromium_created][badge_vnc-chromium_created]
-    [![badge_vnc-chromium_version-sticker][badge_vnc-chromium_version-sticker]][link_vnc-chromium_version-sticker-verbose]
-
-- `vnc-novnc-chromium` adds only [Chromium Browser][chromium], implements VNC and noVNC
-
-    ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
-    [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
-
-- `vnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements only VNC
-
-    ![badge_vnc-vscode-firefox-plus_created][badge_vnc-vscode-firefox-plus_created]
-    [![badge_vnc-vscode-firefox-plus_version-sticker][badge_vnc-vscode-firefox-plus_version-sticker]][link_vnc-vscode-firefox-plus_version-sticker-verbose]
-
-- `vnc-novnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements VNC and noVNC
-
-    ![badge_vnc-novnc-vscode-firefox-plus_created][badge_vnc-novnc-vscode-firefox-plus_created]
-    [![badge_vnc-novnc-vscode-firefox-plus_version-sticker][badge_vnc-novnc-vscode-firefox-plus_version-sticker]][link_vnc-novnc-vscode-firefox-plus_version-sticker-verbose]
+    ![badge_vscode-firefox_created][badge_vscode-firefox_created]
+    [![badge_vscode-firefox_version-sticker][badge_vscode-firefox_version-sticker]][link_vscode-firefox_version-sticker-verbose]
 
 The [source repository][this-github] contains also the branch `bonus-images-python-gui-frameworks`, which allows building images already including the most popular Python GUI frameworks (see above). Those images could be occasionally pushed to Docker Hub, but there will be no effort to do it regularly. However, you can built them locally any time.
 
