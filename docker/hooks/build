@@ -29,7 +29,7 @@ main() {
         ### ubuntu-vnc-xfce-nodejs-g3
         ### -------------------------
 
-        nodejs-vnc* | nodejs-current-vnc* | latest-nodejs )
+        nodejs | nodejs-* | nodejs-current | nodejs-current-* )
 
             set -x
             docker build $@ \
@@ -68,7 +68,7 @@ main() {
         ### ubuntu-vnc-xfce-python-g3
         ### -------------------------
 
-        python-vnc* | latest-python )
+        python | python-* )
 
             set -x
             docker build $@ \
@@ -106,7 +106,7 @@ main() {
         ### ubuntu-vnc-xfce-postman-g3
         ### --------------------------
 
-        postman-vnc* | latest-postman )
+        postman | postman-* )
 
             set -x
             docker build $@ \
@@ -144,7 +144,7 @@ main() {
 
         ### These base images will not be built or published on Docker Hub.
 
-        xfce-vnc* )
+        coding | coding-* )
 
             set -x
             docker build $@ \
