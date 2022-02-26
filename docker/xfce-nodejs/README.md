@@ -32,18 +32,25 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
+./docker/hooks/build dev nodejs
+./docker/hooks/build dev nodejs-chromium
+./docker/hooks/build dev nodejs-vscode
+./docker/hooks/build dev nodejs-vscode-chromium
+./docker/hooks/build dev nodejs-vscode-firefox
+./docker/hooks/build dev nodejs-current
 ./docker/hooks/build dev nodejs-vnc
 ./docker/hooks/build dev nodejs-vnc-chromium
 ./docker/hooks/build dev nodejs-vnc-vscode
 ./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-novnc
-./docker/hooks/build dev nodejs-vnc-novnc-chromium
-./docker/hooks/build dev nodejs-vnc-novnc-vscode-chromium
 ./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-plus
-./docker/hooks/build dev nodejs-current-vnc-vscode
-### and so on ...
+./docker/hooks/build dev nodejs-vnc-current
+./docker/hooks/build dev nodejs-vnc-chromium-current
+./docker/hooks/build dev nodejs-vnc-vscode-current
+./docker/hooks/build dev nodejs-vnc-vscode-chromium-current
+./docker/hooks/build dev nodejs-vnc-vscode-firefox-current
 ```
+
+You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
@@ -166,40 +173,12 @@ You can build all possible variations of the images locally, but it would not be
 
 Therefore only the following image tags will be regularly built and published on Docker Hub (with `Node.js LTS` by default):
 
-- images with [Node.js LTS][nodejs]
-  - base images
-    - `latest` is identical to `vnc-novnc`
-    - `vnc` implements only VNC
-    - `vnc-novnc` implements VNC and noVNC
-  - adding [Visual Studio Code][vscode]
-    - `vnc-vscode`
-    - `vnc-novnc-vscode`
-  - adding [Visual Studio Code][vscode] and [Chromium Browser][chromium]
-    - `vnc-vscode-chromium`
-    - `vnc-novnc-vscode-chromium`
-  - adding only [Chromium Browser][chromium]
-    - `vnc-chromium`
-    - `vnc-novnc-chromium`
-  - adding [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
-    - `vnc-vscode-firefox-plus`
-    - `vnc-novnc-vscode-firefox-plus`
-- images with [Node.js Current][nodejs]
-  - base images
-    - `current-vnc-novnc`
-
-The following image tags will not be built or published on Docker Hub, but they can be built any time locally from the same [source repository][this-github]:
-
-- images with [Node.js LTS][nodejs]
-  - adding [Firefox][firefox] with optional **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
-    - `vnc-firefox` and `vnc-firefox-plus`
-    - `vnc-novnc-firefox` and `vnc-novnc-firefox-plus`
-  - adding [Visual Studio Code][vscode] and [Firefox][firefox]
-    - `vnc-vscode-firefox`
-    - `vnc-novnc-vscode-firefox`
-  - other images
-    - various combinations of other, more subtle, features (see the hook script `env.rc`)
-- images with [Node.js Current][nodejs]
-  - the same spectrum of images as by the `LTS` version, only their tags would start with the prefix `current-`
+- `latest` implements VNC and noVNC
+- `chromium` adds [Chromium Browser][chromium]
+- `vscode` adds [Visual Studio Code][vscode]
+- `vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium]
+- `vscode-firefox` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
+- `current` with [Node.js Current][nodejs], implements VNC and noVNC
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 

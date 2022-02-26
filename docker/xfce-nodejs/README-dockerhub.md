@@ -139,65 +139,35 @@ You can build all possible variations of the images locally, but it would not be
 
 Therefore only the following image tags will be regularly built and published on Docker Hub (with [Node.js][nodejs] `LTS` by default):
 
-- `latest` is identical to `vnc-novnc`
+- `latest` implements VNC and noVNC
 
     ![badge_latest_created][badge_latest_created]
     [![badge_latest_version-sticker][badge_latest_version-sticker]][link_latest_version-sticker-verbose]
 
-- `vnc` implements only VNC
+- `chromium` adds [Chromium Browser][chromium]
 
-    ![badge_vnc_created][badge_vnc_created]
-    [![badge_vnc_version-sticker][badge_vnc_version-sticker]][link_vnc_version-sticker-verbose]
+    ![badge_chromium_created][badge_chromium_created]
+    [![badge_chromium_version-sticker][badge_chromium_version-sticker]][link_chromium_version-sticker-verbose]
 
-- `vnc-novnc` implements VNC and noVNC
+- `vscode` adds [Visual Studio Code][vscode]
 
-    ![badge_vnc-novnc_created][badge_vnc-novnc_created]
-    [![badge_vnc-novnc_version-sticker][badge_vnc-novnc_version-sticker]][link_vnc-novnc_version-sticker-verbose]
+    ![badge_vscode_created][badge_vscode_created]
+    [![badge_vscode_version-sticker][badge_vscode_version-sticker]][link_vscode_version-sticker-verbose]
 
-- `vnc-vscode` adds [Visual Studio Code][vscode], implements only VNC
+- `vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium]
 
-    ![badge_vnc-vscode_created][badge_vnc-vscode_created]
-    [![badge_vnc-vscode_version-sticker][badge_vnc-vscode_version-sticker]][link_vnc-vscode_version-sticker-verbose]
+    ![badge_vscode-chromium_created][badge_vscode-chromium_created]
+    [![badge_vscode-chromium_version-sticker][badge_vscode-chromium_version-sticker]][link_vscode-chromium_version-sticker-verbose]
 
-- `vnc-novnc-vscode` adds [Visual Studio Code][vscode], implements VNC and noVNC
+- `vscode-firefox` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**
 
-    ![badge_vnc-novnc-vscode_created][badge_vnc-novnc-vscode_created]
-    [![badge_vnc-novnc-vscode_version-sticker][badge_vnc-novnc-vscode_version-sticker]][link_vnc-novnc-vscode_version-sticker-verbose]
+    ![badge_vscode-firefox_created][badge_vscode-firefox_created]
+    [![badge_vscode-firefox_version-sticker][badge_vscode-firefox_version-sticker]][link_vscode-firefox_version-sticker-verbose]
 
-- `vnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements only VNC
+- `current` with [Node.js][nodejs] `Current`, implements VNC and noVNC
 
-    ![badge_vnc-vscode-chromium_created][badge_vnc-vscode-chromium_created]
-    [![badge_vnc-vscode-chromium_version-sticker][badge_vnc-vscode-chromium_version-sticker]][link_vnc-vscode-chromium_version-sticker-verbose]
-
-- `vnc-novnc-vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium], implements VNC and noVNC
-
-    ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
-    [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
-
-- `vnc-chromium` adds only [Chromium Browser][chromium], implements only VNC
-
-    ![badge_vnc-chromium_created][badge_vnc-chromium_created]
-    [![badge_vnc-chromium_version-sticker][badge_vnc-chromium_version-sticker]][link_vnc-chromium_version-sticker-verbose]
-
-- `vnc-novnc-chromium` adds only [Chromium Browser][chromium], implements VNC and noVNC
-
-    ![badge_vnc-novnc-chromium_created][badge_vnc-novnc-chromium_created]
-    [![badge_vnc-novnc-chromium_version-sticker][badge_vnc-novnc-chromium_version-sticker]][link_vnc-novnc-chromium_version-sticker-verbose]
-
-- `vnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements only VNC
-
-    ![badge_vnc-vscode-firefox-plus_created][badge_vnc-vscode-firefox-plus_created]
-    [![badge_vnc-vscode-firefox-plus_version-sticker][badge_vnc-vscode-firefox-plus_version-sticker]][link_vnc-vscode-firefox-plus_version-sticker-verbose]
-
-- `vnc-novnc-vscode-firefox-plus` adds [Visual Studio Code][vscode] and [Firefox][firefox] with **plus features**, implements VNC and noVNC
-
-    ![badge_vnc-novnc-vscode-firefox-plus_created][badge_vnc-novnc-vscode-firefox-plus_created]
-    [![badge_vnc-novnc-vscode-firefox-plus_version-sticker][badge_vnc-novnc-vscode-firefox-plus_version-sticker]][link_vnc-novnc-vscode-firefox-plus_version-sticker-verbose]
-
-- `current-vnc-novnc` with [Node.js][nodejs] `Current`, implements VNC and noVNC
-
-    ![badge_current-vnc-novnc_created][badge_current-vnc-novnc_created]
-    [![badge_current-vnc-novnc_version-sticker][badge_current-vnc-novnc_version-sticker]][link_current-vnc-novnc_version-sticker-verbose]
+    ![badge_current_created][badge_current_created]
+    [![badge_current_version-sticker][badge_current_version-sticker]][link_current_version-sticker-verbose]
 
 Clicking on the version sticker badge in the [README on Docker Hub][this-readme-dockerhub] reveals more information about the actual configuration of the image.
 
