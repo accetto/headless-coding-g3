@@ -16,8 +16,8 @@
 ![badge-github-commits][badge-github-commits]
 ![badge-github-last-commit][badge-github-last-commit]
 
-![badge-github-workflow-dockerhub-autobuild][badge-github-workflow-dockerhub-autobuild]
-![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push]
+<!-- ![badge-github-workflow-dockerhub-autobuild][badge-github-workflow-dockerhub-autobuild] -->
+<!-- ![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push] -->
 
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment and [VNC][tigervnc]/[noVNC][novnc] servers for headless use and selected applications for programming. Adding more tools requires usually only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
 
@@ -63,37 +63,39 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
+./docker/hooks/build dev nodejs
+./docker/hooks/build dev nodejs-chromium
+./docker/hooks/build dev nodejs-vscode
+./docker/hooks/build dev nodejs-vscode-chromium
+./docker/hooks/build dev nodejs-vscode-firefox
+./docker/hooks/build dev nodejs-current
 ./docker/hooks/build dev nodejs-vnc
 ./docker/hooks/build dev nodejs-vnc-chromium
 ./docker/hooks/build dev nodejs-vnc-vscode
 ./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-novnc
-./docker/hooks/build dev nodejs-vnc-novnc-chromium
-./docker/hooks/build dev nodejs-vnc-novnc-vscode-chromium
 ./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-plus
-./docker/hooks/build dev nodejs-current-vnc-vscode
-### and so on ...
+./docker/hooks/build dev nodejs-vnc-current
+./docker/hooks/build dev nodejs-vnc-chromium-current
+./docker/hooks/build dev nodejs-vnc-vscode-chromium-current
+./docker/hooks/build dev nodejs-vnc-vscode-firefox-current
 
+./docker/hooks/build dev postman
+./docker/hooks/build dev postman-chromium
+./docker/hooks/build dev postman-firefox
 ./docker/hooks/build dev postman-vnc
 ./docker/hooks/build dev postman-vnc-chromium
 ./docker/hooks/build dev postman-vnc-firefox
-./docker/hooks/build dev postman-vnc-firefox-plus
-./docker/hooks/build dev postman-vnc-novnc
-./docker/hooks/build dev postman-vnc-novnc-chromium
-./docker/hooks/build dev postman-vnc-novnc-firefox
-./docker/hooks/build dev postman-vnc-novnc-firefox-plus
 
+./docker/hooks/build dev python
+./docker/hooks/build dev python-chromium
+./docker/hooks/build dev python-vscode
+./docker/hooks/build dev python-vscode-chromium
+./docker/hooks/build dev python-vscode-firefox
 ./docker/hooks/build dev python-vnc
 ./docker/hooks/build dev python-vnc-chromium
 ./docker/hooks/build dev python-vnc-vscode
 ./docker/hooks/build dev python-vnc-vscode-chromium
-./docker/hooks/build dev python-vnc-novnc
-./docker/hooks/build dev python-vnc-novnc-chromium
-./docker/hooks/build dev python-vnc-novnc-vscode-chromium
 ./docker/hooks/build dev python-vnc-vscode-firefox
-./docker/hooks/build dev python-vnc-vscode-firefox-plus
-### and so on ...
 
 ### from the branch 'bonus-images-python-gui-frameworks'
 ./docker/hooks/build dev python-vnc-tkinter
@@ -105,8 +107,9 @@ The fastest way to build the images locally:
 ./docker/hooks/build dev python-vnc-tkinter-vscode
 ./docker/hooks/build dev python-vnc-tkinter-vscode-chromium
 ./docker/hooks/build dev python-vnc-novnc-tkinter
-### and so on ...
 ```
+
+You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
 
 Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
 
