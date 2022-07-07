@@ -6,6 +6,11 @@
 
 ***
 
+### Release 22.07
+
+- xfce-nodejs
+  - updated the `package.json` file of the sample `electron-test-app` to satisfy the Dependabot alerts
+
 ### Release 22.04
 
 - **noVNC** improvements
