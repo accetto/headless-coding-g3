@@ -2,6 +2,8 @@
 
 ## Project `accetto/headless-coding-g3`
 
+Version: G3v2
+
 ***
 
 [Docker Hub][this-docker] - [Changelog][this-changelog] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
@@ -18,6 +20,18 @@
 
 <!-- ![badge-github-workflow-dockerhub-autobuild][badge-github-workflow-dockerhub-autobuild] -->
 <!-- ![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push] -->
+
+***
+
+- [Headless Ubuntu/Xfce containers with VNC/noVNC for programming](#headless-ubuntuxfce-containers-with-vncnovnc-for-programming)
+  - [Project `accetto/headless-coding-g3`](#project-accettoheadless-coding-g3)
+  - [Introduction](#introduction)
+  - [TL;DR](#tldr)
+  - [Project versions](#project-versions)
+  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
+  - [Credits](#credits)
+
+## Introduction
 
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment and [VNC][tigervnc]/[noVNC][novnc] servers for headless use and selected applications for programming. Adding more tools requires usually only a single or just a few commands. The instructions are in the provided README files and some simple test applications are also already included.
 
@@ -63,61 +77,75 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
-./docker/hooks/build dev nodejs
-./docker/hooks/build dev nodejs-chromium
-./docker/hooks/build dev nodejs-vscode
-./docker/hooks/build dev nodejs-vscode-chromium
-./docker/hooks/build dev nodejs-vscode-firefox
-./docker/hooks/build dev nodejs-current
-./docker/hooks/build dev nodejs-vnc
-./docker/hooks/build dev nodejs-vnc-chromium
-./docker/hooks/build dev nodejs-vnc-vscode
-./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-current
-./docker/hooks/build dev nodejs-vnc-chromium-current
-./docker/hooks/build dev nodejs-vnc-vscode-chromium-current
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-current
+### prepare and source the 'secrets.rc' file first (see 'example-secrets.rc')
 
-./docker/hooks/build dev postman
-./docker/hooks/build dev postman-chromium
-./docker/hooks/build dev postman-firefox
-./docker/hooks/build dev postman-vnc
-./docker/hooks/build dev postman-vnc-chromium
-./docker/hooks/build dev postman-vnc-firefox
+### examples of building and publishing the individual images
+./builder.sh nodejs all
+./builder.sh nodejs-chromium all
+./builder.sh nodejs-vscode all
+./builder.sh nodejs-vscode-chromium all
+./builder.sh nodejs-vscode-firefox all
+./builder.sh nodejs-current all
+./builder.sh postman all
+./builder.sh postman-chromium all
+./builder.sh postman-firefox all
+./builder.sh python all
+./builder.sh python-chromium all
+./builder.sh python-vscode all
+./builder.sh python-vscode-chromium all
+./builder.sh python-vscode-firefox all
 
-./docker/hooks/build dev python
-./docker/hooks/build dev python-chromium
-./docker/hooks/build dev python-vscode
-./docker/hooks/build dev python-vscode-chromium
-./docker/hooks/build dev python-vscode-firefox
-./docker/hooks/build dev python-vnc
-./docker/hooks/build dev python-vnc-chromium
-./docker/hooks/build dev python-vnc-vscode
-./docker/hooks/build dev python-vnc-vscode-chromium
-./docker/hooks/build dev python-vnc-vscode-firefox
+### or skipping the publishing to the Docker Hub
+./builder.sh nodejs all-no-push
 
-### from the branch 'bonus-images-python-gui-frameworks'
-./docker/hooks/build dev python-vnc-tkinter
-./docker/hooks/build dev python-vnc-wxpython
-./docker/hooks/build dev python-vnc-pyqt5
-./docker/hooks/build dev python-vnc-pyside2
-./docker/hooks/build dev python-vnc-pyside6
-./docker/hooks/build dev python-vnc-kivy
-./docker/hooks/build dev python-vnc-tkinter-vscode
-./docker/hooks/build dev python-vnc-tkinter-vscode-chromium
-./docker/hooks/build dev python-vnc-novnc-tkinter
+### example of building and publishing a group of images
+./ci-builder.sh all group nodejs-vscode-chromium postman-firefox python-vscode-chromium
+
+### or all the images at once
+./ci-builder.sh all group complete
+
+### or skipping the publishing to the Docker Hub
+./ci-builder.sh all-no-push group complete
+
+### or all images featuring 'Chromium Browser' or 'Firefox'
+./ci-builder.sh all group complete-chromium
+./ci-builder.sh all group complete-firefox
+
+### or, for example, complete 'nodejs' or 'python' group
+./ci-builder.sh all group complete-nodejs
+./ci-builder.sh all group complete-python
+
+### and so on
 ```
 
-You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
+You can still execute the individual hook scripts as before (see the folder `/docker/hooks/`). However, the provided utilities `builder.sh` and `ci-builder.sh` are more convenient. Before pushing the images to the **Docker Hub** you have to prepare and source the file `secrets.rc` (see `example-secrets.rc`). The script `builder.sh` builds the individual images. The script `ci-builder.sh` can build various groups of images or all of them at once. Check the files `local-builder-readme.md`, `local-building-example.md` and the [sibling Wiki][sibling-wiki] for more information.
 
-Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
+Sharing the audio device for video with sound (only Chromium and only on Linux):
 
-## Implicit base images
+```shell
+docker run -it -P --rm \
+  --device /dev/snd:/dev/snd:rw \
+  --group-add audio \
+accetto/ubuntu-vnc-xfce-python-g3:chromium
+```
 
-This project contains also resources for building the base images without the applications for programming. Because those images would be actually equivalent to the images from the [sibling project][sibling-github], they will not be built or published on Docker Hub. However, you can build them yourself locally any time you wish.
+## Project versions
 
-The [source repository][this-github] contains also the branch `bonus-images-python-gui-frameworks`, which allows building images already including the most popular Python GUI frameworks. Those images could be occasionally pushed to Docker Hub, but there will be no effort to do it regularly. However, you can built them locally any time.
+This file describes the **second version** (G3v2) of the project.
+
+The **first version** (G3v1, or simply G3) will still be available in this **GitHub** repository as the branch `archived-generation-g3v1`.
+
+The version `G3v2` brings the following major changes comparing to the previous version `G3v1`:
+
+- Significantly improved building performance by introducing a local cache (`g3-cache`).
+- Auto-building on the **Docker Hub** and using of the **GitHub Actions** have been abandoned.
+- The enhanced building pipeline moves towards building the images outside the **Docker Hub** and aims to support also stages with CI/CD capabilities (e.g. the **GitLab**).
+- The **local stage** is the default building stage now. However, the new building pipeline has already been tested also with a local **GitLab** installation in a Docker container on a Linux machine.
+- Automatic publishing of README files to the **Docker Hub** has been removed, because it was not working properly any more. However, the README files for the **Docker Hub** can still be prepared with the provided utility `util-readme.sh` and then copy-and-pasted to the **Docker Hub** manually.
+
+The changes affect only the building pipeline, not the Docker images themselves. The `Dockerfile`, apart from using the new local `g3-cache`, stays conceptually unchanged.
+
+You can learn more about the project generations in the [sibling project README][sibling-readme] and the [sibling Wiki][sibling-wiki].
 
 ## Issues, Wiki and Discussions
 

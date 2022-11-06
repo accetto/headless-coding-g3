@@ -34,8 +34,17 @@ main() {
             )
             ;;
 
+        postman )
+            # result=$(wget -qO- \
+            result=$(curl -sL -H "Accept: application/vnd.github.v3+json" \
+                "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
+                | grep -m1 "version" \
+                | grep -Po '[0-9.]+'
+            )
+            ;;
+
         * )
-            echo "Unknown key '$1'"
+            echo "Exiting '${0}' with code '1' because of unknown key '${1}'"
             return 1
             ;;
 

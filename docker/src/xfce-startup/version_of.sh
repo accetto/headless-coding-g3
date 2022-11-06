@@ -72,7 +72,7 @@ case "$1" in
         ### source example: GNU nano, version 4.8
         echo $(nano --version 2>/dev/null | grep -Po -m1 '(?<=version\s)[0-9.]+')
         ;;
-    node | nodejs | node-js )
+    nodejs | node-js | node )
         ### source example: v10.16.3
         echo $(node --version 2>/dev/null | grep -Po -m1 '[0-9.]+$')
         ;;
@@ -87,7 +87,7 @@ case "$1" in
         ;;
     postman )
         # jq -r '.version' /opt/Postman/app/resources/app/package.json
-        if [ -n "$(which postman)" ] && [ -n "$(which jq)" ] ; then
+        if [[ -n "$(which postman)" && -n "$(which jq)" ]] ; then
             jq -r '.version' "${POSTMAN_PATH}"/Postman/app/resources/app/package.json 2>/dev/null
         fi
         ;;

@@ -9,6 +9,30 @@
 ![badge-github-release][badge-github-release]
 ![badge-github-release-date][badge-github-release-date]
 
+***
+
+- [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
+  - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
+    - [Introduction](#introduction)
+    - [TL;DR](#tldr)
+    - [Description](#description)
+    - [Image tags](#image-tags)
+    - [Ports](#ports)
+    - [Volumes](#volumes)
+    - [Version sticker](#version-sticker)
+  - [Using headless containers](#using-headless-containers)
+    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
+    - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
+    - [Startup options and help](#startup-options-and-help)
+  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
+  - [Credits](#credits)
+  - [Diagrams](#diagrams)
+    - [Dockerfile.xfce.nodejs](#dockerfilexfcenodejs)
+
+***
+
+### Introduction
+
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use, the JavaScript-based platform [Node.js][nodejs] with [npm][npm] and optionally other tools for programming (e.g. [Visual Studio Code][vscode]).
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
@@ -32,27 +56,27 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
-./docker/hooks/build dev nodejs
-./docker/hooks/build dev nodejs-chromium
-./docker/hooks/build dev nodejs-vscode
-./docker/hooks/build dev nodejs-vscode-chromium
-./docker/hooks/build dev nodejs-vscode-firefox
-./docker/hooks/build dev nodejs-current
-./docker/hooks/build dev nodejs-vnc
-./docker/hooks/build dev nodejs-vnc-chromium
-./docker/hooks/build dev nodejs-vnc-vscode
-./docker/hooks/build dev nodejs-vnc-vscode-chromium
-./docker/hooks/build dev nodejs-vnc-vscode-firefox
-./docker/hooks/build dev nodejs-vnc-current
-./docker/hooks/build dev nodejs-vnc-chromium-current
-./docker/hooks/build dev nodejs-vnc-vscode-current
-./docker/hooks/build dev nodejs-vnc-vscode-chromium-current
-./docker/hooks/build dev nodejs-vnc-vscode-firefox-current
+### prepare and source the 'secrets.rc' file first (see 'example-secrets.rc')
+
+### examples of building and publishing the individual images
+./builder.sh nodejs all
+./builder.sh nodejs-chromium all
+./builder.sh nodejs-vscode all
+./builder.sh nodejs-vscode-chromium all
+./builder.sh nodejs-vscode-firefox all
+./builder.sh nodejs-current all
+
+### or skipping the publishing to the Docker Hub
+./builder.sh nodejs all-no-push
+
+### examples of building and publishing the images as a group
+./ci-builder.sh all group nodejs nodejs-current nodejs-vscode-chromium
+
+### or all the images featuring Node.js
+./ci-builder.sh all group complete-nodejs
 ```
 
-You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
-
-Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
+You can still execute the individual hook scripts as before (see the folder `/docker/hooks/`). However, the provided utilities `builder.sh` and `ci-builder.sh` are more convenient. Before pushing the images to the **Docker Hub** you have to prepare and source the file `secrets.rc` (see `example-secrets.rc`). The script `builder.sh` builds the individual images. The script `ci-builder.sh` can build various groups of images or all of them at once. Check the files `local-builder-readme.md`, `local-building-example.md` and the sibling [Wiki][sibling-wiki] for more information.
 
 Making [Visual Studio Code][vscode] settings and extensions persistent:
 
@@ -107,24 +131,7 @@ npm install --save-dev electron
 electron-test-app --no-sandbox %U
 ```
 
-### Table of contents
-
-- [Headless Ubuntu/Xfce container with VNC/noVNC for `Node.js` development](#headless-ubuntuxfce-container-with-vncnovnc-for-nodejs-development)
-  - [accetto/ubuntu-vnc-xfce-nodejs-g3](#accettoubuntu-vnc-xfce-nodejs-g3)
-    - [TL;DR](#tldr)
-    - [Table of contents](#table-of-contents)
-    - [Image tags](#image-tags)
-    - [Ports](#ports)
-    - [Volumes](#volumes)
-    - [Version sticker](#version-sticker)
-  - [Using headless containers](#using-headless-containers)
-    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
-    - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
-    - [Startup options and help](#startup-options-and-help)
-  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
-  - [Credits](#credits)
-  - [Diagrams](#diagrams)
-    - [Dockerfile.xfce.nodejs](#dockerfilexfcenodejs)
+### Description
 
 This is the **third generation** (G3) of my headless images. They replace the **second generation** (G2) of similar images from the GitHub repository [accetto/xubuntu-vnc][accetto-github-xubuntu-vnc], which will be archived.
 

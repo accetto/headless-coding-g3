@@ -9,6 +9,28 @@
 ![badge-github-release][badge-github-release]
 ![badge-github-release-date][badge-github-release-date]
 
+***
+
+- [Headless Ubuntu/Xfce container with VNC/noVNC and Postman desktop app](#headless-ubuntuxfce-container-with-vncnovnc-and-postman-desktop-app)
+  - [accetto/ubuntu-vnc-xfce-postman-g3](#accettoubuntu-vnc-xfce-postman-g3)
+    - [Introduction](#introduction)
+    - [TL;DR](#tldr)
+    - [Description](#description)
+    - [Image tags](#image-tags)
+    - [Ports](#ports)
+    - [Volumes](#volumes)
+    - [Version sticker](#version-sticker)
+  - [Using headless containers](#using-headless-containers)
+    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
+    - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
+    - [Startup options and help](#startup-options-and-help)
+  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
+  - [Credits](#credits)
+  - [Diagrams](#diagrams)
+    - [Dockerfile.xfce.postman](#dockerfilexfcepostman)
+
+### Introduction
+
 This repository contains resources for building Docker images based on [Ubuntu 20.04 LTS][docker-ubuntu] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use and the [Postman][postman] desktop application.
 
 All images can also contain the current [Chromium][chromium] or [Firefox][firefox] web browsers.
@@ -32,36 +54,26 @@ The fastest way to build the images locally:
 
 ```shell
 ### PWD = project root
-./docker/hooks/build dev postman
-./docker/hooks/build dev postman-chromium
-./docker/hooks/build dev postman-firefox
-./docker/hooks/build dev postman-vnc
-./docker/hooks/build dev postman-vnc-chromium
-./docker/hooks/build dev postman-vnc-firefox
+### prepare and source the 'secrets.rc' file first (see 'example-secrets.rc')
+
+### examples of building and publishing the individual images 
+./builder.sh postman all
+./builder.sh postman-chromium all
+./builder.sh postman-firefox all
+
+### or skipping the publishing to the Docker Hub
+./builder.sh postman all-no-push
+
+### examples of building and publishing the images as a group
+./ci-builder.sh all group postman postman-chromium
+
+### or all the images featuring the Postman
+./ci-builder.sh all group complete-postman
 ```
 
-You can also use the provided helper script `builder.sh`, which can also publish the images on Docker Hub, if you correctly set the required environment variables (see the file `example-secrets.rc`). Check the files `local-builder-readme.md` and `local-building-example.md`.
+You can still execute the individual hook scripts as before (see the folder /docker/hooks/). However, the provided utilities builder.sh and ci-builder.sh are more convenient. Before pushing the images to the Docker Hub you have to prepare and source the file secrets.rc (see example-secrets.rc). The script builder.sh builds the individual images. The script ci-builder.sh can build various groups of images or all of them at once. Check the files local-builder-readme.md, local-building-example.md and the sibling Wiki for more information.
 
-Find more in the hook script `env.rc` and in the [sibling Wiki][sibling-wiki].
-
-### Table of contents
-
-- [Headless Ubuntu/Xfce container with VNC/noVNC and Postman desktop app](#headless-ubuntuxfce-container-with-vncnovnc-and-postman-desktop-app)
-  - [accetto/ubuntu-vnc-xfce-postman-g3](#accettoubuntu-vnc-xfce-postman-g3)
-    - [TL;DR](#tldr)
-    - [Table of contents](#table-of-contents)
-    - [Image tags](#image-tags)
-    - [Ports](#ports)
-    - [Volumes](#volumes)
-    - [Version sticker](#version-sticker)
-  - [Using headless containers](#using-headless-containers)
-    - [Overriding VNC/noVNC parameters](#overriding-vncnovnc-parameters)
-    - [Running containers in background or foreground](#running-containers-in-background-or-foreground)
-    - [Startup options and help](#startup-options-and-help)
-  - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
-  - [Credits](#credits)
-  - [Diagrams](#diagrams)
-    - [Dockerfile.xfce.postman](#dockerfilexfcepostman)
+### Description
 
 This is the **third generation** (G3) of my headless images. More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
 
