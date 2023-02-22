@@ -317,7 +317,7 @@ main() {
                         pivotal )
 
                             clear_log
-                            build_group "${command}" "nodejs" "nodejs-current" "nodejs-vscode" "postman" "python"
+                            build_group "${command}" "nodejs" "nodejs-current" "postman" "python" "python-vscode"
                             ;;
 
                         complete-chromium )
