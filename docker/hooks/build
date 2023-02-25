@@ -7,10 +7,12 @@ source "${_mydir}"/env.rc
 source "${_mydir}"/util.rc
 
 main() {
+    local params=$@
     local now
     local version_sticker
     local cache_script="cache"
     local -i exit_code=0
+    local target_stage
 
     if [[ -f "${_build_context}/${_scrap_demand_stop_building}" ]] ; then
     
@@ -31,19 +33,45 @@ main() {
         version_sticker="null"
     fi
 
+    ### check for the '--target' parameter
+    if [[ $# -gt 0 ]] ; then
+
+        ### no quotes around 'params'
+        for i in ${params} ; do
+            if [[ "${i}" == "--target" ]] ; then
+
+                target_stage="${i}"
+
+            elif [[ -n "${target_stage}" ]] ; then
+
+                ### only if '--target' is followed by a value
+                if [[ ! "${i}" =~ ^- ]] ; then
+                    target_stage="${i}"
+                fi
+                break
+            fi
+        done
+
+        ### remove the orphaned '--target' (missing value)
+        if [[ "${target_stage}" == "--target" ]] ; then
+            params="${params/--target/}"
+            target_stage=""
+        fi
+    fi
+
     now="$(date --utc +%FT%TZ)"
     echo "Current timestamp: ${now}" ; echo
 
     case "${_blend}" in
 
         ### -------------------------
-        ### ubuntu-vnc-xfce-nodejs-g3
+        ### debian-vnc-xfce-nodejs-g3
         ### -------------------------
 
         nodejs | nodejs-* | nodejs-current | nodejs-current-* )
 
-            set -x
-            docker build $@ \
+            ### no quotes around 'params'
+            docker build ${params} \
                 -f "${DOCKERFILE_PATH}" \
                     --build-arg BUILDKIT_INLINE_CACHE=1 \
                     --build-arg BASEIMAGE="${BASEIMAGE}" \
@@ -56,7 +84,6 @@ main() {
                     ${FEATURES_BUILD_SLIM:+--build-arg ARG_APT_NO_RECOMMENDS=1} \
                     ${FEATURES_SCREENSHOOTING:+--build-arg ARG_FEATURES_SCREENSHOOTING=1} \
                     ${FEATURES_THUMBNAILING:+--build-arg ARG_FEATURES_THUMBNAILING=1} \
-                    ${FEATURES_USER_GROUP_OVERRIDE:+--build-arg ARG_FEATURES_USER_GROUP_OVERRIDE=1} \
                     \
                     ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_DISTRO=${TIGERVNC_DISTRO}} \
                     ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_VERSION=${TIGERVNC_VERSION}} \
@@ -65,8 +92,6 @@ main() {
                     ${FEATURES_NOVNC:+--build-arg ARG_WEBSOCKIFY_VERSION=${WEBSOCKIFY_VERSION}} \
                     ${FEATURES_NOVNC:+--build-arg ARG_MERGE_STAGE_VNC_BASE="stage_novnc"} \
                     \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_DISTRO=${CHROMIUM_DISTRO}} \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_VERSION=${CHROMIUM_VERSION}} \
                     ${FEATURES_CHROMIUM:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_chromium"} \
                     \
                     ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \
@@ -83,13 +108,14 @@ main() {
             ;;
 
         ### --------------------------
-        ### ubuntu-vnc-xfce-postman-g3
+        ### debian-vnc-xfce-postman-g3
         ### --------------------------
 
         postman | postman-* )
 
             set -x
-            docker build $@ \
+            ### no quotes around 'params'
+            docker build ${params} \
                 -f "${DOCKERFILE_PATH}" \
                     --build-arg BUILDKIT_INLINE_CACHE=1 \
                     --build-arg BASEIMAGE="${BASEIMAGE}" \
@@ -102,7 +128,6 @@ main() {
                     ${FEATURES_BUILD_SLIM:+--build-arg ARG_APT_NO_RECOMMENDS=1} \
                     ${FEATURES_SCREENSHOOTING:+--build-arg ARG_FEATURES_SCREENSHOOTING=1} \
                     ${FEATURES_THUMBNAILING:+--build-arg ARG_FEATURES_THUMBNAILING=1} \
-                    ${FEATURES_USER_GROUP_OVERRIDE:+--build-arg ARG_FEATURES_USER_GROUP_OVERRIDE=1} \
                     \
                     ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_DISTRO=${TIGERVNC_DISTRO}} \
                     ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_VERSION=${TIGERVNC_VERSION}} \
@@ -111,8 +136,6 @@ main() {
                     ${FEATURES_NOVNC:+--build-arg ARG_WEBSOCKIFY_VERSION=${WEBSOCKIFY_VERSION}} \
                     ${FEATURES_NOVNC:+--build-arg ARG_MERGE_STAGE_VNC_BASE="stage_novnc"} \
                     \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_DISTRO=${CHROMIUM_DISTRO}} \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_VERSION=${CHROMIUM_VERSION}} \
                     ${FEATURES_CHROMIUM:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_chromium"} \
                     \
                     ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \
@@ -127,13 +150,14 @@ main() {
             ;;
 
         ### -------------------------
-        ### ubuntu-vnc-xfce-python-g3
+        ### debian-vnc-xfce-python-g3
         ### -------------------------
 
         python | python-* )
 
             set -x
-            docker build $@ \
+            ### no quotes around 'params'
+            docker build ${params} \
                 -f "${DOCKERFILE_PATH}" \
                     --build-arg BUILDKIT_INLINE_CACHE=1 \
                     --build-arg BASEIMAGE="${BASEIMAGE}" \
@@ -155,8 +179,6 @@ main() {
                     ${FEATURES_NOVNC:+--build-arg ARG_WEBSOCKIFY_VERSION=${WEBSOCKIFY_VERSION}} \
                     ${FEATURES_NOVNC:+--build-arg ARG_MERGE_STAGE_VNC_BASE="stage_novnc"} \
                     \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_DISTRO=${CHROMIUM_DISTRO}} \
-                    ${FEATURES_CHROMIUM:+--build-arg ARG_CHROMIUM_VERSION=${CHROMIUM_VERSION}} \
                     ${FEATURES_CHROMIUM:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_chromium"} \
                     \
                     ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \

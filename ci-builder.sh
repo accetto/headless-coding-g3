@@ -1,6 +1,7 @@
 #!/bin/bash
 ### do not use '-e'
 ### @accetto, September 2022
+### updated: January 2023
 
 ### depends on the script 'builder.sh'
 ### set the environment variables first, e.g. 'source .secrets'
@@ -92,8 +93,8 @@ This script can:
 
 Usage: <script> <mode> <argument> [<optional-argument>]...
 
-    ${0} [<options>] <command> family <parent-blend> [<child-suffix>]...
     ${0} [<options>] <command> group <blend> [<blend>]...
+    ${0} [<options>] <command> family <parent-blend> [<child-suffix>]...
     ${0} [--log-all] log get (digest|stickers|timing|errors)
 
 <options>      := (--log-all|--no-cache) 
@@ -106,8 +107,9 @@ Usage: <script> <mode> <argument> [<optional-argument>]...
                   |(nodejs[-current|-chromium|-vscode[-chromium|-firefox]])
                   |(python[-chromium|-vscode[-chromium|-firefox]])
 
-Family mode: The children are skipped if a new parent image was not actually built.
 Group mode : All images are processed independently.
+Family mode: The children are skipped if a new parent image was not actually built.
+Remark: Currently are both modes equivalent, because there are no child suffixes supported.
 
 The command and the blend are passed to the builder script.
 The result "<parent-blend><child-suffix>" must be a blend supported by the builder script.
@@ -119,17 +121,19 @@ EOT
     # Examples of family mode:
     # Build and publish all blends, not using the Docker builder cache:
     #     ${0} --no-cache all family complete
-    # Build the 'latest' and 'latest-chromium' blends, but skip the publishing:
-    #     ${0} all-no-push family latest -chromium
-    # Build and publish only the 'latest-firefox' blend:
-    #     ${0} all family latest-firefox
+    # Build the 'latest' and 'latest-ver2' blends, but skip the publishing:
+    #     ${0} all-no-push family latest -ver2
+    # Build and publish only the 'latest-firefox' and 'latest-firefox-ver2' blends:
+    #     ${0} all family latest-firefox -ver2
+    # Build and publish only the 'latest' and 'latest-firefox-ver2' blends:
+    #     ${0} all family latest -firefox-ver2
 
     # Examples of group mode:
     # Build and publish all blends:
     #     ${0} all group complete
-    # Build the 'latest' and 'latest-chromium' blends, but skip the publishing:
-    #     ${0} all-no-push group latest latest-chromium
-    # Building and publishing the images containing Firefox:
+    # Build the 'latest' and 'latest-ver2' blends, but skip the publishing:
+    #     ${0} all-no-push group latest latest-ver2
+    # Build and publish the images containing Firefox:
     #     ${0} all group complete-firefox
 
     # Other examples:
@@ -406,7 +410,7 @@ main() {
     fi
 }
 
-declare _builder_project="${BUILDER_REPO:-headless-ubuntu-coding-g3}"
+declare _builder_project="${BUILDER_REPO:-headless-coding-g3}"
 declare _builder_log="scrap_builder.log"
 
 declare _builder_script="builder.sh"

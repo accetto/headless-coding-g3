@@ -1,5 +1,6 @@
 #!/bin/bash -e
 ### @accetto, September 2022
+### updated: January 2023
 
 echo -e "\n==> EXECUTING @$(date -u +'%Y-%m-%d_%H-%M-%S'): ${0} $@\n"
 
@@ -130,34 +131,6 @@ cache_websockify() {
     refresh_file "${section}" "${file}" "${source_url}" "${target}"
 }
 
-cache_chromium() {
-    local section="chromium"
-    local source_base_url="http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser"
-    local target_path="${_cache}/${section}"
-    local file=""
-    local target=""
-
-    mkdir -p "${target_path}"
-
-    file="chromium-browser_${CHROMIUM_VERSION}_${CHROMIUM_DISTRO}.deb"
-    source_url="${source_base_url}/${file}"
-    target="${target_path}/${file}"
-
-    refresh_file "${section}" "${file}" "${source_url}" "${target}"
-
-    file="chromium-codecs-ffmpeg_${CHROMIUM_VERSION}_${CHROMIUM_DISTRO}.deb"
-    source_url="${source_base_url}/${file}"
-    target="${target_path}/${file}"
-
-    refresh_file "${section}" "${file}" "${source_url}" "${target}"
-
-    file="chromium-browser-l10n_${CHROMIUM_VERSION}_all.deb"
-    source_url="${source_base_url}/${file}"
-    target="${target_path}/${file}"
-
-    refresh_file "${section}" "${file}" "${source_url}" "${target}"
-}
-
 cache_nodejs() {
     local section="nodejs"
     local source_base_url="https://nodejs.org/dist"
@@ -211,11 +184,6 @@ main() {
 
         cache_novnc
         cache_websockify
-    fi
-
-    if [[ "${FEATURES_CHROMIUM}" == "1" ]] ; then
-    
-        cache_chromium
     fi
 
     if [[ "${FEATURES_NODEJS}" == "1" ]] ; then

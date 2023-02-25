@@ -1,5 +1,5 @@
 print_usage() {
-    local readonly github_repo_url="https://github.com/accetto/ubuntu-vnc-xfce-g3"
+    local readonly github_repo_url="https://github.com/accetto/headless-coding-g3"
 
     echo "
 CONTAINER USAGE:

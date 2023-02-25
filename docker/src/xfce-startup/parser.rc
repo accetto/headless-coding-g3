@@ -5,7 +5,7 @@
 
 # Created by argbash-init v2.8.1
 # ARG_VERSION([echo $(basename $0) v20.12.06])
-# ARG_HELP([Container startup script],[Use '-H' or '--help-usage' for extended container usage help.\nFor more information visit https://github.com/accetto/ubuntu-vnc-xfce-g3])
+# ARG_HELP([Container startup script],[Use '-H' or '--help-usage' for extended container usage help.\nFor more information visit https://github.com/accetto/headless-coding-g3])
 # ARG_OPTIONAL_ACTION([help-usage],[H],[Extended container usage help.],[print_usage])
 #
 # ARG_POSITIONAL_INF([command],[Optional command with optional arguments. It is executed during startup.])
@@ -84,7 +84,7 @@ print_help()
 	printf '\t%s\n' "--debug, --no-debug: Startup process modifier (off by default)"
 	printf '\t%s\n' "--verbose, --no-verbose: Startup process modifier (off by default)"
 	printf '\n%s\n' "Use '-H' or '--help-usage' for extended container usage help.
-For more information visit https://github.com/accetto/ubuntu-vnc-xfce-g3"
+For more information visit https://github.com/accetto/headless-coding-g3"
 }
 
 

@@ -3,6 +3,7 @@
 ### resolve also symlinks
 _current_dir="$(dirname "$(readlink -f "$0")")"
 
+debian=$("${_current_dir}/version_of.sh" debian)
 ubuntu=$("${_current_dir}/version_of.sh" ubuntu)
 chromium=$("${STARTUPDIR}/version_of.sh" chromium)
 firefox=$("${STARTUPDIR}/version_of.sh" firefox)
@@ -23,7 +24,10 @@ main() {
 
             key="$1"
 
-            if [[ "${key}" = '--' ]] ; then shift ; fi
+            if [[ "${key}" = '--' ]] ; then
+            
+                shift
+            fi
 
             case "${key}" in
 
@@ -47,7 +51,13 @@ main() {
                     if [[ -n "${postman}" ]] ; then echo "Postman ${postman}" ; fi
                     if [[ -n "${python}" ]] ; then echo "Python ${python}" ; fi
                     if [[ -n "${python_pip}" ]] ; then echo "python-pip ${python_pip}" ; fi
-                    echo "Ubuntu ${ubuntu}"
+
+                    if [[ -n "${debian}" ]] ; then
+                        echo "Debian ${debian}"
+                    elif [[ -n "${ubuntu}" ]] ; then
+                        echo "Ubuntu ${ubuntu}"
+                    fi
+
                     if [[ -n "${vscode}" ]] ; then echo "VSCode ${vscode}" ; fi
                     ;;
 
@@ -109,7 +119,11 @@ main() {
                     version=$("${_current_dir}/version_of.sh" tigervnc)
                     if [[ -n "${version}" ]] ; then echo "TigerVNC ${version}" ; fi
 
-                    echo "Ubuntu ${ubuntu}"
+                    if [[ -n "${debian}" ]] ; then
+                        echo "Debian ${debian}"
+                    elif [[ -n "${ubuntu}" ]] ; then
+                        echo "Ubuntu ${ubuntu}"
+                    fi
 
                     if [[ -n "${vscode}" ]] ; then echo "VSCode ${vscode}" ; fi
 
@@ -120,7 +134,11 @@ main() {
             shift
         done
     else
-        sticker="ubuntu$ubuntu"
+        if [[ -n "${debian}" ]] ; then
+            sticker="debian${debian}"
+        elif [[ -n "${ubuntu}" ]] ; then
+            sticker="ubuntu$ubuntu"
+        fi
 
         if [[ -n "${nodejs}" ]] ; then
 

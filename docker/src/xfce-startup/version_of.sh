@@ -6,9 +6,9 @@ case "$1" in
         ### source example: Angular CLI: 8.3.2
         echo $(ng --version 2>/dev/null | grep -Po -m1 '(?<=Angular CLI:\s)[0-9.]+')
         ;;
-    chromium | chromium-browser | chromiumbrowser )
-        ### source example: Chromium 76.0.3809.100 Built on Ubuntu , running on Ubuntu 18.04
-        echo $(chromium-browser --version 2>/dev/null | grep -Po -m1 '(?<=Chromium\s)[0-9.]+')
+    chromium | chromium-browser)
+        ### source example: Chromium 109.0.5414.119 built on Debian 11.6, running on Debian 11.6
+        echo $(chromium --version 2>/dev/null | grep -Po -m1 '(?<=Chromium\s)[0-9.]+')
         ;;
     code | vsc | vscode | visual-studio-code | visualstudiocode )
         ### source example: 1.37.1
@@ -21,6 +21,12 @@ case "$1" in
     dconf-editor )
         ### source example: dconf-editor 3.36.0
         echo $(dconf-editor --version 2>/dev/null | grep -Po -m1 '[0-9.]+$')
+        ;;
+    debian )
+        ### source example: 11 (bullseye)
+        # echo $(cat /etc/os-release 2>/dev/null | grep -Po -m1 '(?<=VERSION\=")[0-9.]+')
+        ### source example: 11.6
+        echo $(cat /etc/debian_version 2>/dev/null | grep -Po -m1 '^[0-9.]+$')
         ;;
     drawio | drawio-desktop )
         ### source example: 12.2.2

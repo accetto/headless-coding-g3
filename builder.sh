@@ -1,5 +1,6 @@
 #!/bin/bash -e
 ### @accetto, August 2021
+### updated: September 2022, January 2023
 
 ### depends on the hook scripts
 ### set the environment variables first, e.g. 'source .secrets'
@@ -109,7 +110,7 @@ main() {
                     echo "==> ${c} '${blend}'"
                     echo
 
-                    "${_build_context}"/hooks/"${c}" dev "${blend}"
+                    "${_build_context}"/hooks/"${c}" dev "${blend}" $@
                     exit_code=$?
                     if [[ ${exit_code} -ne 0 ]] ; then die "Hook script '${c}' failed with code ${exit_code}." ${exit_code} ; fi
                 done
