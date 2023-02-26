@@ -12,7 +12,12 @@
       - [Step 2: `build`](#step-2-build)
       - [Step 3: `push`](#step-3-push)
       - [Step 4: `post_push`](#step-4-post_push)
-    - [README files for Docker Hub](#readme-files-for-docker-hub)
+  - [Additional parameters](#additional-parameters)
+    - [Special handling of `--target` parameter](#special-handling-of---target-parameter)
+  - [Disabling default features](#disabling-default-features)
+    - [Disabling `noVNC`](#disabling-novnc)
+    - [Disabling `Firefox Plus`](#disabling-firefox-plus)
+  - [README files for Docker Hub](#readme-files-for-docker-hub)
 
 ## Introduction
 
@@ -20,7 +25,7 @@ The **Docker Hub** has removed the **auto-building feature** from the free plan 
 
 This page describes how to build the images locally and optionally also push them to the **Docker Hub**.
 
-The **second version** (G3v2) of the building pipeline makes it really easy, even if you want to build a set of images or all of them at once.
+The **second version** (G3v2) of the building pipeline introduced in the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] made it really easy, even if you want to build a set of images or all of them at once.
 
 ## Preparation
 
@@ -53,7 +58,7 @@ The actual building pipeline consists of the following hook scripts stored in th
 
 The hook scripts are executed exactly in that order.
 
-The **second version** (G3v2) of the pipeline has added also the helper script `cache`, which ist stored in the same folder. It is used by the hook scripts `pre_build` and `build` and it refreshes the local `g3-cache`. It can be also executed  stand-alone.
+The **second version** (G3v2) of the pipeline introduced in the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] has added also the helper script `cache`, which ist stored in the same folder. It is used by the hook scripts `pre_build` and `build` and it refreshes the local `g3-cache`. It can be also executed  stand-alone.
 
 Utilizing the local `g3-cache` brings a significant boost in the building performance and much shorter building times.
 
@@ -61,7 +66,7 @@ There is also the helper script `util-readme.sh`, stored in the folder `utils/`.
 
 ## Three ways of building images
 
-Since the **second version** (G3v2) of the building pipeline there are the following ways of building the images:
+Since the **second version** (G3v2) of the building pipeline introduced in the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] there are the following ways of building the images:
 
 - Building sets of images by executing the helper script `ci-builder.sh`
 - Building the individual images by executing the helper script `builder.sh`
@@ -92,7 +97,7 @@ You can find more information and examples in the separate `readme` file, descri
 
 ### Building and publishing individual images
 
-Building and publishing of individual images is also very easy. Let's say we wan to refresh the image `accetto/ubuntu-vnc-xfce-nodejs-g3:latest`. We could execute the following command:
+Building and publishing of individual images is also very easy. Let's say we wan to refresh the image `accetto/debian-vnc-xfce-nodejs-g3:latest`. We could execute the following command:
 
 ```shell
 ### PWD = project's root directory
@@ -158,7 +163,7 @@ The other option is to set the environment variable `FORCE_BUILDING=1` **before*
 ./docker/hooks/build dev python --no-cache
 ```
 
-This step builds a new persistent image, named by default according the variable `BUILDER_REPO` (e.g. `headless-ubuntu-coding-g3`).
+This step builds a new persistent image, named by default according the variable `BUILDER_REPO` (e.g. `headless-coding-g3`).
 
 **Remark**: Ensure that the file `scrap-demand-stop-building` is not present or the environment variable is set `FORCE_BUILDING=1`.
 
@@ -186,7 +191,73 @@ This step creates the deployment image tag and pushes it to the deployment repos
 
 This step updates the **GitHub Gists** belonging to the **builder repository** and the **deployment repository** and removes the temporary helper files created by the hook script `pre_build`.
 
-### README files for Docker Hub
+## Additional parameters
+
+Additional parameters, that come after the mandatory ones, can be passed to the hook scripts in the folder `docker/hooks`.
+
+The individual hook scripts can use the additional parameters or ignore them.
+
+Currently only the `build` and `pre_build` scripts actually process the additional parameters.
+
+Both scripts insert the additional parameters just after the `docker build` part of the Docker build command line.
+
+For example, if the additional parameters `--target stage_xfce --no-cache` are provided to the script `docker/hooks/build`, then the result Docker command line will begin like this:
+
+```shell
+docker build --target stage_xfce --no-cache -f ./docker/Dockerfile.xfce.postman ...
+```
+
+However, there is a special handling of the parameter `--target`.
+
+### Special handling of `--target` parameter
+
+The Docker `build` parameter `--target` allows processing multi-stage Dockerfiles only to a particular stage.
+
+Therefore this parameter makes sense only by the hook script `docker/hooks/build`.
+
+For example, this would build an image including only the stages `stage_essentials`, `stage_xserver` and `stage_xfce`:
+
+```shell
+docker build --target stage_xfce --no-cache -f ./docker/Dockerfile.xfce.postman ...
+```
+
+The result image tag will get the suffix `_stage_xfce`, e.g. `accetto/headless-coding-g3:postman_stage_xfce`.
+
+This is generally useful only during development and debugging.
+
+On the other hand, the hook script `docker/hooks/pre_build` ignores and  removes the parameter `--target` with its value.
+
+Therefore `pre_build` always process all Dockerfile stages.
+
+For example, if the additional parameters `--target stage_xfce --no-cache` are provided to the script `docker/hooks/pre_build`, then the result Docker command line will begin like this:
+
+```shell
+docker build --no-cache -f ./docker/Dockerfile.xfce.postman ...
+```
+
+Note that both hook scripts always remove an orphaned `--target` parameter which comes with no value.
+
+## Disabling default features
+
+Some features, that are enabled by default, can be disabled via environment variables.
+
+It allows to build even smaller images by excluding `noVNC` or `Firefox Plus features`.
+
+### Disabling `noVNC`
+
+If the environment variable `FEATURES_NOVNC` is explicitly set to zero (by `export FEATURES_NOVNC="0"`), then
+
+- image will not include `noVNC`
+- image tag will get the `-vnc` suffix (e.g. `postman-vnc`, `postman-firefox-vnc` etc.)
+
+### Disabling `Firefox Plus`
+
+If the environment variable `FEATURES_FIREFOX_PLUS` is explicitly set to zero (by `export FEATURES_FIREFOX_PLUS="0"`) and the variable `FEATURES_FIREFOX="1"`, then
+
+- image with Firefox will not include the *Firefox Plus features*
+- image tag will get the `-default` suffix (e.g. `latest-firefox-default` or also `latest-firefox-default-vnc` etc.)
+
+## README files for Docker Hub
 
 Each **deployment repository** has its own `README` file for the **Docker Hub**.
 
@@ -204,12 +275,16 @@ The utility will also check the length of the result file, because it is limited
 
 Therefore there is always also the full-length `README` file version, which is published only on the **GitHub**.
 
-For example, the `README` file for the repository `accetto/ubuntu-vnc-xfce-python-g3` can be generated by the following command:
+For example, the `README` file for the repository `accetto/debian-vnc-xfce-python-g3` can be generated by the following command:
 
 ```bash
 ### PWD = utils/
-./util-readme.sh --repo accetto/ubuntu-vnc-xfce-python-g3 --context=../docker/xfce-python --gist <deployment-gist-ID> -- preview
+./util-readme.sh --repo accetto/debian-vnc-xfce-python-g3 --context=../docker/xfce-python --gist <deployment-gist-ID> -- preview
 
 ### or if the environment variable 'DEPLOY_GIST_ID' has been set
-./util-readme.sh --repo accetto/ubuntu-vnc-xfce-python-g3 --context=../docker/xfce-python -- preview
+./util-readme.sh --repo accetto/debian-vnc-xfce-python-g3 --context=../docker/xfce-python -- preview
 ```
+
+***
+
+[accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3

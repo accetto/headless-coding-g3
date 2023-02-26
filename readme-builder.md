@@ -3,10 +3,10 @@
 - [Utility `builder.sh`](#utility-buildersh)
   - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
-  - [Examples](#examples)
-    - [Executing complete pipeline](#executing-complete-pipeline)
-    - [Executing individual pipeline steps](#executing-individual-pipeline-steps)
-      - [What about the 'cache' helper script](#what-about-the-cache-helper-script)
+  - [Executing complete pipeline](#executing-complete-pipeline)
+  - [Executing individual pipeline steps](#executing-individual-pipeline-steps)
+    - [What about the 'cache' helper script](#what-about-the-cache-helper-script)
+  - [Additional building parameters](#additional-building-parameters)
 
 ## Introduction
 
@@ -31,7 +31,7 @@ Usage: ./builder.sh <blend> <command> [<docker-cli-options>]
 blend   := (((nodejs|nodejs-vscode|postman|python|python-vscode)[-(chromium|firefox)]))|nodejs-current)
 command := (all|all-no-push)|(pre_build|build|push|post_push|cache)
 
-The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.
+The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.    
 
 The script creates a complete execution log.
 ```
@@ -54,22 +54,20 @@ source secrets.rc
 . secrets.rc
 ```
 
-## Examples
-
-### Executing complete pipeline
+## Executing complete pipeline
 
 Building the individual images and publishing them to the **Docker Hub**:
 
 ```shell
 ### PWD = project's root directory
 
-### ubuntu-vnc-xfce-postman-g3:latest
+### debian-vnc-xfce-postman-g3:latest
 ./builder.sh postman all
 
-### ubuntu-vnc-xfce-postman-g3:chromium
+### debian-vnc-xfce-postman-g3:chromium
 ./builder.sh postman-chromium all
 
-### ubuntu-vnc-xfce-postman-g3:firefox
+### debian-vnc-xfce-postman-g3:firefox
 ./builder.sh postman-firefox all
 ```
 
@@ -88,9 +86,9 @@ You can also provide additional parameters for the internally used Docker `build
 ### docker build --no-cache ...
 ```
 
-The optional `<docker-cli-options>` are passed only to the `pre_build` hook script, which passes them to the internally used `docker build` command.
+The optional `<docker-cli-options>` are passed only to the `pre_build` hook script, which passes them to the internally used `docker build` command. The `cache` hook script, however, doesn't use any Docker CLI commands.
 
-### Executing individual pipeline steps
+## Executing individual pipeline steps
 
 The building pipeline consists of the following steps, that can be executed also individually:
 
@@ -117,9 +115,9 @@ The building pipeline consists of the following steps, that can be executed also
 
 The optional `<docker-cli-options>` are passed to the each individual hook script, which can pass them to the internally used Docker CLI command. The `cache` hook script, however, doesn't use any Docker CLI commands.
 
-#### What about the 'cache' helper script
+### What about the 'cache' helper script
 
-The `cache` hook script has been introduced in the **second version** (G3v2) of the building pipeline. It refreshes the local `g3-cache`, which must be always placed inside the Docker build context. The script is also used by the `pre_build` and `build` hook scripts.
+The `cache` hook script has been introduced in the **second version** (G3v2) of the building pipeline in the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3]. It refreshes the local `g3-cache`, which must be always placed inside the Docker build context. The script is also used by the `pre_build` and `build` hook scripts.
 
 The `g3-cache` and the rules for its refreshing are described separately.
 
@@ -128,17 +126,36 @@ The script can be also used as a quick check, if there are newer versions of the
 - `TigerVNC`
 - `noVNC`
 - `websockify`
-- `Chromium Browser`
 - `Node.js`
 - `Postman`
 
 The script will refresh only the packages that are required for the current build:
 
 ```shell
-### this will refresh only 'TigerVNC', 'noVNC', 'websockify' and "Postman
-./builder.sh postman cache
-./builder.sh postman-firefox cache
+### this will refresh only 'TigerVNC', 'noVNC', 'websockify'
+./builder.sh python cache
+./builder.sh python-firefox cache
 
-### this will refresh also 'Chromium Browser'
-./builder.sh postman-chromium cache
+### this will refresh also 'Postman'
+./builder.sh postman cache
 ```
+
+## Additional building parameters
+
+The script `builder.sh` passes the additional parameters, that come after the mandatory ones, to the hook scripts in the folder `docker/hooks`.
+
+For example:
+
+```shell
+./builder.sh latest build --target stage_xfce --no-cache
+```
+
+The additional parameters `--target stage_xfce --no-cache` will be passed to the script `docker/hooks/build`.
+
+See the file [readme-local-building-example][this-readme-local-building-example] for more information about handling of the additional building parameters.
+
+***
+
+[this-readme-local-building-example]: https://github.com/accetto/headless-coding-g3/blob/master/readme-local-building-example.md
+
+[accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3

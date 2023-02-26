@@ -8,11 +8,11 @@ version: '3'
 
 services:
   test:
-    image: accetto/ubuntu-vnc-xfce-nodejs-g3:extended
+    image: accetto/debian-vnc-xfce-nodejs-g3:extended
     # environment:
     #   - VNC_PW=
     #   - VNC_RESOLUTION=1024x768
     ports:
       - ":5901"
       - ":6901"
-    user: "1000"
+    user: "2000:3000"

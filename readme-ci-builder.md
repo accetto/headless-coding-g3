@@ -4,15 +4,16 @@
   - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Usage modes](#usage-modes)
-    - [Family mode](#family-mode)
-      - [Family mode examples](#family-mode-examples)
     - [Group mode](#group-mode)
       - [Group mode examples](#group-mode-examples)
+    - [Family mode](#family-mode)
+      - [Family mode examples](#family-mode-examples)
     - [Log processing](#log-processing)
       - [Digest command](#digest-command)
       - [Stickers commands](#stickers-commands)
       - [Timing command](#timing-command)
       - [Errors command](#errors-command)
+  - [Additional building parameters](#additional-building-parameters)
 
 ## Introduction
 
@@ -27,8 +28,8 @@ The common usage pattern
 has the following typical forms that also described below:
 
 ```shell
-./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
 ./ci-builder.sh [<options>] <command> group <blend> [<blend>]...
+./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
 ./ci-builder.sh [--log-all] log get (digest|stickers|timing|errors)
 ```
 
@@ -41,8 +42,8 @@ This script can:
 
 Usage: <script> <mode> <argument> [<optional-argument>]...
 
-    ./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
     ./ci-builder.sh [<options>] <command> group <blend> [<blend>]...
+    ./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
     ./ci-builder.sh [--log-all] log get (digest|stickers|timing|errors)
 
 <options>      := (--log-all|--no-cache) 
@@ -55,8 +56,9 @@ Usage: <script> <mode> <argument> [<optional-argument>]...
                   |(nodejs[-current|-chromium|-vscode[-chromium|-firefox]])
                   |(python[-chromium|-vscode[-chromium|-firefox]])
 
-Family mode: The children are skipped if a new parent image was not actually built.
 Group mode : All images are processed independently.
+Family mode: The children are skipped if a new parent image was not actually built.
+Remark: Currently are both modes equivalent, because there are no child suffixes supported.
 
 The command and the blend are passed to the builder script.
 The result "<parent-blend><child-suffix>" must be a blend supported by the builder script.
@@ -85,57 +87,6 @@ source secrets.rc
 ```
 
 ## Usage modes
-
-### Family mode
-
-The **family mode** is intended for an efficient building of the sets of dependent images.
-
-The dependency in this context is meant more technically than conceptually.
-
-The following example will help to understand the concept.
-
-This project currently does not include any images that are in such a relation. Therefore it will be explained using the images from the sibling project [accetto/ubuntu-vnc-xfce-g3][sibling-github].
-
-The image `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` adds some additional features to the image `accetto/ubuntu-vnc-xfce-firefox-g3:latest`, but otherwise are both images identical.
-
-In such case a conclusion can be made, that if the `latest` tag does not need a refresh, then also the `latest-plus` tag doesn't need it and it can be skipped.
-
-There is a similar dependency between the images `accetto/ubuntu-vnc-xfce-g3:latest` and `accetto/ubuntu-vnc-xfce-g3:latest-fugo`.
-
-This kind of family-like relation allows to refresh the images more efficiently by skipping the "children" if the "parent" doesn't need a re-build.
-
-The **family mode** usage pattern:
-
-```shell
-./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
-```
-
-Note that the children tags are specified by their suffixes to the parent's tag.
-
-#### Family mode examples
-
-The following cases bring the efficiency advantage:
-
-```shell
-### image 'latest-fugo' will be skipped if the 'latest' image doesn't need a re-build
-./ci-builder.sh all family latest -fugo
-
-### 'firefox' image 'latest-plus' will be skipped if the 'latest' image doesn't need a re-build 
-./ci-builder.sh all family latest-firefox -plus
-```
-
-The following command can also be used, but there would be no benefit comparing to the equivalent **group mode** command:
-
-```shell
-./ci-builder.sh all family latest-chromium
-```
-
-You can also skip the publishing to the **Docker Hub** by replacing the `all` command by the `all-no-push` one. For example:
-
-```shell
-### image 'latest-fugo' will be skipped if the 'latest' image doesn't need a re-build
-./ci-builder.sh all-no-push family latest -fugo
-```
 
 ### Group mode
 
@@ -180,6 +131,59 @@ You can also use one of the **named groups**:
 ./ci-builder.sh all group complete-postman
 ./ci-builder.sh all group complete-python
 ```
+### Family mode
+
+The **family mode** is intended for an efficient building of the sets of dependent images.
+
+**Remark:** Since the version G3v3 of the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] is this mode for advanced use only. The previous images `accetto/ubuntu-vnc-xfce-g3:latest-fugo` and `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` that used it are not published any more. The image `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` has been renamed to `accetto/ubuntu-vnc-xfce-firefox-g3:latest`.
+
+The dependency in this context is meant more technically than conceptually.
+
+The following example will help to understand the concept.
+
+This project currently does not include any images that are in such a relation. Therefore it will be explained using the images from the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
+
+The image `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` added some additional features to the image `accetto/ubuntu-vnc-xfce-firefox-g3:latest`, but otherwise were both images identical.
+
+In such case a conclusion can be made, that if the `latest` tag does not need a refresh, then also the `latest-plus` tag doesn't need it and its building can be skipped.
+
+There had been a similar dependency between the images `accetto/ubuntu-vnc-xfce-g3:latest` and `accetto/ubuntu-vnc-xfce-g3:latest-fugo`.
+
+This kind of family-like relation allows to refresh the images more efficiently by skipping the "children" if the "parent" doesn't need a re-build.
+
+The **family mode** usage pattern:
+
+```shell
+./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
+```
+
+Note that the children tags are specified by their suffixes to the parent's tag.
+
+#### Family mode examples
+
+The following cases bring the efficiency advantage:
+
+```shell
+### image 'latest-fugo' will be skipped if the 'latest' image doesn't need a re-build
+./ci-builder.sh all family latest -fugo
+
+### 'firefox' image 'latest-plus' will be skipped if the 'latest' image doesn't need a re-build 
+./ci-builder.sh all family latest-firefox -plus
+```
+
+The following command can also be used, but there would be no benefit comparing to the equivalent **group mode** command:
+
+```shell
+./ci-builder.sh all family latest-chromium
+```
+
+You can also skip the publishing to the **Docker Hub** by replacing the `all` command by the `all-no-push` one. For example:
+
+```shell
+### image 'latest-fugo' will be skipped if the 'latest' image doesn't need a re-build
+./ci-builder.sh all-no-push family latest -fugo
+```
+
 ### Log processing
 
 The **log processing** mode is intended for evaluating the outcome of the latest image building session. The result are extracted from the **ci-builder log** by `grep` utility.
@@ -203,12 +207,12 @@ The output can look out like this:
 ```text
 --> Log digest:
 
-Building image 'headless-ubuntu-coding-g3:postman'
-Building image 'headless-ubuntu-coding-g3:postman-chromium'
-Building image 'headless-ubuntu-coding-g3:postman-firefox'
-No build needed for 'headless-ubuntu-coding-g3:postman'.
-No build needed for 'headless-ubuntu-coding-g3:postman-chromium'.
-No build needed for 'headless-ubuntu-coding-g3:postman-firefox'.
+Building image 'headless-coding-g3:postman'
+Building image 'headless-coding-g3:postman-chromium'
+Building image 'headless-coding-g3:postman-firefox'
+Built new 'headless-coding-g3:postman'.
+Built new 'headless-coding-g3:postman-chromium'.
+Built new 'headless-coding-g3:postman-firefox'.
 ```
 
 #### Stickers commands
@@ -224,9 +228,9 @@ The output can look out like this:
 ```text
 --> Version stickers:
 
-Current version sticker of 'accetto/devops-headless-ubuntu-coding-g3:postman-chromium_helper': ubuntu20.04.5-postman10.0.1-chromium105.0.5195.102
-Current version sticker of 'accetto/devops-headless-ubuntu-coding-g3:postman-firefox_helper': ubuntu20.04.5-postman10.0.1-firefox106.0.2
-Current version sticker of 'accetto/devops-headless-ubuntu-coding-g3:postman_helper': ubuntu20.04.5-postman10.0.1
+Current version sticker of 'accetto/headless-coding-g3:postman-chromium_helper': debian11.6-postman10.10.9-chromium110.0.5481.77
+Current version sticker of 'accetto/headless-coding-g3:postman-firefox_helper': debian11.6-postman10.10.9-firefox102.8.0esr
+Current version sticker of 'accetto/headless-coding-g3:postman_helper': debian11.6-postman10.10.9
 ```
 
 #### Timing command
@@ -242,14 +246,14 @@ The output can look out like this:
 ```text
 --> Building timing:
 
-==> EXECUTING @2022-11-06_11-22-43: ./ci-builder.sh 
-==> EXECUTING @2022-11-06_11-22-43: ./builder.sh 
-==> FINISHED  @2022-11-06_11-25-32: ./builder.sh 
-==> EXECUTING @2022-11-06_11-25-32: ./builder.sh 
-==> FINISHED  @2022-11-06_11-26-04: ./builder.sh 
-==> EXECUTING @2022-11-06_11-26-04: ./builder.sh 
-==> FINISHED  @2022-11-06_11-26-44: ./builder.sh 
-==> FINISHED  @2022-11-06_11-26-44: ./ci-builder.sh
+==> EXECUTING @2023-02-25_13-38-10: ./ci-builder.sh 
+==> EXECUTING @2023-02-25_13-38-10: ./builder.sh
+==> FINISHED  @2023-02-25_13-38-45: ./builder.sh
+==> EXECUTING @2023-02-25_13-38-45: ./builder.sh
+==> FINISHED  @2023-02-25_13-38-59: ./builder.sh
+==> EXECUTING @2023-02-25_13-38-59: ./builder.sh
+==> FINISHED  @2023-02-25_13-39-14: ./builder.sh
+==> FINISHED  @2023-02-25_13-39-14: ./ci-builder.sh
 ```
 
 #### Errors command
@@ -266,7 +270,14 @@ The output is mostly empty:
 --> Building errors:
 
 ```
+## Additional building parameters
+
+There is no notion of additional building parameters by the script `ci-builder.sh` (compare to [builder.sh][readme-builder]).
+
+There is no way to build the images only from particular Dockerfile stages using the script `ci-builder.sh`.
 
 ***
 
-[sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
+[readme-builder]: https://github.com/accetto/debian-vnc-xfce-g3/blob/master/readme-builder.md
+
+[accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3

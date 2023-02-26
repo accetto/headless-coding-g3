@@ -1,6 +1,6 @@
-# Headless Ubuntu/Xfce container with VNC/noVNC and Postman desktop app
+# Headless Debian/Xfce container with VNC/noVNC and Postman desktop app
 
-## accetto/ubuntu-vnc-xfce-postman-g3
+## accetto/debian-vnc-xfce-postman-g3
 
 [Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Full Readme][this-readme-full] - [Changelog][this-changelog] - [Project Readme][this-readme-project] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
 
@@ -14,8 +14,8 @@
 
 ***
 
-- [Headless Ubuntu/Xfce container with VNC/noVNC and Postman desktop app](#headless-ubuntuxfce-container-with-vncnovnc-and-postman-desktop-app)
-  - [accetto/ubuntu-vnc-xfce-postman-g3](#accettoubuntu-vnc-xfce-postman-g3)
+- [Headless Debian/Xfce container with VNC/noVNC and Postman desktop app](#headless-debianxfce-container-with-vncnovnc-and-postman-desktop-app)
+  - [accetto/debian-vnc-xfce-postman-g3](#accettodebian-vnc-xfce-postman-g3)
     - [Introduction](#introduction)
     - [TL;DR](#tldr)
       - [Installing packages](#installing-packages)
@@ -38,13 +38,19 @@
 
 ### Introduction
 
+This repository contains resources for building Docker images based on [Debian 11][docker-debian] with [Xfce][xfce] desktop environment, [VNC][tigervnc]/[noVNC][novnc] servers for headless use and the [Postman][postman] desktop application.
+
+All images can optionally include also the [Chromium][chromium] or [Firefox][firefox] web browsers.
+
+Adding more tools like, for example, [Newman][newman] usually requires only a single or just a few commands. The instructions are in the [provided README file](https://github.com/accetto/headless-coding-g3/tree/master/docker/xfce-postman/src/home).
+
 This is the **short README** version for the **Docker Hub**. There is also the [full-length README][this-readme-full] on the **GitHub**.
 
 ### TL;DR
 
 #### Installing packages
 
-I try to keep the images slim. Consequently you can encounter missing dependencies while adding more applications yourself. You can track the missing libraries on the [Ubuntu Packages Search][ubuntu-packages-search] page and install them subsequently.
+I try to keep the images slim. Consequently you can encounter missing dependencies while adding more applications yourself. You can track the missing libraries on the [Debian Packages Search][debian-packages-search] page and install them subsequently.
 
 You can also try to fix it by executing the following (the default `sudo` password is **headless**):
 
@@ -65,7 +71,7 @@ You can check the current shared memory size by executing the following command 
 df -h /dev/shm
 ```
 
-The Wiki page [Firefox multi-process][that-wiki-firefox-multiprocess] describes several ways, how to increase the shared memory size.
+The older sibling Wiki page [Firefox multi-process][that-wiki-firefox-multiprocess] describes several ways, how to increase the shared memory size.
 
 #### Extending images
 
@@ -88,8 +94,8 @@ The fastest way to build the images:
 ./builder.sh postman-chromium all
 ./builder.sh postman-firefox all
 
-### or skipping the publishing to the Docker Hub
-./builder.sh postman all-no-push
+### just building the image, skipping the publishing and the version sticker update
+./builder.sh postman build
 
 ### examples of building and publishing the images as a group
 ./ci-builder.sh all group postman postman-chromium
@@ -100,6 +106,8 @@ The fastest way to build the images:
 
 You can still execute the individual hook scripts as before (see the folder /docker/hooks/). However, the provided utilities builder.sh and ci-builder.sh are more convenient. Before pushing the images to the Docker Hub you have to prepare and source the file secrets.rc (see example-secrets.rc). The script builder.sh builds the individual images. The script ci-builder.sh can build various groups of images or all of them at once. Check the files local-builder-readme.md, local-building-example.md and the sibling Wiki for more information.
 
+Note that selected features that are enabled by default can be explicitly disabled via environment variables. This allows to build even smaller images by excluding, for example, `noVNC`. See [readme-local-building-example.md][this-readme-local-building-example] for more information.
+
 #### Sharing devices
 
 Sharing the audio device for video with sound works only with `Chromium` and only on Linux:
@@ -108,7 +116,7 @@ Sharing the audio device for video with sound works only with `Chromium` and onl
 docker run -it -P --rm \
   --device /dev/snd:/dev/snd:rw \
   --group-add audio \
-accetto/ubuntu-vnc-xfce-postman-g3:chromium
+accetto/debian-vnc-xfce-postman-g3:chromium
 ```
 
 Sharing the display with the host works only on Linux:
@@ -120,7 +128,7 @@ docker run -it -P --rm \
     -e DISPLAY=${DISPLAY} \
     --device /dev/dri/card0 \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    accetto/ubuntu-vnc-xfce-postman-g3:latest --skip-vnc
+    accetto/debian-vnc-xfce-postman-g3:latest --skip-vnc
 
 xhost -local:$(whoami)
 ```
@@ -133,7 +141,7 @@ xhost +local:$(whoami)
 docker run -it -P --rm \
     --device /dev/dri/card0 \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    accetto/ubuntu-vnc-xfce-postman-g3:latest
+    accetto/debian-vnc-xfce-postman-g3:latest
 
 xhost -local:$(whoami)
 ```
@@ -142,26 +150,24 @@ xhost -local:$(whoami)
 
 This is the **third generation** (G3) of my headless images. More information about the image generations can be found in the [sibling project README][sibling-readme-project] file and the [sibling Wiki][sibling-wiki].
 
-**Remark:** The images can optionally contain the current `Chromium Browser` version from the `Ubuntu 18.04 LTS` distribution. This is because the version for `Ubuntu 20.04 LTS` depends on `snap`, which is not working correctly in Docker at this time. They can also optionally contain the latest version of the current [Firefox][firefox] browser for `Ubuntu 20.04 LTS`.
-
 **Attention:** If you will build an image containing the [Chromium Browser][chromium], then the browser will run in the `--no-sandbox` mode. You should be aware of the implications. The image is intended for testing and development.
 
 **Attention:** If you will build an image containing the [Firefox][firefox] browser, then the browser will run in the `multi-process` mode. Be aware, that this mode requires larger shared memory (`/dev/shm`). At least 256MB is recommended. Please check the **Firefox multi-process** page in [this Wiki][that-wiki-firefox-multiprocess] for more information and the instructions, how to set the shared memory size in different scenarios.
 
 The main features and components of the images in the default configuration are:
 
-- utilities **ping**, **wget**, **sudo** (Ubuntu distribution)
+- utilities **ping**, **wget**, **sudo** (Debian distribution)
 - current version of JSON processor [jq][jq]
-- light-weight [Xfce][xfce] desktop environment (Ubuntu distribution)
+- light-weight [Xfce][xfce] desktop environment (Debian distribution)
 - current version of high-performance [TigerVNC][tigervnc] server and client
 - current version of [noVNC][novnc] HTML5 clients (full and lite) (TCP port **6901**)
-- popular text editor [nano][nano] (Ubuntu distribution)
-- lite but advanced graphical editor [mousepad][mousepad] (Ubuntu distribution)
+- popular text editor [nano][nano] (Debian distribution)
+- lite but advanced graphical editor [mousepad][mousepad] (Debian distribution)
 - current version of [tini][tini] as the entry-point initial process (PID 1)
 - support for overriding both the container user account and its group
-- support of **version sticker** (see below)
-- optionally the current version of [Chromium Browser][chromium] open-source web browser (from the `Ubuntu 18.04 LTS` distribution)
-- optionally the current version of [Firefox][firefox] web browser and optionally also some additional **plus** features described in the [sibling image README][sibling-readme-xfce-firefox]
+- support of **version sticker** (see the [full-length README][this-readme-full] on the **GitHub**)
+- optionally the current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
+- optionally the current version of [Firefox ESR (Extended Support Release)][firefox] web browser and optionally also some additional **plus features** described in the [sibling project README][sibling-readme-xfce-firefox]
 
 All images include the current version of the [Postman][postman] desktop application.
 
@@ -171,7 +177,7 @@ The history of notable changes is documented in the [CHANGELOG][this-changelog].
 
 ### Image tags
 
-The following image tags on Docker Hub are regularly rebuilt:
+The following image tags on the **Docker Hub** are regularly rebuilt:
 
 - `latest` implements VNC and noVNC
 
@@ -183,7 +189,7 @@ The following image tags on Docker Hub are regularly rebuilt:
     ![badge_chromium_created][badge_chromium_created]
     [![badge_chromium_version-sticker][badge_chromium_version-sticker]][link_chromium_version-sticker-verbose]
 
-- `firefox` adds [Firefox][firefox] with **plus features** (described in the [sibling image README][sibling-readme-xfce-firefox])
+- `firefox` adds [Firefox][firefox] with the **plus features** (described in the [sibling project README][sibling-readme-xfce-firefox])
 
     ![badge_firefox_created][badge_firefox_created]
     [![badge_firefox_version-sticker][badge_firefox_version-sticker]][link_firefox_version-sticker-verbose]
@@ -249,9 +255,13 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
-[this-readme-dockerhub]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
+[this-readme-dockerhub]: https://hub.docker.com/r/accetto/debian-vnc-xfce-nodejs-g3
 [this-readme-full]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-postman/README.md
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
+
+[this-readme-local-building-example]: https://github.com/accetto/headless-coding-g3/blob/master/readme-local-building-example.md
+
+<!-- Sibling projects -->
 
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
 [sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
@@ -274,8 +284,10 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- External links -->
 
+[docker-debian]: https://hub.docker.com/_/debian/
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
-[ubuntu-packages-search]: https://packages.ubuntu.com/
+
+[debian-packages-search]: https://packages.debian.org/index
 
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
