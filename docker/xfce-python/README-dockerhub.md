@@ -327,23 +327,18 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- Sibling project -->
 
-[accetto-github-debian-vnc-xfce-g3]: https://github.com/accetto/debian-vnc-xfce-g3
-[accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3
-
 [sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
-[sibling-github]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
 [sibling-issues]: https://github.com/accetto/ubuntu-vnc-xfce-g3/issues
-[sibling-readme-project]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/README.md
 [sibling-readme-xfce]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/docker/xfce/README.md
 [sibling-readme-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/docker/xfce-firefox/README.md
 [sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
 
 <!-- Docker image specific -->
 
-[this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3/
+[this-docker]: https://hub.docker.com/r/accetto/debian-vnc-xfce-python-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/ubuntu-vnc-xfce-python.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/debian-vnc-xfce-python.jpg
 
 <!-- Previous generations -->
 
@@ -355,7 +350,6 @@ Credit goes to all the countless people and companies, who contribute to open so
 <!-- External links -->
 
 [docker-debian]: https://hub.docker.com/_/debian/
-[docker-ubuntu]: https://hub.docker.com/_/ubuntu/
 
 [debian-packages-search]: https://packages.debian.org/index
 
@@ -371,16 +365,13 @@ Credit goes to all the countless people and companies, who contribute to open so
 [mousepad]: https://github.com/codebrainz/mousepad
 [nano]: https://www.nano-editor.org/
 [novnc]: https://github.com/kanaka/noVNC
-[npm]: https://www.npmjs.com/
 [pip]: https://pip.pypa.io/en/stable/
 [pyqt5]: https://www.riverbankcomputing.com/software/pyqt/
 [pyside]: https://doc.qt.io/qtforpython/
 [python]: https://www.python.org/
 [tigervnc]: http://tigervnc.org
-[tightvnc]: http://www.tightvnc.com
 [tini]: https://github.com/krallin/tini
 [tkinter]: https://wiki.python.org/moin/TkInter
-[typescript]: https://www.typescriptlang.org/
 [vscode]: https://code.visualstudio.com/
 [wxpython]: https://wxpython.org/
 [xfce]: http://www.xfce.org
@@ -393,8 +384,8 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- docker badges specific -->
 
-[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=pulls
+[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/debian-vnc-xfce-python-g3?icon=docker&label=pulls
 
-[badge-docker-stars]: https://badgen.net/docker/stars/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=stars
+[badge-docker-stars]: https://badgen.net/docker/stars/accetto/debian-vnc-xfce-python-g3?icon=docker&label=stars
 
 <!-- Appendix -->

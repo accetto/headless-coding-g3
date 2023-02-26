@@ -1,6 +1,6 @@
-# Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development
+# Headless Debian/Xfce container with VNC/noVNC for `Python` development
 
-## accetto/ubuntu-vnc-xfce-python-g3
+## accetto/debiab-vnc-xfce-python-g3
 
 [Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Docker Readme][this-readme-dockerhub] - [Changelog][this-changelog] - [Project Readme][this-readme-project]
 
@@ -11,8 +11,8 @@
 
 ***
 
-- [Headless Ubuntu/Xfce container with VNC/noVNC for `Python` development](#headless-ubuntuxfce-container-with-vncnovnc-for-python-development)
-  - [accetto/ubuntu-vnc-xfce-python-g3](#accettoubuntu-vnc-xfce-python-g3)
+- [Headless Debian/Xfce container with VNC/noVNC for `Python` development](#headless-debianxfce-container-with-vncnovnc-for-python-development)
+  - [accetto/debiab-vnc-xfce-python-g3](#accettodebiab-vnc-xfce-python-g3)
     - [Introduction](#introduction)
     - [TL;DR](#tldr)
       - [Installing packages](#installing-packages)
@@ -269,7 +269,7 @@ To keep the keyboard shortcuts consistent, change the keyboard layout to your pr
 
 ### Version sticker
 
-Version sticker serves multiple purposes that are closer described in the [sibling Wiki][sibling-wiki]. Note that the usage of the version sticker has changed between the generations of images.
+Version sticker serves multiple purposes that are closer described in the [sibling Wiki][sibling-wiki-version-stickers]. Note that the usage of the version sticker has changed between the generations of images.
 
 The **short version sticker value** describes the version of the image and it is persisted in its **label** during the build-time. It is also shown as its **badge** in the README file.
 
@@ -370,16 +370,17 @@ Credit goes to all the countless people and companies, who contribute to open so
 [sibling-readme-xfce]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/docker/xfce/README.md
 [sibling-readme-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-g3/blob/master/docker/xfce-firefox/README.md
 [sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
+[sibling-wiki-version-stickers]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Concepts-of-dockerfiles
 
 <!-- Docker image specific -->
 
-[this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3/
+[this-docker]: https://hub.docker.com/r/accetto/debian-vnc-xfce-python-g3/
 [this-dockerfile]: https://github.com/accetto/headless-coding-g3/blob/master/docker/Dockerfile.xfce.python
 
 [this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python.png
 [this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python-bonus.png
 
-[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/ubuntu-vnc-xfce-python.jpg
+[this-screenshot-container]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/debian-vnc-xfce-python.jpg
 
 <!-- Previous generations -->
 
@@ -429,6 +430,6 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- docker badges specific -->
 
-[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=pulls
+[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/debian-vnc-xfce-python-g3?icon=docker&label=pulls
 
-[badge-docker-stars]: https://badgen.net/docker/stars/accetto/ubuntu-vnc-xfce-python-g3?icon=docker&label=stars
+[badge-docker-stars]: https://badgen.net/docker/stars/accetto/debian-vnc-xfce-python-g3?icon=docker&label=stars

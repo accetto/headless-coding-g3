@@ -190,9 +190,9 @@ xhost -local:$(whoami)
 
 ## Project versions
 
-This file describes the **third version** (G3v3) of the project, which however corresponds to the **fourth version** (G3v4) of the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
+This file describes the **third version** (G3v3) of the project, which however corresponds to the **fourth version** (G3v4) of the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] (as of the release 23.02.1).
 
-The **second version** (G3v2) and the **first version** (G3v1, or simply G3) will be still available in this GitHub repository as the branches `archived-generation-g3v2-ubuntu` and `archived-generation-g3v1`.
+The **second version** (G3v2) and the **first version** (G3v1, or simply G3) will still be available in this GitHub repository as the branches `archived-generation-g3v2-ubuntu` and `archived-generation-g3v1`.
 
 The version `G3v3` brings the following major changes comparing to the previous version `G3v2`:
 
