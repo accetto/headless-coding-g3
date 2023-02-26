@@ -6,7 +6,56 @@
 
 ***
 
+### Release 23.02
+
+This is the first `G3v3` release, switching the images from `Ubuntu 20.04 LTS` to `Debian 11` and introducing the updated startup scripts. The previous version `G3v2` will still be available in this repository as the branch `archived-generation-g3v2-ubuntu`.
+
+This release corresponds to the version `G3v4` of the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] (as of the release `23.02.1`).
+
+The updated startup scripts that support overriding the user ID (`id`) and group ID (`gid`) without needing the former build argument `ARG_FEATURES_USER_GROUP_OVERRIDE`, which has been removed.
+
+- The user ID and the group ID can be overridden during the build time (`docker build`) and the run time (`docker run`).
+- The `user name`, the `group name` and the `initial sudo password` can be overridden during the build time.
+- The permissions of the files `/etc/passwd` and `/etc/groups` are set to the standard `644` after creating the user.
+- The content of the home folder and the startup folder belongs to the created user.
+- The created user gets permissions to use `sudo`. The initial `sudo` password is configurable during the build time using the build argument `ARG_SUDO_INITIAL_PW`. The password can be changed inside the container.
+- The default `id:gid` has been changed from `1001:0` to `1000:1000`.
+
+Features `NOVNC` and `FIREFOX_PLUS`, that are enabled by default, can be disabled via environment variables:
+
+- If `FEATURES_NOVNC="0"`, then
+  - image will not include `noVNC`
+  - image tag will get the `-vnc` suffix (e.g. `latest-vnc`, `20.04-firefox-vnc` etc.)
+- If `FEATURES_FIREFOX_PLUS="0"` and `FEATURES_FIREFOX="1"`, then
+  - image with Firefox will not include the *Firefox Plus features*
+  - image tag will get the `-default` suffix (e.g. `latest-firefox-default` or also `latest-firefox-default-vnc` etc.)
+
+Changes in build arguments:
+
+- removed `ARG_FEATURES_USER_GROUP_OVERRIDE`
+- renamed `ARG_SUDO_PW` to `ARG_SUDO_INITIAL_PW`
+- added `ARG_HEADLESS_USER_ID`, `ARG_HEADLESS_USER_NAME`, `ARG_HEADLESS_USER_GROUP_ID` and `ARG_HEADLESS_USER_GROUP_NAME`
+
+Changes in environment variables:
+
+- removed `FEATURES_USER_GROUP_OVERRIDE`
+- added `HEADLESS_USER_ID`, `HEADLESS_USER_NAME`, `HEADLESS_USER_GROUP_ID` and `HEADLESS_USER_GROUP_NAME`
+
+Main changes in files:
+
+- updated `Dockerfile.xfce.nodejs`, `Dockerfile.xfce.postman` and `Dockerfile.xfce.python`
+- updated `startup.sh`, `user_generator.rc` and `set_user_permissions.sh`
+- updated hook scripts `env.rc`, `build`, `pre_build` and `util.rc`
+- added `tests/test-01.sh` allows to quickly check the current permissions
+
+Updated versions:
+
+- **TigerVNC** to version `1.13.0`
+- **noVNC** to version `1.4.0`
+
 ### Release 22.12.1
+
+This is the last `G3v2` release with the images based on `Ubuntu 20.04 LTS`.
 
 - Updated components:
 
@@ -135,7 +184,7 @@ This is just a maintenance release.
 
 ### Release 22.01.1
 
-- FIXED: `Dockerfile.xfce.postman`
+- fixed `Dockerfile.xfce.postman`
   - package `libxshmfence1` added
   - it's required since Postman v9.8.3
 
@@ -223,14 +272,18 @@ This is just a maintenance release.
 [this-docker]: https://hub.docker.com/u/accetto/
 [this-github]: https://github.com/accetto/headless-coding-g3/
 
-[sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
-[sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
-
-[sibling-wiki-building-stages]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Building-stages
-[sibling-wiki-how-ci-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-CI-works
-
 [accetto-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [accetto-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
 [accetto-ubuntu-vnc-xfce-python-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-python-g3
 
 [accetto-tigervnc-release-mirror]: https://github.com/accetto/tigervnc/releases
+
+<!-- Sibling projects -->
+
+[accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3
+
+[sibling-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki
+[sibling-discussions]: https://github.com/accetto/ubuntu-vnc-xfce-g3/discussions
+
+[sibling-wiki-building-stages]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Building-stages
+[sibling-wiki-how-ci-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-CI-works
