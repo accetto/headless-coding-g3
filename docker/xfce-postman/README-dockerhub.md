@@ -2,7 +2,7 @@
 
 ## accetto/debian-vnc-xfce-postman-g3
 
-[Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Full Readme][this-readme-full] - [Changelog][this-changelog] - [Project Readme][this-readme-project] - [Wiki][sibling-wiki] - [Discussions][sibling-discussions]
+[Docker Hub][this-docker] - [Git Hub][this-github] - [Dockerfile][this-dockerfile] - [Full Readme][this-readme-full] - [Changelog][this-changelog] - [Project Readme][this-readme-project]
 
 ![badge-docker-pulls][badge-docker-pulls]
 ![badge-docker-stars][badge-docker-stars]
@@ -152,7 +152,7 @@ This is the **third generation** (G3) of my headless images. More information ab
 
 **Attention:** If you will build an image containing the [Chromium Browser][chromium], then the browser will run in the `--no-sandbox` mode. You should be aware of the implications. The image is intended for testing and development.
 
-**Attention:** If you will build an image containing the [Firefox][firefox] browser, then the browser will run in the `multi-process` mode. Be aware, that this mode requires larger shared memory (`/dev/shm`). At least 256MB is recommended. Please check the **Firefox multi-process** page in [this Wiki][that-wiki-firefox-multiprocess] for more information and the instructions, how to set the shared memory size in different scenarios.
+**Attention:** If you will build an image containing the [Firefox][firefox] browser, then the browser will run in the `multi-process` mode. Be aware, that this mode requires larger shared memory (`/dev/shm`). At least 256MB is recommended. Please check the **Firefox multi-process** page in this older [sibling Wiki][that-wiki-firefox-multiprocess] for more information and the instructions, how to set the shared memory size in different scenarios.
 
 The main features and components of the images in the default configuration are:
 
@@ -255,7 +255,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 [this-changelog]: https://github.com/accetto/headless-coding-g3/blob/master/CHANGELOG.md
 [this-github]: https://github.com/accetto/headless-coding-g3/
 [this-issues]: https://github.com/accetto/headless-coding-g3/issues
-[this-readme-dockerhub]: https://hub.docker.com/r/accetto/debian-vnc-xfce-nodejs-g3
+[this-readme-dockerhub]: https://hub.docker.com/r/accetto/debian-vnc-xfce-postman-g3
 [this-readme-full]: https://github.com/accetto/headless-coding-g3/blob/master/docker/xfce-postman/README.md
 [this-readme-project]: https://github.com/accetto/headless-coding-g3/blob/master/README.md
 
