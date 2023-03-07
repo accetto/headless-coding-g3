@@ -6,6 +6,11 @@
 
 ***
 
+### Release 23.03
+
+- updated with `TigerVNC 1.13.1` bugfix release
+- also some updates in readme files
+
 ### Release 23.02
 
 This is the first `G3v3` release, switching the images from `Ubuntu 20.04 LTS` to `Debian 11` and introducing the updated startup scripts. The previous version `G3v2` will still be available in this repository as the branch `archived-generation-g3v2-ubuntu`.
