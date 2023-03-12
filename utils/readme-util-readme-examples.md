@@ -40,4 +40,4 @@ See the sibling Wiki page ["Utility util-readme.sh"][sibling-wiki-utility-util-r
 
 ***
 
-[sibling-wiki-utility-util-readme]: https://github.com/accetto/debian-vnc-xfce-g3/wiki/Utility-util-readme
+[sibling-wiki-utility-util-readme]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Utility-util-readme

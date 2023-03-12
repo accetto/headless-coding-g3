@@ -26,11 +26,11 @@ Version: G3v3
   - [Project `accetto/headless-coding-g3`](#project-accettoheadless-coding-g3)
   - [Introduction](#introduction)
   - [TL;DR](#tldr)
-      - [Installing packages](#installing-packages)
-      - [Shared memory size](#shared-memory-size)
-      - [Extending images](#extending-images)
-      - [Building images](#building-images)
-      - [Sharing devices](#sharing-devices)
+    - [Installing packages](#installing-packages)
+    - [Shared memory size](#shared-memory-size)
+    - [Extending images](#extending-images)
+    - [Building images](#building-images)
+    - [Sharing devices](#sharing-devices)
   - [Project versions](#project-versions)
   - [Issues, Wiki and Discussions](#issues-wiki-and-discussions)
   - [Credits](#credits)
@@ -68,7 +68,7 @@ There are currently resources for the following Docker images:
   - [Dockerfile][this-dockerfile-python-bonus-gui-frameworks] for bonus images with GUI frameworks (bonus branch)
   - [Dockerfile stages diagram][this-diagram-dockerfile-stages-python-bonus] (bonus branch)
 
-#### Installing packages
+### Installing packages
 
 I try to keep the images slim. Consequently you can encounter missing dependencies while adding more applications yourself. You can track the missing libraries on the [Debian Packages Search][debian-packages-search] page and install them subsequently.
 
@@ -81,7 +81,7 @@ sudo apt-get update
 sudo apt --fix-broken install
 ```
 
-#### Shared memory size
+### Shared memory size
 
 Note that some applications require larger shared memory than the default 64MB. Using 256MB usually solves crashes or strange behavior.
 
@@ -93,7 +93,7 @@ df -h /dev/shm
 
 The older sibling Wiki page [Firefox multi-process][that-wiki-firefox-multiprocess] describes several ways, how to increase the shared memory size.
 
-#### Extending images
+### Extending images
 
 The provided example file `Dockerfile.extend` shows how to use the images as the base for your own images.
 
@@ -101,7 +101,7 @@ Your concrete `Dockerfile` may need more statements, but the concept should be c
 
 The compose file `example.yml` shows how to switch to another non-root user and how to set the VNC password and resolution.
 
-#### Building images
+### Building images
 
 The fastest way to build the images:
 
@@ -150,7 +150,7 @@ The fastest way to build the images:
 
 You can still execute the individual hook scripts as before (see the folder `/docker/hooks/`). However, the provided utilities `builder.sh` and `ci-builder.sh` are more convenient. Before pushing the images to the **Docker Hub** you have to prepare and source the file `secrets.rc` (see `example-secrets.rc`). The script `builder.sh` builds the individual images. The script `ci-builder.sh` can build various groups of images or all of them at once. Check the [builder-utility-readme][this-builder-readme], [local-building-example][this-readme-local-building-example] and [sibling Wiki][sibling-wiki] for more information.
 
-#### Sharing devices
+### Sharing devices
 
 Sharing the audio device for video with sound works only with `Chromium` and only on Linux:
 
@@ -190,7 +190,7 @@ xhost -local:$(whoami)
 
 ## Project versions
 
-This file describes the **third version** (G3v3) of the project, which however corresponds to the **fourth version** (G3v4) of the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] (as of the release 23.02.1).
+This file describes the **third version** (G3v3) of the project, which however corresponds to the **fourth version** (G3v4) of the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
 
 The **second version** (G3v2) and the **first version** (G3v1, or simply G3) will still be available in this GitHub repository as the branches `archived-generation-g3v2-ubuntu` and `archived-generation-g3v1`.
 
@@ -210,6 +210,7 @@ The version `G3v3` brings the following major changes comparing to the previous 
 - If `FEATURES_FIREFOX_PLUS="0"` and `FEATURES_FIREFOX="1"`, then
   - image with Firefox will not include the *Firefox Plus features*
   - image tag will get the `-default` suffix (e.g. `latest-firefox-default` or also `latest-firefox-default-vnc` etc.)
+- The images are based on `Debian 11` (formerly on `Ubuntu 20.04 LTS`).
 
 The version `G3v2` has brought the following major changes comparing to the previous version `G3v1`:
 

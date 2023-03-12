@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 main() {
     local result=""
@@ -7,27 +7,25 @@ main() {
 
         nodejs-current )
             # result=$(wget -qO- \
-            result=$(curl -sL \
+            result=$(curl -sLN \
                 https://nodejs.org/en/download/current/ \
-                | grep "Latest Current Version:" \
+                | grep -Po -m1 '(?<=Latest Current Version)[^0-9]*[0-9a-zA-Z.-]+' \
                 | grep -Po -m1 '[0-9.]+' \
-                | head -n1
-            )
+                )
             ;;
 
         nodejs-lts )
             # result=$(wget -qO- \
-            result=$(curl -sL \
+            result=$(curl -sLN \
                 https://nodejs.org/en/download/ \
-                | grep 'Latest LTS Version:' \
+                | grep -Po -m1 '(?<=Latest LTS Version)[^0-9]*[0-9a-zA-Z.-]+' \
                 | grep -Po -m1 '[0-9.]+' \
-                | head -n1
-            )
+                )
             ;;
 
         postman )
             # result=$(wget -qO- \
-            result=$(curl -sL -H "Accept: application/vnd.github.v3+json" \
+            result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
                 "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
                 | grep -m1 "version" \
                 | grep -Po '[0-9.]+'
@@ -45,7 +43,7 @@ main() {
 
         echo "${result}"
     else
-        echo "Exiting '${0}' with code '1' because not able to get version of '$1'"
+        echo "Exiting '${0}' with code '1' because unable to get version of '$1'"
         return 1
     fi
 }

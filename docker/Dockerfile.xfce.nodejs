@@ -379,9 +379,7 @@ RUN \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         apt-transport-https \
         code \
-    && rm -f "${HOME}"/packages.microsoft.gpg \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -f "${HOME}"/packages.microsoft.gpg
 
 COPY "./xfce-vscode/src/home/Desktop" "${HOME}/Desktop"/
 COPY "./xfce-vscode/src/home/config" "${HOME}/.config"/
