@@ -17,7 +17,7 @@ The `g3-cache` stores the selected pre-downloaded packages used by the Dockerfil
 
 It results in a significantly higher performance by building sets of images or by repeated builds.
 
-You can learn more about the concept on the sibling Wiki page ["Concepts of `g3-cache`"][this-wiki-concepts-of-g3-cache] and about the implementation on the sibling Wiki page ["How `g3-cache` works"][this-wiki-how-g3-cache-works].
+You can learn more about the concept on the sibling Wiki page ["Concepts of `g3-cache`"][sibling-wiki-concepts-of-g3-cache] and about the implementation on the sibling Wiki page ["How `g3-cache` works"][sibling-wiki-how-g3-cache-works].
 
 ### Ensure `wget` utility
 
@@ -55,8 +55,9 @@ The script is used by the hook scripts `pre_build` and `build`. However, it can 
 
 ***
 
-[this-wiki-concepts-of-g3-cache]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Concepts-of-g3-cache
-[this-wiki-how-g3-cache-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-g3-cache-works
+[sibling-wiki-concepts-of-g3-cache]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Concepts-of-g3-cache
+
+[sibling-wiki-how-g3-cache-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-g3-cache-works
 
 [accetto-github-debian-vnc-xfce-g3]: https://github.com/accetto/debian-vnc-xfce-g3/
 [accetto-github-ubuntu-vnc-xfce-g3]: https://github.com/accetto/ubuntu-vnc-xfce-g3/
