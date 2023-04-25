@@ -6,6 +6,10 @@
 
 ***
 
+### Release 23.04
+
+Added a new image [accetto/debian-vnc-xfce-vscode-g3][accetto-debian-vnc-xfce-vscode-g3].
+
 ### Release 23.03.2
 
 This release mitigates the problems with the edge use case, when users bind the whole `$HOME` directory to an external folder on the host computer.
@@ -293,6 +297,10 @@ This is just a maintenance release.
 
 [this-docker]: https://hub.docker.com/u/accetto/
 [this-github]: https://github.com/accetto/headless-coding-g3/
+
+[accetto-debian-vnc-xfce-vscode-g3]: https://hub.docker.com/r/accetto/debian-vnc-xfce-vscode-g3
+
+<!-- Old links -->
 
 [accetto-ubuntu-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-nodejs-g3
 [accetto-ubuntu-vnc-xfce-postman-g3]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-postman-g3
