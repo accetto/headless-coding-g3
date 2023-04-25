@@ -100,10 +100,10 @@ Usage: <script> <mode> <argument> [<optional-argument>]...
 <options>      := (--log-all|--no-cache) 
 <command>      := (all|all-no-push)
 <mode>         := (family|group)
-<parent-blend> := (complete)|(postman|nodejs[-current|-vscode]|python[-vscode])
+<parent-blend> := (complete)|(vscode|postman|nodejs[-current|-vscode]|python[-vscode])
 <child-suffix> := (-chromium|-firefox), except with 'nodejs-current'
 <blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nodejs|-postman|-python])
-                  |(postman)
+                  |(vscode|postman)
                   |(nodejs[-current|-chromium|-vscode[-chromium|-firefox]])
                   |(python[-chromium|-vscode[-chromium|-firefox]])
 
@@ -297,12 +297,14 @@ main() {
                             build_family "${command}" nodejs-current
 
                             build_family "${command}" postman -chromium -firefox
+                            
+                            build_family "${command}" vscode -chromium -firefox
 
                             build_family "${command}" python -chromium
                             build_family "${command}" python-vscode -chromium -firefox
                             ;;
 
-                        latest | nodejs | postman | python )
+                        latest | nodejs | postman | python | vscode )
 
                             clear_log
                             build_family "${command}" "${subject}" $@
@@ -321,7 +323,7 @@ main() {
                         pivotal )
 
                             clear_log
-                            build_group "${command}" "nodejs" "nodejs-current" "postman" "python" "python-vscode"
+                            build_group "${command}" "nodejs" "nodejs-current" "postman" "vscode" "python" 
                             ;;
 
                         complete-chromium )
@@ -340,6 +342,7 @@ main() {
                         complete-vscode )
 
                             clear_log
+                            list+=( "vscode" "vscode-chromium" "vscode-firefox" )
                             list+=( "nodejs-vscode" "nodejs-vscode-chromium" "nodejs-vscode-firefox" )
                             list+=( "python-vscode" "python-vscode-chromium" "python-vscode-firefox" )
                             build_group "${command}" "${list[@]}"
@@ -370,6 +373,7 @@ main() {
                             clear_log
                             
                             list+=( "nodejs" "nodejs-chromium" "nodejs-vscode" "nodejs-vscode-chromium" "nodejs-vscode-firefox" "nodejs-current" )
+                            list+=( "vscode" "vscode-chromium" "vscode-firefox" )
                             list+=( "postman" "postman-chromium" "postman-firefox" )
                             list+=( "python" "python-chromium" "python-vscode" "python-vscode-chromium" "python-vscode-firefox" )
 
@@ -378,6 +382,7 @@ main() {
 
                         nodejs | nodejs-chromium | nodejs-vscode | nodejs-vscode-chromium | nodejs-vscode-firefox | nodejs-current \
                         | postman | postman-chromium | postman-firefox \
+                        | vscode | vscode-chromium | vscode-firefox \
                         | python | python-chromium | python-vscode | python-vscode-chromium | python-vscode-firefox \
                         )
 

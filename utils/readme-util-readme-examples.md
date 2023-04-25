@@ -27,6 +27,8 @@ Embedded help describes the parameters:
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-python-g3 --context=../docker/xfce-python --gist <deployment-gist-ID> -- preview
 
+./util-readme.sh --repo accetto/debian-vnc-xfce-vscode-g3 --context=../docker/xfce-vscode --gist <deployment-gist-ID> -- preview
+
 ### or if the environment variable 'DEPLOY_GIST_ID' has been set
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-nodejs-g3 --context=../docker/xfce-nodejs -- preview
@@ -34,6 +36,8 @@ Embedded help describes the parameters:
 ./util-readme.sh --repo accetto/debian-vnc-xfce-postman-g3 --context=../docker/xfce-postman -- preview
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-python-g3 --context=../docker/xfce-python -- preview
+
+./util-readme.sh --repo accetto/debian-vnc-xfce-vscode-g3 --context=../docker/xfce-vscode -- preview
 ```
 
 See the sibling Wiki page ["Utility util-readme.sh"][sibling-wiki-utility-util-readme] for more information.
