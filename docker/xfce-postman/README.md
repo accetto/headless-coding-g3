@@ -11,6 +11,12 @@
 
 ***
 
+**Attention** The Postman company has decided to remove `Scratch Pad` from `Postman App` as of May 15, 2023. Therefore will these images from now on always include the version `10.13.6`, the last one that still contains `Scratch Pad`.
+
+**Important for builders**: Downloading `Postman` is prohibited. The file `postman-10.13.6-linux-x64.tar.gz` must be put into `g3-cache`.
+
+***
+
 - [Headless Debian/Xfce container with VNC/noVNC and Postman desktop app](#headless-debianxfce-container-with-vncnovnc-and-postman-desktop-app)
   - [accetto/debian-vnc-xfce-postman-g3](#accettodebian-vnc-xfce-postman-g3)
     - [Introduction](#introduction)
@@ -170,7 +176,7 @@ The main features and components of the images in the default configuration are:
 - optionally the current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
 - optionally the current version of [Firefox ESR (Extended Support Release)][firefox] web browser and optionally also some additional **plus features** described in the [sibling project README][sibling-readme-xfce-firefox]
 
-All images include the current version of the [Postman][postman] desktop application.
+All images include the version `10.13.6` of the [Postman][postman] desktop application. This is the last version that still includes `Scratch Pad`.
 
 The history of notable changes is documented in the [CHANGELOG][this-changelog].
 

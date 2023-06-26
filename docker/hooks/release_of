@@ -8,8 +8,8 @@ main() {
         nodejs-current )
             # result=$(wget -qO- \
             result=$(curl -sLN \
-                https://nodejs.org/en/download/current/ \
-                | grep -Po -m1 '(?<=Latest Current Version)[^0-9]*[0-9a-zA-Z.-]+' \
+                https://nodejs.org/en/feed/releases.xml \
+                | grep -m1 '\(Current\)' \
                 | grep -Po -m1 '[0-9.]+' \
                 )
             ;;
@@ -17,19 +17,24 @@ main() {
         nodejs-lts )
             # result=$(wget -qO- \
             result=$(curl -sLN \
-                https://nodejs.org/en/download/ \
-                | grep -Po -m1 '(?<=Latest LTS Version)[^0-9]*[0-9a-zA-Z.-]+' \
+                https://nodejs.org/en/feed/releases.xml \
+                | grep -m1 '\(LTS\)' \
                 | grep -Po -m1 '[0-9.]+' \
                 )
             ;;
 
         postman )
+            ### The 'Postman' version is locked to '10.13.6', the last one that still includes 'Scratch Pad'.
+            ### The last 'Postman' version containing Scratch Pad is '10.13.6'.
+            ### The first 'Postman' version not containing Scratch Pad is '10.14.2' (since May 15, 2023).
+            result="10.13.6"
+            
             # result=$(wget -qO- \
-            result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-                "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
-                | grep -m1 "version" \
-                | grep -Po '[0-9.]+'
-            )
+            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
+            #     | grep -m1 "version" \
+            #     | grep -Po '[0-9.]+'
+            # )
             ;;
 
         * )

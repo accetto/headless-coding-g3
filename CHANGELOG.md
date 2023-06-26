@@ -6,6 +6,22 @@
 
 ***
 
+### Release 23.06
+
+The Postman company has decided to remove `Scratch Pad` from `Postman App` as of May 15, 2023. Therefore will `Postman` images from now on always include the version `10.13.6`, the last one that still contains `Scratch Pad`.
+
+**Important for builders**: Downloading `Postman` is prohibited. The file `postman-10.13.6-linux-x64.tar.gz` must be put into `g3-cache`.
+
+Fixes:
+
+- `Node.js`: Failing building because the version detection code needed adjustments.
+
+Main changes:
+
+- `hooks/release_of`: Node.js version detection code has been adjusted
+- `hooks/cache`, `Dockerfile.xfce.postman`: Postman downloading is prohibited, `g3-cache` must be used.
+- Postman image README files updated
+
 ### Release 23.04
 
 Added a new image [accetto/debian-vnc-xfce-vscode-g3][accetto-debian-vnc-xfce-vscode-g3].

@@ -331,6 +331,11 @@ RUN \
         libxss1 \
         libxtst6
 
+### The 'Postman' version is locked to '10.13.6', the last one that still includes 'Scratch Pad'.
+### The first release with this locking is '23.06'.
+### The last 'Postman' version containing 'Scratch Pad' is '10.13.6'.
+### The first 'Postman' version not containing 'Scratch Pad' is '10.14.2' (since May 15, 2023).
+### Warning! File 'postman-10.13.6-linux-x64.tar.gz' must be put into 'g3-cache', downloading is prohibited.
 RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
@@ -338,9 +343,12 @@ RUN \
     POSTMAN_VERSION="${ARG_POSTMAN_VERSION}" \
     POSTMAN_DISTRO="${ARG_POSTMAN_DISTRO}" \
     &&  if [ ! -s "/tmp/g3-cache/postman/postman-${POSTMAN_VERSION}-${POSTMAN_DISTRO}.tar.gz" ] ; then \
-            wget --show-progress --progress=bar:force:noscroll \
-                -q "https://dl.pstmn.io/download/latest/linux64" \
-                -P "/tmp/g3-cache/postman/postman-${POSTMAN_VERSION}-${POSTMAN_DISTRO}.tar.gz" ; \
+            echo "GUARD ERROR: Downloading 'Postman' is prohibited. Put file 'postman-10.13.6-linux-x64.tar.gz' into 'g3-cache'." && exit 1 ; \
+            ### Warning! The next code would download the real latest version
+            ### and store it under the name of the version '10.13.6'!
+            # wget --show-progress --progress=bar:force:noscroll \
+            #     -q "https://dl.pstmn.io/download/latest/linux64" \
+            #     -P "/tmp/g3-cache/postman/postman-${POSTMAN_VERSION}-${POSTMAN_DISTRO}.tar.gz" ; \
         fi \
     &&  tar xzf "/tmp/g3-cache/postman/postman-${POSTMAN_VERSION}-${POSTMAN_DISTRO}.tar.gz" -C "${POSTMAN_PATH}" \
     &&  ln -s "${POSTMAN_PATH}/Postman/Postman" "/usr/local/bin/postman" \
