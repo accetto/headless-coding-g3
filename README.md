@@ -22,6 +22,7 @@ Version: G3v3
 <!-- ![badge-github-workflow-dockerhub-post-push][badge-github-workflow-dockerhub-post-push] -->
 
 ***
+
 - [Headless Debian/Xfce containers with VNC/noVNC for programming](#headless-debianxfce-containers-with-vncnovnc-for-programming)
   - [Project `accetto/headless-coding-g3`](#project-accettoheadless-coding-g3)
   - [Introduction](#introduction)
@@ -264,7 +265,7 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- diagrams -->
 
-[this-diagram-dockerfile-stages-xfce]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.png
+<!-- [this-diagram-dockerfile-stages-xfce]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.png -->
 [this-diagram-dockerfile-stages-nodejs]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.nodejs.png
 [this-diagram-dockerfile-stages-python]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python.png
 [this-diagram-dockerfile-stages-python-bonus]: https://raw.githubusercontent.com/accetto/headless-coding-g3/master/docker/doc/images/Dockerfile.xfce.python-bonus.png
@@ -299,9 +300,9 @@ Credit goes to all the countless people and companies, who contribute to open so
 
 <!-- github badges -->
 
-[badge-github-workflow-dockerhub-autobuild]: https://github.com/accetto/headless-coding-g3/workflows/dockerhub-autobuild/badge.svg
+<!-- [badge-github-workflow-dockerhub-autobuild]: https://github.com/accetto/headless-coding-g3/workflows/dockerhub-autobuild/badge.svg -->
 
-[badge-github-workflow-dockerhub-post-push]: https://github.com/accetto/headless-coding-g3/workflows/dockerhub-post-push/badge.svg
+<!-- [badge-github-workflow-dockerhub-post-push]: https://github.com/accetto/headless-coding-g3/workflows/dockerhub-post-push/badge.svg -->
 
 [badge-github-release]: https://badgen.net/github/release/accetto/headless-coding-g3?icon=github&label=release
 

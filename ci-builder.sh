@@ -100,7 +100,7 @@ Usage: <script> <mode> <argument> [<optional-argument>]...
 <options>      := (--log-all|--no-cache) 
 <command>      := (all|all-no-push)
 <mode>         := (family|group)
-<parent-blend> := (complete)|(vscode|postman|nodejs[-current|-vscode]|python[-vscode])
+<parent-blend> := (complete)|(vscode[-all]|postman|nodejs[-current|-vscode]|python[-vscode])
 <child-suffix> := (-chromium|-firefox), except with 'nodejs-current'
 <blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nodejs|-postman|-python])
                   |(vscode|postman)
@@ -340,6 +340,13 @@ main() {
                             ;;
 
                         complete-vscode )
+
+                            clear_log
+                            list+=( "vscode" "vscode-chromium" "vscode-firefox" )
+                            build_group "${command}" "${list[@]}"
+                            ;;
+                        
+                        complete-vscode-all )
 
                             clear_log
                             list+=( "vscode" "vscode-chromium" "vscode-firefox" )

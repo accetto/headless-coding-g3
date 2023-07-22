@@ -345,9 +345,11 @@ COPY "./xfce-vscode/src/home/config" "${HOME}/.config"/
 ###############
 
 FROM ${ARG_FINAL_STAGE_BASE} as stage_final
+ARG ARG_FEATURES_OVERRIDING_ENVV
 ARG ARG_SUDO_INITIAL_PW
 
 ENV \
+    FEATURES_OVERRIDING_ENVV="${ARG_FEATURES_OVERRIDING_ENVV:+1}" \
     FEATURES_VERSION_STICKER=1 \
     STARTUPDIR="/dockerstartup"
 
