@@ -256,6 +256,7 @@ main() {
         help | --help | -h )
         
             show_unlogged_help
+            return 0
             ;;
 
         log )

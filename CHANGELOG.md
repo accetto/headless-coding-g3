@@ -2,9 +2,13 @@
 
 ## Project `accetto/headless-coding-g3`
 
-[Docker Hub][this-docker] - [Git Hub][this-github] - [sibling Wiki][sibling-wiki] - [sibling Discussions][sibling-discussions]
+[User Guide][this-user-guide] - [Docker Hub][this-docker] - [Git Hub][this-github] - [sibling Wiki][sibling-wiki] - [sibling Discussions][sibling-discussions]
 
 ***
+
+### Release 23.08
+
+This release brings updated and significantly shortened README files, because most of the content has been moved into the new [User guide][this-user-guide].
 
 ### Release 23.07.1
 
@@ -341,6 +345,8 @@ This is just a maintenance release.
   - **xfce** image is not built or published on Docker Hub by default
 
 ***
+
+[this-user-guide]: https://accetto.github.io/user-guide-g3/
 
 [this-docker]: https://hub.docker.com/u/accetto/
 [this-github]: https://github.com/accetto/headless-coding-g3/
