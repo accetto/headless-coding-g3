@@ -324,7 +324,7 @@ main() {
                         pivotal )
 
                             clear_log
-                            build_group "${command}" "nodejs" "nodejs-current" "postman" "vscode" "python" 
+                            build_group "${command}" "vscode" "nodejs" "nodejs-current" "python"
                             ;;
 
                         complete-chromium )
@@ -380,10 +380,10 @@ main() {
 
                             clear_log
                             
-                            list+=( "nodejs" "nodejs-chromium" "nodejs-vscode" "nodejs-vscode-firefox" "nodejs-vscode-chromium" "nodejs-current" )
                             list+=( "vscode" "vscode-firefox"  "vscode-chromium")
-                            list+=( "postman" "postman-firefox" "postman-chromium" )
+                            list+=( "nodejs" "nodejs-chromium" "nodejs-vscode" "nodejs-vscode-firefox" "nodejs-vscode-chromium" "nodejs-current" )
                             list+=( "python" "python-chromium" "python-vscode" "python-vscode-firefox" "python-vscode-chromium" )
+                            list+=( "postman" "postman-firefox" "postman-chromium" )
 
                             build_group "${command}" "${list[@]}"
                             ;;

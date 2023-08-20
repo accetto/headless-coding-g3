@@ -12,7 +12,7 @@
 
 This Docker Hub repository contains Docker images for headless working with the free open-source JavaScript runtime environment [Node.js][nodejs] and its package installer [npm][npm].
 
-The images are based on [Debian 11][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
+The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
 The free open-source programming editor [Visual Studio Code][vscode] and the popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
 

@@ -6,6 +6,32 @@
 
 ***
 
+### Release 23.08.1 (Milestone)
+
+This release brings new images based on the current **Debian 12**.
+
+Main changes:
+
+- hook scripts `env.rc`, `push` and `post_push` have been updated
+- handling of multiple deployment tags per image has been improved and it covers also publishing into the builder repository now
+  - also less image pollution by publishing
+- file `readme-local-building-example.md` got a new section `Tips and examples`, containing
+  - `How to deploy all images into one repository`
+- script `ci-builder.sh` has been updated
+  - `postman` has been removed from the `pivotal` group
+  - group `complete` has been re-ordered
+
+Main updated components:
+
+- `Debian` to version **12.1**
+- `Xfce` desktop to version **4.18**
+- `Mousepad` to version **0.5.10**
+- `nano` to version **7.2**
+- `Python` to version **3.11.2**
+
+Images with `Postman` still include the version **10.13.6**, because it's the last version containing `Scratch Pad`.
+You can update `Postman` to the latest version in the running container, if you don't mind loosing the `Scratch Pad.`
+
 ### Release 23.08
 
 This release brings updated and significantly shortened README files, because most of the content has been moved into the new [User guide][this-user-guide].
@@ -41,7 +67,7 @@ Other changes:
     - `complete-vscode-all` is the same as the former `complete-vscode` group and it includes all images that contain Visual Studio Code
     - `complete-vscode` includes only the `accetto/debian-vnc-xfce-vscode-g3` images
 
-### Release 23.06
+### Release 23.06 (Milestone)
 
 The Postman company has decided to remove `Scratch Pad` from `Postman App` as of May 15, 2023. Therefore will `Postman` images from now on always include the version `10.13.6`, the last one that still contains `Scratch Pad`.
 
@@ -83,7 +109,7 @@ This is a maintenance release aiming to improve the scripts and documentation.
 - updated with `TigerVNC 1.13.1` bugfix release
 - also some updates in readme files
 
-### Release 23.02
+### Release 23.02 (Milestone)
 
 This is the first `G3v3` release, switching the images from `Ubuntu 20.04 LTS` to `Debian 11` and introducing the updated startup scripts. The previous version `G3v2` will still be available in this repository as the branch `archived-generation-g3v2-ubuntu`.
 

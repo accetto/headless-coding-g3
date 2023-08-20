@@ -12,7 +12,7 @@
 
 This Docker Hub repository contains Docker images for headless working with the [Postman][postman] desktop application.
 
-The images are based on [Debian 11][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
+The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
 The popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
 
