@@ -389,9 +389,10 @@ Simply set all repositories except the builder one to `void` and force the publi
 For example, for publishing all the images into a single repository `headless-coding-g3` set the variables like this:
 
 ```shell
-DEPLOYMENT_REPO="void"
-DEPLOYMENT_REPO_CHROMIUM="void"
-DEPLOYMENT_REPO_FIREFOX="void"
+DEPLOYMENT_REPO_NODEJS="void"
+DEPLOYMENT_REPO_POSTMAN="void"
+DEPLOYMENT_REPO_PYTHON="void"
+DEPLOYMENT_REPO_VSCODE="void"
 BUILDER_REPO="headless-coding-g3"
 FORCE_PUBLISHING_BUILDER_REPO=1
 ```
