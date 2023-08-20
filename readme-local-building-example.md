@@ -366,13 +366,14 @@ For example, the `README` file for the repository `accetto/debian-vnc-xfce-pytho
 
 ### How to deploy all images into one repository
 
-There are three deployment repositories by default.
+There are four deployment repositories by default.
 
 Their names are defined by the following environment variables:
 
-- `DEPLOYMENT_REPO` for generic images
-- `DEPLOYMENT_REPO_CHROMIUM` for images with Chromium
-- `DEPLOYMENT_REPO_FIREFOX` for images with Firefox
+- `DEPLOYMENT_REPO_NODEJS` for `Node.js` images
+- `DEPLOYMENT_REPO_POSTMAN` for `Postman` images
+- `DEPLOYMENT_REPO_PYTHON` for `Python` images
+- `DEPLOYMENT_REPO_VSCODE` for `Visual Studio Code` images
 
 The forth variable `BUILDER_REPO` defines the name of the *builder repository*, which is not used for deployment by default.
 
