@@ -6,6 +6,10 @@
 
 ***
 
+### Release 23.09
+
+This is a maintenance release fixing the  `nodejs-current` publishing problem.
+
 ### Release 23.08.1 (Milestone)
 
 This release brings new images based on the current **Debian 12**.
