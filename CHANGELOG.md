@@ -6,6 +6,22 @@
 
 ***
 
+### Release 23.11
+
+Improved `Node.js` images:
+
+- global `npm` modules are installed into the folder `$HOME/$NPM_GLOBAL_MODULES`
+- default folder name is `.node_modules_global`
+- the folder is owned by the container user
+
+Other changes:
+
+- file `$HOME/.bashrc` added to all images
+  - it contains examples of custom aliases
+    - `ll` - just `ls -l`
+    - `cls` - clears the terminal window
+    - 'ps1' - sets the command prompt text
+
 ### Release 23.09
 
 This is a maintenance release fixing the  `nodejs-current` publishing problem.
