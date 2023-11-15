@@ -314,10 +314,12 @@ ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_NODEJS_PORT
 ARG ARG_NODEJS_DISTRO
 ARG ARG_NODEJS_VERSION
+ARG ARG_NPM_GLOBAL_MODULES
 
 ENV \
     FEATURES_NODEJS=1 \
-    NODEJS_PORT="${ARG_NODEJS_PORT:-3000}"
+    NODEJS_PORT="${ARG_NODEJS_PORT:-3000}" \
+    NPM_GLOBAL_MODULES="${HOME}/${ARG_NPM_GLOBAL_MODULES:-.node_modules_global}"
 
 RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
@@ -345,7 +347,9 @@ RUN \
                 -P "/tmp/g3-cache/nodejs" ; \
         fi \
     &&  tar xJf "/tmp/g3-cache/nodejs/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" --strip 1 -C "${NODEJS_PATH}" \
-    &&  mkdir -p "${HOME}"/projects/samples
+    &&  mkdir -p "${HOME}/projects/samples" "${NPM_GLOBAL_MODULES}" \
+    &&  npm config set prefix="${NPM_GLOBAL_MODULES}" \
+    &&  npm install npm@"$(npm --version)" --global
 
 COPY ./xfce-nodejs/src/home/readme*.md "${HOME}"/
 COPY ./xfce-nodejs/src/samples "${HOME}"/projects/samples
@@ -397,7 +401,8 @@ ARG ARG_SUDO_INITIAL_PW
 ENV \
     FEATURES_OVERRIDING_ENVV="${ARG_FEATURES_OVERRIDING_ENVV:+1}" \
     FEATURES_VERSION_STICKER=1 \
-    STARTUPDIR="/dockerstartup"
+    STARTUPDIR="/dockerstartup" \
+    PATH="${NPM_GLOBAL_MODULES}/bin:${PATH}"
 
 COPY ./src/xfce-startup "${STARTUPDIR}"/
 COPY ./src/tests "${HOME}"/tests/
