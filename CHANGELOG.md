@@ -6,6 +6,11 @@
 
 ***
 
+### Release 23.11.1
+
+Added more 'die-fast' error handling into the building and publishing scripts.
+They exit immediately if the image building or pushing commands fail.
+
 ### Release 23.11
 
 Improved `Node.js` images:
@@ -20,7 +25,7 @@ Other changes:
   - it contains examples of custom aliases
     - `ll` - just `ls -l`
     - `cls` - clears the terminal window
-    - 'ps1' - sets the command prompt text
+    - `ps1` - sets the command prompt text
 
 ### Release 23.09
 
