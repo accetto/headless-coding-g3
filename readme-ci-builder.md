@@ -41,28 +41,35 @@ The supported option values can be taken from the embedded help:
 
 ```shell
 This script can:
-    - build sets of images using the builder script 'builder.sh'
+    - build sets of images using the builder script '${_builder_script}'
     - extract selected information from the log
 
 Usage: <script> <mode> <argument> [<optional-argument>]...
 
-    ./ci-builder.sh [<options>] <command> group <blend> [<blend>]...
-    ./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
-    ./ci-builder.sh [--log-all] log get (digest|stickers|timing|errors)
+    ${0} [<options>] <command> group <blend> [<blend>]...
+    ${0} [<options>] <command> family <parent-blend> [<child-suffix>]...
+    ${0} [--log-all] log get (digest|stickers|timing|errors)
 
 <options>      := (--log-all|--no-cache) 
 <command>      := (all|all-no-push)
 <mode>         := (family|group)
-<parent-blend> := (complete)|(postman|nodejs[-current|-vscode]|python[-vscode])
+<parent-blend> := (complete)|(vscode[-all]|nvm[-vscode]|python[-vscode]|postman|nodejs[-current|-vscode])
 <child-suffix> := (-chromium|-firefox), except with 'nodejs-current'
-<blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nodejs|-postman|-python])
-                  |(postman)
+<blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nvm|-nodejs|-postman|-python])
+                  |(vscode|postman)
+                  |(nvm[-chromium|-vscode[-chromium|-firefox]])
                   |(nodejs[-current|-chromium|-vscode[-chromium|-firefox]])
                   |(python[-chromium|-vscode[-chromium|-firefox]])
 
 Group mode : All images are processed independently.
 Family mode: The children are skipped if a new parent image was not actually built.
 Remark: Currently are both modes equivalent, because there are no child suffixes supported.
+
+Note that the groups 'pivotal|complete|complete-chromium|complete-firefox|complete-vscode' do not include
+the 'nodejs' and 'postman' images. Those should be built explicitly.
+
+Note that the group 'complete-vscode' includes only 'vscode[-chromium|-firefox]' images.
+The group 'complete-vscode-all' includes all images containing 'vscode' (excluding 'nodejs').
 
 The command and the blend are passed to the builder script.
 The result "<parent-blend><child-suffix>" must be a blend supported by the builder script.
@@ -175,38 +182,39 @@ The image tags can be listed in the command line.
 For example, all these images will be built independently of each other.
 
 ```shell
-./ci-builder.sh all group nodejs-vscode postman-firefox python-vscode-chromium
+./ci-builder.sh all group nvm-vscode postman-firefox python-vscode-chromium
 ```
 
 You can also use one of the **named groups**:
 
 ```shell
-### includes the images 'nodejs', 'nodejs-current', 'nodejs-vscode', 'postman' and 'python'
+### includes the images 'vscode', 'nvm' and 'python'
 ./ci-builder.sh all group pivotal
 
-### includes the images 'nodejs', 'nodejs-current', 'nodejs-chromium', 'nodejs-vscode',
-### 'nodejs-vscode-chromium', 'nodejs-vscode-firefox', 'postman', 'postman-chromium',
-### 'postman-firefox', 'python', 'python-chromium', 'python-vscode', 'python-vscode-chromium'
-### and 'python-vscode-firefox'
+### includes all images except the 'Node.js' and 'Postman' ones
+### excluded images can be build explicitly
 ./ci-builder.sh all group complete
 
-### includes all the images featuring the Firefox browser
+### includes all images featuring Firefox
 ./ci-builder.sh all group complete-firefox
 
-### includes all the images featuring the Chromium Browser
+### includes all images featuring Chromium
 ./ci-builder.sh all group complete-chromium
 
-### includes all the images featuring the Visual Studio Code
-./ci-builder.sh all group complete-vscode
+### includes all images featuring Visual Studio Code
+./ci-builder.sh all group complete-vscode-all
 
-### includes all the images featuring the named application
+### includes all images of the particular blend group
 ./ci-builder.sh all group complete-nodejs
+./ci-builder.sh all group complete-nvm
 ./ci-builder.sh all group complete-postman
 ./ci-builder.sh all group complete-python
+./ci-builder.sh all group complete-vscode
 ```
+
 ### Family mode
 
-The **family mode** is intended for an efficient building of the sets of dependent images.
+The **family mode** is intended for an efficient building of sets of dependent images.
 
 **Remark:** Since the version G3v3 of the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] is this mode for advanced use only.
 The previous images `accetto/ubuntu-vnc-xfce-g3:latest-fugo` and `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` that used it are not published any more.

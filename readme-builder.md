@@ -32,7 +32,7 @@ This script can:
 
 Usage: ./builder.sh <blend> <command> [<docker-cli-options>]
 
-blend   := (((nodejs|nodejs-vscode|postman|python|python-vscode)[-(chromium|firefox)]))|nodejs-current)
+blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(chromium|firefox)]))|nodejs-current)
 command := (all|all-no-push)|(pre_build|build|push|post_push|cache)
 
 The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.
@@ -131,27 +131,27 @@ Building the individual images and publishing them to the **Docker Hub**:
 ```shell
 ### PWD = project's root directory
 
-### debian-vnc-xfce-postman-g3:latest
-./builder.sh postman all
+### debian-vnc-xfce-nvm-g3:latest
+./builder.sh nvm all
 
-### debian-vnc-xfce-postman-g3:chromium
-./builder.sh postman-chromium all
+### debian-vnc-xfce-nvm-g3:chromium
+./builder.sh nvm-chromium all
 
-### debian-vnc-xfce-postman-g3:firefox
-./builder.sh postman-firefox all
+### debian-vnc-xfce-nvm-g3:firefox
+./builder.sh nvm-firefox all
 ```
 
 You can skip the publishing to the **Docker Hub** by replacing the command `all` by the command `all-no-push`:
 
 ```shell
-./builder.sh postman all-no-push
+./builder.sh nvm all-no-push
 ```
 
 You can also provide additional parameters for the internally used Docker `build` command.
 For example:
 
 ```shell
-./builder.sh postman all-no-push --no-cache
+./builder.sh nvm all-no-push --no-cache
 
 ### it results in
 ### docker build --no-cache ...
@@ -168,21 +168,21 @@ The building pipeline consists of the following steps, that can be executed also
 ### this step builds the helper image and compare its verbose version sticker
 ### to the one from the builder repository gist
 ### it also refreshes the 'g3-cache' by executing the 'cache' hook script
-./builder.sh postman pre_build
+./builder.sh nvm pre_build
 
 ### this step builds a new image depending on the comparison result from the previous step
 ### if you want to force the building in any case, then delete the file 'scrap-demand-stop-building'
 ### or set the environment variable 'FORCE_BUILDING=1'
-./builder.sh postman build
+./builder.sh nvm build
 
 ### this step publishes the image to the deployment repository on the Docker Hub
 ### there are actually more configurations possible, check the Wiki for the description
-./builder.sh postman push
+./builder.sh nvm push
 
 ### this step updates the gists that store off-line data like badge endpoints
 ### or version stickers
 ### note that it will not publish the README file to the Docker Hub
-./builder.sh postman post_push
+./builder.sh nvm post_push
 ```
 
 The optional `<docker-cli-options>` are passed to the each individual hook script, which can pass them to the internally used Docker CLI command.
@@ -211,8 +211,8 @@ The script will refresh only the packages that are required for the current buil
 ./builder.sh python cache
 ./builder.sh python-firefox cache
 
-### this will refresh also 'Postman'
-./builder.sh postman cache
+### this will refresh also 'Node.js'
+./builder.sh nodejs cache
 ```
 
 ## Additional building parameters

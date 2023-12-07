@@ -91,6 +91,10 @@ case "$1" in
         ### source example: 6.9.0
         echo $(npm --version 2>/dev/null  | grep -Po -m1 '[0-9.]+$')
         ;;
+    nvm )
+        ### source example: 0.39.5
+        \. ${HOME}/.nvm/nvm.sh && echo $(nvm --version 2>/dev/null  | grep -Po -m1 '[0-9.]+$')
+        ;;
     postman )
         # jq -r '.version' /opt/Postman/app/resources/app/package.json
         if [[ -n "$(which postman)" && -n "$(which jq)" ]] ; then

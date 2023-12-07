@@ -9,7 +9,8 @@ main() {
             # result=$(wget -qO- \
             result=$(curl -sLN \
                 https://nodejs.org/en/feed/releases.xml \
-                | grep -m1 '\(Current\)' \
+                | grep '\(Current\)' \
+                | sort -rV \
                 | grep -Po -m1 '[0-9.]+' \
                 )
             ;;
@@ -18,9 +19,19 @@ main() {
             # result=$(wget -qO- \
             result=$(curl -sLN \
                 https://nodejs.org/en/feed/releases.xml \
-                | grep -m1 '\(LTS\)' \
+                | grep '\(LTS\)' \
+                | sort -rV \
                 | grep -Po -m1 '[0-9.]+' \
                 )
+            ;;
+
+        nvm )
+            # result=$(wget -qO- \
+            result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                https://api.github.com/repos/nvm-sh/nvm/releases/latest \
+                | grep -m1 "tag_name" \
+                | grep -Po '[0-9.]+'
+            )
             ;;
 
         postman )

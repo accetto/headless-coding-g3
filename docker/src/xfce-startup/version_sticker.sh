@@ -9,6 +9,7 @@ chromium=$("${STARTUPDIR}/version_of.sh" chromium)
 firefox=$("${STARTUPDIR}/version_of.sh" firefox)
 nodejs=$("${STARTUPDIR}/version_of.sh" nodejs)
 npm=$("${STARTUPDIR}/version_of.sh" npm)
+nvm=$("${STARTUPDIR}/version_of.sh" nvm)
 postman=$("${STARTUPDIR}/version_of.sh" postman)
 vscode=$("${STARTUPDIR}/version_of.sh" vscode)
 
@@ -48,6 +49,7 @@ main() {
                     if [[ -n "${firefox}" ]] ; then echo "Firefox ${firefox}" ; fi
                     if [[ -n "${nodejs}" ]] ; then echo "Node.js ${nodejs}" ; fi
                     if [[ -n "${npm}" ]] ; then echo "npm ${npm}" ; fi
+                    if [[ -n "${nvm}" ]] ; then echo "nvm ${nvm}" ; fi
                     if [[ -n "${postman}" ]] ; then echo "Postman ${postman}" ; fi
                     if [[ -n "${python}" ]] ; then echo "Python ${python}" ; fi
                     if [[ -n "${python_pip}" ]] ; then echo "python-pip ${python_pip}" ; fi
@@ -100,6 +102,8 @@ main() {
 
                     if [[ -n "${npm}" ]] ; then echo "npm ${npm}" ; fi
 
+                    if [[ -n "${nvm}" ]] ; then echo "nvm ${nvm}" ; fi
+
                     if [[ -n "${postman}" ]] ; then echo "Postman ${postman}" ; fi
 
                     version=$("${_current_dir}/version_of.sh" python3)
@@ -140,7 +144,12 @@ main() {
             sticker="ubuntu$ubuntu"
         fi
 
-        if [[ -n "${nodejs}" ]] ; then
+        ### Warning, 'nvm' must come before 'nodejs'!
+        if [[ -n "${nvm}" ]] ; then
+
+            sticker="${sticker}"-"nvm${nvm}"
+
+        elif [[ -n "${nodejs}" ]] ; then
 
             sticker="${sticker}"-"nodejs${nodejs}"-"npm${npm}"
 

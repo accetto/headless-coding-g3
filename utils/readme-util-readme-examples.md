@@ -23,6 +23,8 @@ Embedded help describes the parameters:
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-nodejs-g3 --context=../docker/xfce-nodejs --gist <deployment-gist-ID> -- preview
 
+./util-readme.sh --repo accetto/debian-vnc-xfce-nvm-g3 --context=../docker/xfce-nvm --gist <deployment-gist-ID> -- preview
+
 ./util-readme.sh --repo accetto/debian-vnc-xfce-postman-g3 --context=../docker/xfce-postman --gist <deployment-gist-ID> -- preview
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-python-g3 --context=../docker/xfce-python --gist <deployment-gist-ID> -- preview
@@ -32,6 +34,8 @@ Embedded help describes the parameters:
 ### or if the environment variable 'DEPLOY_GIST_ID' has been set
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-nodejs-g3 --context=../docker/xfce-nodejs -- preview
+
+./util-readme.sh --repo accetto/debian-vnc-xfce-nvm-g3 --context=../docker/xfce-nvm -- preview
 
 ./util-readme.sh --repo accetto/debian-vnc-xfce-postman-g3 --context=../docker/xfce-postman -- preview
 

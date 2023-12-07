@@ -170,18 +170,18 @@ You can find more information and examples in the separate `readme` file, descri
 ### Building and publishing individual images
 
 Building and publishing of individual images is also very easy.
-Let's say we wan to refresh the image `accetto/debian-vnc-xfce-nodejs-g3:latest`.
+Let's say we wan to refresh the image `accetto/debian-vnc-xfce-nvm-g3:latest`.
 We could execute the following command:
 
 ```shell
 ### PWD = project's root directory
-./builder.sh nodejs all
+./builder.sh nvm all
 
 ### alternatively with additional Docker CLI options
-./builder.sh nodejs all --no-cache
+./builder.sh nvm all --no-cache
 
 ### or skipping the publishing to the Docker Hub
-./builder.sh nodejs all-no-push
+./builder.sh nvm all-no-push
 ```
 
 The script `builder.sh` is using the individual hook scripts internally.
@@ -371,6 +371,7 @@ There are four deployment repositories by default.
 Their names are defined by the following environment variables:
 
 - `DEPLOYMENT_REPO_NODEJS` for `Node.js` images
+- `DEPLOYMENT_REPO_NVM` for `NVM` images
 - `DEPLOYMENT_REPO_POSTMAN` for `Postman` images
 - `DEPLOYMENT_REPO_PYTHON` for `Python` images
 - `DEPLOYMENT_REPO_VSCODE` for `Visual Studio Code` images
@@ -391,6 +392,7 @@ For example, for publishing all the images into a single repository `headless-co
 
 ```shell
 DEPLOYMENT_REPO_NODEJS="void"
+DEPLOYMENT_REPO_NVM="void"
 DEPLOYMENT_REPO_POSTMAN="void"
 DEPLOYMENT_REPO_PYTHON="void"
 DEPLOYMENT_REPO_VSCODE="void"

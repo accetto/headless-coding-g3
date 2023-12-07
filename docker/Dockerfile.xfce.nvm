@@ -112,9 +112,12 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
+        curl \
+        git \
         mousepad \
         python3 \
         systemctl \
+        xz-utils \
         "${ARG_FEATURES_SCREENSHOOTING:+ristretto}" \
         "${ARG_FEATURES_SCREENSHOOTING:+xfce4-screenshooter}" \
         "${ARG_FEATURES_THUMBNAILING:+tumbler}"
@@ -308,11 +311,42 @@ RUN \
 FROM ${ARG_MERGE_STAGE_BROWSER_BASE} as merge_stage_browser
 
 
+#############
+### stage_nvm
+#############
+
+FROM merge_stage_browser as stage_nvm
+ARG ARG_NVM_VERSION
+ARG ARG_NODEJS_PORT
+
+ENV \
+    FEATURES_NVM=1 \
+    NODEJS_PORT="${ARG_NODEJS_PORT:-3000}" \
+    NVM_VERSION="${ARG_NVM_VERSION}"
+
+RUN \
+    mkdir -p "${HOME}"/.nvm \
+    && chown -R "${HEADLESS_USER_ID}:${HEADLESS_USER_GROUP_ID}" "${HOME}"/.nvm "${HOME}"/.bashrc
+
+USER "${HEADLESS_USER_ID}"
+
+### alternatively 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash'
+RUN \
+    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
+
+COPY ./xfce-nodejs/src/home/readme*.md "${HOME}"/
+COPY ./xfce-nodejs/src/samples "${HOME}"/projects/samples
+
+EXPOSE "${NODEJS_PORT}"
+
+USER 0
+
+
 ################
 ### stage_vscode
 ################
 
-FROM merge_stage_browser as stage_vscode
+FROM stage_nvm as stage_vscode
 ARG ARG_APT_NO_RECOMMENDS
 
 ENV \
@@ -323,8 +357,6 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
-        curl \
-        git \
         gpg \
         libasound2 \
         libxshmfence1
@@ -342,7 +374,6 @@ RUN \
 COPY "./xfce-vscode/src/home/Desktop" "${HOME}/Desktop"/
 COPY "./xfce-vscode/src/home/config" "${HOME}/.config"/
 
-
 ###############
 ### FINAL STAGE
 ###############
@@ -354,7 +385,8 @@ ARG ARG_SUDO_INITIAL_PW
 ENV \
     FEATURES_OVERRIDING_ENVV="${ARG_FEATURES_OVERRIDING_ENVV:+1}" \
     FEATURES_VERSION_STICKER=1 \
-    STARTUPDIR="/dockerstartup"
+    STARTUPDIR="/dockerstartup" \
+    PATH="${NPM_GLOBAL_MODULES}/bin:${PATH}"
 
 COPY ./src/xfce-startup "${STARTUPDIR}"/
 COPY ./src/tests "${HOME}"/tests/
@@ -402,10 +434,10 @@ ARG ARG_VERSION_STICKER
 LABEL \
     org.opencontainers.image.authors="accetto" \
     org.opencontainers.image.created="${ARG_CREATED}" \
-    org.opencontainers.image.description="Headless Debian/Xfce/VNC/noVNC/Chromium/Firefox containers with Visual Studio Code" \
+    org.opencontainers.image.description="Headless Debian/Xfce/VNC/noVNC/Chromium/Firefox containers for Node.js programming" \
     org.opencontainers.image.documentation="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.source="https://github.com/accetto/headless-coding-g3" \
-    org.opencontainers.image.title="accetto/debian-vnc-xfce-vscode-g3" \
+    org.opencontainers.image.title="accetto/debian-vnc-xfce-nodejs-g3" \
     org.opencontainers.image.url="https://github.com/accetto/headless-coding-g3" \
     org.opencontainers.image.vendor="https://github.com/accetto" \
     org.opencontainers.image.version="${ARG_DOCKER_TAG}"

@@ -13,7 +13,7 @@ main() {
     local version_sticker
     local -i exit_code=0
 
-    local should_build=${FORCE_BUILDING}
+    local should_build=${FORCE_BUILDING:-0}
     local build_prohibited=${PROHIBIT_BUILDING}
     local cache_script="cache"
 
@@ -93,6 +93,49 @@ main() {
                     ${FEATURES_NODEJS:+--build-arg ARG_NODEJS_DISTRO=${NODEJS_DISTRO}} \
                     ${FEATURES_NODEJS:+--build-arg ARG_NODEJS_VERSION=${NODEJS_VERSION}} \
                     ${FEATURES_NODEJS:+--build-arg ARG_FINAL_STAGE_BASE="stage_nodejs"} \
+                    \
+                    ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
+                    \
+                -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"
+            
+            exit_code=$?
+            set +x
+
+            if [[ ${exit_code} -ne 0 ]] ; then set +x; die "Failed to build image '${DOCKER_REPO}:${DOCKER_TAG}${helper_suffix}'" ${exit_code} ; fi
+            ;;
+
+        ### -------------------------
+        ### debian-vnc-xfce-nvm-g3
+        ### -------------------------
+
+        nvm | nvm-* )
+
+            ### no quotes around ${params}!
+            set -x
+            docker build ${params} \
+                -f "${DOCKERFILE_PATH}" \
+                    --build-arg BASEIMAGE="${BASEIMAGE}" \
+                    --build-arg BASETAG="${BASETAG}" \
+                    \
+                    ${FEATURES_BUILD_SLIM:+--build-arg ARG_APT_NO_RECOMMENDS=1} \
+                    ${FEATURES_OVERRIDING_ENVV:+--build-arg ARG_FEATURES_OVERRIDING_ENVV=1} \
+                    ${FEATURES_SCREENSHOOTING:+--build-arg ARG_FEATURES_SCREENSHOOTING=1} \
+                    ${FEATURES_THUMBNAILING:+--build-arg ARG_FEATURES_THUMBNAILING=1} \
+                    \
+                    ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_DISTRO=${TIGERVNC_DISTRO}} \
+                    ${FEATURES_VNC:+--build-arg ARG_TIGERVNC_VERSION=${TIGERVNC_VERSION}} \
+                    \
+                    ${FEATURES_NOVNC:+--build-arg ARG_NOVNC_VERSION=${NOVNC_VERSION}} \
+                    ${FEATURES_NOVNC:+--build-arg ARG_WEBSOCKIFY_VERSION=${WEBSOCKIFY_VERSION}} \
+                    ${FEATURES_NOVNC:+--build-arg ARG_MERGE_STAGE_VNC_BASE="stage_novnc"} \
+                    \
+                    ${FEATURES_CHROMIUM:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_chromium"} \
+                    \
+                    ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \
+                    ${FEATURES_FIREFOX_PLUS:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox_plus"} \
+                    \
+                    ${FEATURES_NVM:+--build-arg ARG_NVM_VERSION=${NVM_VERSION}} \
+                    ${FEATURES_NVM:+--build-arg ARG_FINAL_STAGE_BASE="stage_nvm"} \
                     \
                     ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
                     \

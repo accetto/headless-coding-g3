@@ -1,6 +1,6 @@
 #!/bin/bash -e
 ### @accetto, August 2021
-### updated: September 2022, January 2023
+### updated: September 2022, January 2023, December 2023
 
 ### depends on the hook scripts
 ### set the environment variables first, e.g. 'source .secrets'
@@ -44,7 +44,7 @@ This script can:
 
 Usage: $0 <blend> <command> [<docker-cli-options>]
 
-blend   := (((nodejs|nodejs-vscode|postman|python|python-vscode|vscode)[-(chromium|firefox)]))|nodejs-current)
+blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(chromium|firefox)]))|nodejs-current)
 command := (all|all-no-push)|(pre_build|build|push|post_push|cache)
 
 The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.
