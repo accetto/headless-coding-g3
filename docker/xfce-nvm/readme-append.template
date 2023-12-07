@@ -40,4 +40,3 @@
 [badge_vscode-firefox_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@version-sticker.json
 
 [link_vscode-firefox_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@version-sticker-verbose.txt
-
