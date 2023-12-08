@@ -6,6 +6,42 @@
 
 ***
 
+### Release 23.12
+
+This release brings new images containing the free open-source utility `NVM` (Node Version Manager), which allows installing and using multiple `Node.js` versions concurrently. No `Node.js` version is installed by default.
+
+They can be pulled from the repository [accetto/debian-vnc-xfce-nvm-g3][accetto-debian-vnc-xfce-nvm-g3] on Docker Hub.
+
+The images are meant as a more flexible alternative to the images from the Docker Hub repository [accetto/debian-vnc-xfce-nodejs-g3][accetto-debian-vnc-xfce-nodejs-g3], that contain particular `Node.js` version.
+Publishing those images will be phased out, but you can still build them yourself using the GitHub project.
+
+Changes:
+
+- resources for building the new `NVM` images have been added
+- new `NVM` related blends have been added
+  - `nvm`, `nvm-chromium`, `nvm-vscode`, `nvm-vscode-chromium`, `nvm-vscode-firefox`
+- new Dockerfile `Dockerfile.xfce.nvm` has been added
+- hook scripts in the folder `docker/hooks/` have been updated
+- version discovery in the hook script `release_of` has been improved
+  - `nvm` key has been added
+  - processing of keys `nodejs-lts` and `nodejs-current` has been improved (fixed)
+- scripts `version_of.sh` and `version_sticker.sh` have been updated
+- embedded help in builder scripts `builder.sh` and `ci-builder.sh` has been updated
+- building groups in the script `ci-builder.sh` have been updated
+  - `NVM` related blends have been added
+  - `Node.js` and `Postman` related blends have been removed from the named groups `pivotal`, `complete`, `complete-chromium`, `complete-firefox` and `complete-vscode`
+    - `Node.js` and `Postman` blends should be build/published explicitly
+- building related README files have been updated
+- stage diagram `Dockerfile.xfce.nvm.png` has been added
+
+Other changes:
+
+- Updated all Dockerfiles
+  - file `.bashrc` is created earlier (stage `merge_stage_vnc`)
+- Updated file `example-secrets.rc`
+  - removed the initialization of the variables `FORCE_BUILDING` and `FORCE_PUBLISHING_BUILDER_REPO` (unset means `0`)
+  - the variables are still used as before, but now they can be set individually for each building/publishing run
+
 ### Release 23.11.1
 
 Added more 'die-fast' error handling into the building and publishing scripts.
@@ -402,6 +438,8 @@ This is just a maintenance release.
 [this-docker]: https://hub.docker.com/u/accetto/
 [this-github]: https://github.com/accetto/headless-coding-g3/
 
+[accetto-debian-vnc-xfce-nodejs-g3]: https://hub.docker.com/r/accetto/debian-vnc-xfce-nodejs-g3
+[accetto-debian-vnc-xfce-nvm-g3]: https://hub.docker.com/r/accetto/debian-vnc-xfce-nvm-g3
 [accetto-debian-vnc-xfce-vscode-g3]: https://hub.docker.com/r/accetto/debian-vnc-xfce-vscode-g3
 
 <!-- Old links -->
