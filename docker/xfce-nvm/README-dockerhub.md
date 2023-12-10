@@ -14,6 +14,8 @@ This Docker Hub repository contains Docker images for headless working with the 
 
 However, instead of a particular `Node.js` version they contain the free open-source utility [NVM][nvm] (Node Version Manager), which allows installing and using multiple versions of `Node.js` and `npm` concurrently.
 
+For example, the command `nvm install --lts` will install the latest LTS (Long Term Support) version of `Node.js`.
+
 The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
 The free open-source programming editor [Visual Studio Code][vscode] and the popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.

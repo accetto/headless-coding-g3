@@ -12,8 +12,8 @@ This release brings new images containing the free open-source utility `NVM` (No
 
 They can be pulled from the repository [accetto/debian-vnc-xfce-nvm-g3][accetto-debian-vnc-xfce-nvm-g3] on Docker Hub.
 
-The images are meant as a more flexible alternative to the images from the Docker Hub repository [accetto/debian-vnc-xfce-nodejs-g3][accetto-debian-vnc-xfce-nodejs-g3], that contain particular `Node.js` version.
-Publishing those images will be phased out, but you can still build them yourself using the GitHub project.
+The images are meant as a more flexible alternative to the ones from the repository [accetto/debian-vnc-xfce-nodejs-g3][accetto-debian-vnc-xfce-nodejs-g3], that contain particular `Node.js` versions.
+Publishing those images will be phased out, but you can always build them yourself using the GitHub project.
 
 Changes:
 
