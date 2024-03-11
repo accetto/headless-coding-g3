@@ -94,6 +94,9 @@ main() {
                     ${FEATURES_NODEJS:+--build-arg ARG_NODEJS_VERSION=${NODEJS_VERSION}} \
                     ${FEATURES_NODEJS:+--build-arg ARG_FINAL_STAGE_BASE="stage_nodejs"} \
                     \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_DISTRO=${VSCODE_DISTRO}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_VERSION=${VSCODE_VERSION}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_FILE=${VSCODE_FILE}} \
                     ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
                     \
                 -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"
@@ -137,6 +140,9 @@ main() {
                     ${FEATURES_NVM:+--build-arg ARG_NVM_VERSION=${NVM_VERSION}} \
                     ${FEATURES_NVM:+--build-arg ARG_FINAL_STAGE_BASE="stage_nvm"} \
                     \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_DISTRO=${VSCODE_DISTRO}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_VERSION=${VSCODE_VERSION}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_FILE=${VSCODE_FILE}} \
                     ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
                     \
                 -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"
@@ -221,6 +227,9 @@ main() {
                     \
                     ${FEATURES_PYTHON:+--build-arg ARG_FINAL_STAGE_BASE="stage_python"} \
                     \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_DISTRO=${VSCODE_DISTRO}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_VERSION=${VSCODE_VERSION}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_FILE=${VSCODE_FILE}} \
                     ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
                     \
                 -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"
@@ -261,6 +270,9 @@ main() {
                     ${FEATURES_FIREFOX:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox"} \
                     ${FEATURES_FIREFOX_PLUS:+--build-arg ARG_MERGE_STAGE_BROWSER_BASE="stage_firefox_plus"} \
                     \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_DISTRO=${VSCODE_DISTRO}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_VERSION=${VSCODE_VERSION}} \
+                    ${FEATURES_VSCODE:+--build-arg ARG_VSCODE_FILE=${VSCODE_FILE}} \
                     ${FEATURES_VSCODE:+--build-arg ARG_FINAL_STAGE_BASE="stage_vscode"} \
                     \
                 -t "${DOCKER_REPO}":"${DOCKER_TAG}${helper_suffix}" "${_build_context}"

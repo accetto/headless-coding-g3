@@ -14,7 +14,7 @@ This Docker Hub repository contains Docker images for headless working with the 
 
 The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
-The free open-source programming editor [Visual Studio Code][vscode] and the popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
+The free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable] and the popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
 
 Adding more tools like, for example, the most popular Python GUI frameworks [TKinter][tkinter], [PyQt5][pyqt5], [PyQT for Python][pyside] (`PySide2` or `PySide6`), [wxPython][wxpython] or [Kivy][kivy] usually requires only a single or just a few commands.
 The instructions are in the provided README files and some simple test applications are also already included.
@@ -39,17 +39,17 @@ The following image tags are regularly built and published on Docker Hub:
     ![badge_chromium_created][badge_chromium_created]
     [![badge_chromium_version-sticker][badge_chromium_version-sticker]][link_chromium_version-sticker-verbose]
 
-- `vscode` adds [Visual Studio Code][vscode]
+- `vscode` adds [portable][vscode-portable] [Visual Studio Code][vscode]
 
     ![badge_vscode_created][badge_vscode_created]
     [![badge_vscode_version-sticker][badge_vscode_version-sticker]][link_vscode_version-sticker-verbose]
 
-- `vscode-chromium` adds [Visual Studio Code][vscode] and [Chromium Browser][chromium]
+- `vscode-chromium` adds [portable][vscode-portable] [Visual Studio Code][vscode] and [Chromium Browser][chromium]
 
     ![badge_vscode-chromium_created][badge_vscode-chromium_created]
     [![badge_vscode-chromium_version-sticker][badge_vscode-chromium_version-sticker]][link_vscode-chromium_version-sticker-verbose]
 
-- `vscode-firefox` adds [Visual Studio Code][vscode] and [Firefox][firefox]
+- `vscode-firefox` adds [portable][vscode-portable] [Visual Studio Code][vscode] and [Firefox][firefox]
 
     ![badge_vscode-firefox_created][badge_vscode-firefox_created]
     [![badge_vscode-firefox_version-sticker][badge_vscode-firefox_version-sticker]][link_vscode-firefox_version-sticker-verbose]
@@ -74,7 +74,7 @@ The main features and components of the images in the default configuration are:
 - current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
 - current version of [Firefox ESR (Extended Support Release)][firefox] web browser and also the additional **Firefox plus** feature (see [User guide][this-user-guide-firefox-plus])
 - programming language [Python][python] with [pip][pip] package installer (Debian distribution)
-- current version of free open-source programming editor [Visual Studio Code][vscode]
+- current version of free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable]
 
 The following **TCP** ports are exposed by default:
 
@@ -92,6 +92,12 @@ However, you can built them yourself.
 This is the **third generation** (G3) of my headless images.
 The **second generation** (G2) contains the GitHub repository [accetto/xubuntu-vnc-novnc][accetto-github-xubuntu-vnc-novnc].
 The **first generation** (G1) contains the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
+
+Note that the portable `Visual Studio Code` does not support automatic updates.
+However, manual updating is really easy.
+Visit the official [Portable Mode][vscode-portable] page for more information.
+
+Alternatively you can pull or build an updated `accetto` image containing the new `Visual Studio Code` version.
 
 ### Getting help
 
@@ -152,6 +158,7 @@ If you have a question or an idea and you don't want to open an issue, you can a
 [tini]: https://github.com/krallin/tini
 [tkinter]: https://wiki.python.org/moin/TkInter
 [vscode]: https://code.visualstudio.com/
+[vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [wxpython]: https://wxpython.org/
 [xfce]: http://www.xfce.org
 

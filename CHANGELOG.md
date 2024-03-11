@@ -6,6 +6,28 @@
 
 ***
 
+### Release 24.03
+
+This is the first `G3v5` release.
+It also introduces the [portable Visual Studio Code][vscode-portable] installation.
+
+*Remark*: The version number `G3v4` has been skipped, to align the numbering with the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
+
+The updated script `set_user_permissions.sh`, which is part of Dockerfiles, skips the hidden files and directories now.
+It generally should not have any unwanted side effects, but it may make a difference in some scenarios, hence the version increase.
+
+The default `Visual Studio Code` installation path is `$HOME/.vscode-portable/code` and it can be changed by setting the build argument `ARG_VSCODE_PATH`.
+
+By setting the build argument `ARG_VSCODE_VERSION` it's possible to install a particular `Visual Studio Code` version.
+
+The complete `Visual Studio Code` profile is by default in the folder `$HOME/.vscode-portable/code/data`.
+
+Note that the portable `Visual Studio Code` does not support automatic updates.
+However, manual updating is really easy.
+Visit the official [Portable Mode][vscode-portable] page for more information.
+
+Alternatively you can pull or build an updated `accetto` image containing the new `Visual Studio Code` version.
+
 ### Release 23.12
 
 This release brings new images containing the free open-source utility `NVM` (Node Version Manager), which allows installing and using multiple `Node.js` versions concurrently. No `Node.js` version is installed by default.
@@ -459,3 +481,7 @@ This is just a maintenance release.
 
 [sibling-wiki-building-stages]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/Building-stages
 [sibling-wiki-how-ci-works]: https://github.com/accetto/ubuntu-vnc-xfce-g3/wiki/How-CI-works
+
+<!-- Other links -->
+
+[vscode-portable]: https://code.visualstudio.com/docs/editor/portable

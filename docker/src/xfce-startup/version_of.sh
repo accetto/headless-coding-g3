@@ -93,7 +93,9 @@ case "$1" in
         ;;
     nvm )
         ### source example: 0.39.5
-        \. ${HOME}/.nvm/nvm.sh && echo $(nvm --version 2>/dev/null  | grep -Po -m1 '[0-9.]+$')
+        if [ -f "${HOME}/.nvm/nvm.sh" ] ; then
+            \. "${HOME}"/.nvm/nvm.sh && echo $(nvm --version 2>/dev/null  | grep -Po -m1 '[0-9.]+$')
+        fi
         ;;
     postman )
         # jq -r '.version' /opt/Postman/app/resources/app/package.json

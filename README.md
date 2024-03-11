@@ -2,7 +2,7 @@
 
 ## Project `accetto/headless-coding-g3`
 
-Version: G3v3
+Version: G3v5
 
 ***
 
@@ -95,11 +95,19 @@ The **first generation** (G1) contains the GitHub repository [accetto/ubuntu-vnc
 
 ### Project versions
 
-This file describes the **third version** (G3v3) of the project, which however corresponds to the **fourth version** (G3v4) of the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
+This file describes the **fifth version** (G3v5) of the project.
+
+*Remark*: The version number `G3v4` has been skipped, to align the numbering with the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
 
 The **second version** (G3v2) and the **first version** (G3v1, or simply G3) will still be available in this GitHub repository as the branches `archived-generation-g3v2-ubuntu` and `archived-generation-g3v1`.
+The **third version** (G3v3) was not archived, because the changes are minor.
 
-The version `G3v3` brings the following major changes comparing to the previous version `G3v2`:
+The version `G3v5` brings only one significant change comparing to the previous version `G3v3` and it also introduces the [portable Visual Studio Code][vscode-portable] installation.
+
+- The updated script `set_user_permissions.sh`, which is part of Dockerfiles, skips the hidden files and directories now.
+It generally should not have any unwanted side effects, but it may make a difference in some scenarios, hence the version increase.
+
+The version `G3v3` has brought the following major changes comparing to the previous version `G3v2`:
 
 - The updated startup scripts that support overriding the user ID (`id`) and group ID (`gid`) without needing the former build argument `ARG_FEATURES_USER_GROUP_OVERRIDE`, which has been removed.
 - The user ID and the group ID can be overridden during the build time (`docker build`) and the run time (`docker run`).
@@ -226,7 +234,9 @@ Credit goes to all the countless people and companies, who contribute to open so
 [firefox]: https://www.mozilla.org
 [novnc]: https://github.com/kanaka/noVNC
 [tigervnc]: http://tigervnc.org
+[vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [xfce]: http://www.xfce.org
+
 
 [badge-github-release]: https://badgen.net/github/release/accetto/headless-coding-g3?icon=github&label=release
 

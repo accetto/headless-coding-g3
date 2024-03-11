@@ -198,6 +198,26 @@ cache_postman() {
     fi
 }
 
+cache_vscode() {
+    local section="vscode"
+    local source_base_url="https://update.code.visualstudio.com/"
+    local target_path="${_cache}/${section}"
+    local target=""
+    local file=""
+
+    mkdir -p "${target_path}"
+
+    ### example: https://update.code.visualstudio.com/{version}/linux-x64/stable
+    file="${VSCODE_FILE}"
+
+    ### Careful, do not add the file name!
+    source_url="${source_base_url}/${VSCODE_VERSION}/${VSCODE_DISTRO}/stable/"
+
+    target="${target_path}/${file}"
+
+    refresh_file "${section}" "${file}" "${source_url}" "${target}"
+}
+
 ### ==========
 ### cache_main
 ### ==========
@@ -232,6 +252,11 @@ main() {
     if [[ "${FEATURES_POSTMAN}" == "1" ]] ; then
 
         cache_postman
+        if [[ $? -ne 0 ]] ; then return 1; fi
+    fi
+
+    if [[ "${FEATURES_VSCODE}" == "1" ]] ; then
+        cache_vscode
         if [[ $? -ne 0 ]] ; then return 1; fi
     fi
 

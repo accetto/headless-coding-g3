@@ -10,7 +10,7 @@
 
 ***
 
-This Docker Hub repository contains Docker images for headless working with the the free open-source programming editor [Visual Studio Code][vscode].
+This Docker Hub repository contains Docker images for headless working with the the free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable].
 
 The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
@@ -60,7 +60,7 @@ The main features and components of the images in the default configuration are:
 - support of **version sticker** (see [User guide][this-user-guide-version-sticker])
 - current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
 - current version of [Firefox ESR (Extended Support Release)][firefox] web browser and also the additional **Firefox plus** feature (see [User guide][this-user-guide-firefox-plus])
-- current version of free open-source programming editor [Visual Studio Code][vscode]
+- current version of free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable]
 
 The following **TCP** ports are exposed by default:
 
@@ -74,6 +74,12 @@ The following **TCP** ports are exposed by default:
 This is the **third generation** (G3) of my headless images.
 The **second generation** (G2) contains the GitHub repository [accetto/xubuntu-vnc-novnc][accetto-github-xubuntu-vnc-novnc].
 The **first generation** (G1) contains the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
+
+Note that the portable `Visual Studio Code` does not support automatic updates.
+However, manual updating is really easy.
+Visit the official [Portable Mode][vscode-portable] page for more information.
+
+Alternatively you can pull or build an updated `accetto` image containing the new `Visual Studio Code` version.
 
 ### Getting help
 
@@ -126,6 +132,7 @@ If you have a question or an idea and you don't want to open an issue, you can a
 [tini]: https://github.com/krallin/tini
 [sudo]: https://www.sudo.ws/
 [vscode]: https://code.visualstudio.com/
+[vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [xfce]: http://www.xfce.org
 
 [badge-github-release]: https://badgen.net/github/release/accetto/headless-coding-g3?icon=github&label=release

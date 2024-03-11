@@ -339,33 +339,52 @@ COPY ./xfce-python/src/samples "${HOME}"/projects/samples
 ### stage_vscode
 ################
 
-FROM stage_python as stage_vscode
+FROM merge_stage_browser as stage_vscode
 ARG ARG_APT_NO_RECOMMENDS
+ARG ARG_VSCODE_DISTRO
+ARG ARG_VSCODE_VERSION
+ARG ARG_VSCODE_FILE
+ARG ARG_VSCODE_PATH
 
 ENV \
     DONT_PROMPT_WSL_INSTALL=1 \
-    FEATURES_VSCODE=1
+    FEATURES_VSCODE=1 \
+    VSCODE_PATH="${HOME}/.vscode-portable/code"
 
 RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
+        curl \
+        git \
         gpg \
         libasound2 \
-        libxshmfence1
+        libgbm1 \
+        libnss3 
 
 RUN \
-    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg \
-    && install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/ \
-    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' \
-    && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        apt-transport-https \
-        code \
-    && rm -f "${HOME}"/packages.microsoft.gpg
+    --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
+    --mount=type=cache,from=stage_cache,sharing=locked,source=/tmp/g3-cache/,target=/tmp/g3-cache/ \
+    VSCODE_DISTRO="${ARG_VSCODE_DISTRO}" \
+    VSCODE_VERSION="${ARG_VSCODE_VERSION}" \
+    VSCODE_FILE="${ARG_VSCODE_FILE}" \
+    &&  if [ ! -s "/tmp/g3-cache/vscode/${VSCODE_FILE}" ] ; then \
+            wget --show-progress --progress=bar:force:noscroll \
+                -q -O "/tmp/g3-cache/vscode/${VSCODE_FILE}" \
+                "https://update.code.visualstudio.com/${VSCODE_VERSION}/${VSCODE_DISTRO}/stable" \
+                -P "/tmp/g3-cache/vscode" ; \
+        fi \
+    && mkdir -p "${VSCODE_PATH}" "${VSCODE_PATH}/data" \
+    && tar xzf "/tmp/g3-cache/vscode/${VSCODE_FILE}" --strip 1 -C "${VSCODE_PATH}" \
+    && ln -s "${VSCODE_PATH}/bin/code" /usr/bin/code
 
 COPY "./xfce-vscode/src/home/Desktop" "${HOME}/Desktop"/
-COPY "./xfce-vscode/src/home/config" "${HOME}/.config"/
+COPY "./xfce-vscode/src/vscode/data" "${VSCODE_PATH}/data"/
+
+RUN \
+    envsubst <"${HOME}/Desktop/code.desktop" >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}/Desktop/code.desktop" \
+    && cp "${HOME}/Desktop/code.desktop" /usr/share/applications/
 
 
 ###############
@@ -401,7 +420,7 @@ RUN \
     &&  echo "${HEADLESS_USER_NAME}:x:${HEADLESS_USER_ID}:${HEADLESS_USER_GROUP_ID}:Default:${HOME}:/bin/bash" >> /etc/passwd \
     &&  echo "${HEADLESS_USER_NAME}  ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/"${HEADLESS_USER_NAME}" \
     &&  echo "${ARG_SUDO_INITIAL_PW:-headless}" > "${STARTUPDIR}"/.initial_sudo_password \
-    &&  echo "${HEADLESS_USER_NAME}:$(cat "${STARTUPDIR}"/.initial_sudo_password)" | chpasswd \
+    &&  echo "${HEADLESS_USER_NAME}:$(cat ${STARTUPDIR}/.initial_sudo_password)" | chpasswd \
     &&  ln -s "${HOME}"/readme.md "${HOME}"/Desktop/README \
     &&  envsubst <"${HOME}"/Desktop/versionsticker.desktop >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}"/Desktop/versionsticker.desktop \
     && "${STARTUPDIR}"/set_user_permissions.sh "${STARTUPDIR}" "${HOME}"

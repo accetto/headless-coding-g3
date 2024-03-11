@@ -36,6 +36,7 @@ The local `g3-cache` of this project has the following **cache sections**:
 - `novnc`
 - `postman`
 - `tigervnc`
+- `vscode`
 - `websockify`
 
 The local `g3-cache` folder `docker/.g3-cache` is excluded from the commits into the `git` repository by the means of the `.gitignore` file.
