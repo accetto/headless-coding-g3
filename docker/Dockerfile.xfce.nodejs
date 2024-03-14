@@ -364,7 +364,7 @@ EXPOSE "${NODEJS_PORT}"
 ### stage_vscode
 ################
 
-FROM merge_stage_browser as stage_vscode
+FROM stage_nodejs as stage_vscode
 ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_VSCODE_DISTRO
 ARG ARG_VSCODE_VERSION

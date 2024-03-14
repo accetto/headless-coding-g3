@@ -23,6 +23,32 @@ This [User guide][this-user-guide] describes the images and how to use them.
 
 The related [GitHub project][this-github] contains image generators that image users generally don’t need, unless they want to build the images themselves.
 
+### Sharing Visual Studio Code profiles
+
+You can share *portable* `Visual Studio Code` profiles using *volumes* if you build your `compose` file similar to this:
+
+```yaml
+volumes:
+  ### The volume should be prepared beforehand, otherwise
+  ### it would be removed with the service.
+  some-shared-vscode-profile-volume:
+    external: true
+
+services:
+  some-vscode-service:
+    ....
+    volumes:
+      - type: volume
+        source: some-shared-vscode-profile-volume:
+        target: /home/headless/.vscode-portable/code/data/user-data/User
+      - type: volume
+        source: some-shared-vscode-profile-volume:
+        target: /home/headless/.vscode-portable/code/data/extensions
+```
+
+Be aware, that if you don't prepare the volume beforehand, it will be removed with the service.
+Read more about [Docker volumes][doc-docker-volumes] and [Compose volumes][doc-compose-volumes] in the official documentation.
+
 ### Tags
 
 The following image tags are regularly built and published on Docker Hub:
@@ -139,6 +165,9 @@ If you have a question or an idea and you don't want to open an issue, you can a
 [accetto-github-ubuntu-vnc-xfce]: https://github.com/accetto/ubuntu-vnc-xfce
 
 [docker-debian]: https://hub.docker.com/_/debian/
+
+[doc-docker-volumes]: https://docs.docker.com/storage/volumes/
+[doc-compose-volumes]: https://docs.docker.com/compose/compose-file/07-volumes/
 
 [chromium]: https://www.chromium.org/Home
 [curl]: http://manpages.ubuntu.com/manpages/bionic/man1/curl.1.html

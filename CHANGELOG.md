@@ -6,6 +6,14 @@
 
 ***
 
+### Release 24.03.1
+
+This is a fix release, correcting an unfortunate copy-and-paste error in the files `Dockerfile.xfce.nodejs`, `Dockerfile.xfce.nvm` and `Dockerfile.xfce.python`.
+
+Other changes:
+
+- Readme files for Docker Hub have got a new section `Sharing Visual Studio Code profiles`
+
 ### Release 24.03
 
 This is the first `G3v5` release.

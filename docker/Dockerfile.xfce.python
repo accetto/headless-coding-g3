@@ -339,7 +339,7 @@ COPY ./xfce-python/src/samples "${HOME}"/projects/samples
 ### stage_vscode
 ################
 
-FROM merge_stage_browser as stage_vscode
+FROM stage_python as stage_vscode
 ARG ARG_APT_NO_RECOMMENDS
 ARG ARG_VSCODE_DISTRO
 ARG ARG_VSCODE_VERSION
