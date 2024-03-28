@@ -22,6 +22,27 @@ This [User guide][this-user-guide] describes the images and how to use them.
 
 The related [GitHub project][this-github] contains image generators that image users generally don’t need, unless they want to build the images themselves.
 
+### Remarks
+
+The Postman company has decided to remove the `Scratch Pad` from the `Postman App` as of May 15, 2023.
+
+Therefore will these images always contain the `Postman App` version `10.13.6`, which is the last version still including the `Scratch Pad` and supporting off-line usage.
+
+Note that you would need to block the `Postman App` from updating itself.
+
+You can do it by blocking the auto-updater downloads by adding the following part to your compose configuration:
+
+```yaml
+extra_hosts:
+    - "dl.pstmn.io=127.0.0.1"
+```
+
+Alternativelly you can add the following line to the file `/etc/hosts` in the container:
+
+```text
+127.0.0.1   dl.pstmn.io
+```
+
 ### Tags
 
 The following image tags are regularly built and published on Docker Hub:
@@ -71,16 +92,6 @@ The following **TCP** ports are exposed by default:
 - **6901** for access over [noVNC][novnc] (using web browser)
 
 ![container-screenshot][this-screenshot-container]
-
-### Remarks
-
-The Postman company has decided to remove the `Scratch Pad` from the `Postman App` as of May 15, 2023.
-
-Therefore will these images always contain the default version `10.13.6`.
-
-That is the last `Postman App` version still including the `Scratch Pad` and supporting off-line usage.
-
-However, you can easily update the `Postman App` to the latest version in the running container.
 
 This is the **third generation** (G3) of my headless images.
 The **second generation** (G2) contains the GitHub repository [accetto/xubuntu-vnc-novnc][accetto-github-xubuntu-vnc-novnc].
