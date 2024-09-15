@@ -3,36 +3,52 @@
 main() {
     local version="$2"
     local result=""
+    local response=""
+    local truncateMax=1000
 
     case "$1" in
 
         nodejs-current )
             # result=$(wget -qO- \
-            result=$(curl -sLN \
-                https://nodejs.org/en/feed/releases.xml \
-                | grep '\(Current\)' \
-                | sort -rV \
-                | grep -Po -m1 '[0-9.]+' \
-                )
+            # result=$(curl -sLN \
+            #     https://nodejs.org/en/feed/releases.xml \
+            #     | grep '\(Current\)' \
+            #     | sort -rV \
+            #     | grep -Po -m1 '[0-9.]+' \
+            #     )
+            response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
+            if [[ -n "${response}" ]] ; then
+                result=$(echo "${response}" | grep '\(Current\)' | sort -rV | grep -Po -m1 '[0-9.]+')
+            fi
             ;;
 
         nodejs-lts )
             # result=$(wget -qO- \
-            result=$(curl -sLN \
-                https://nodejs.org/en/feed/releases.xml \
-                | grep '\(LTS\)' \
-                | sort -rV \
-                | grep -Po -m1 '[0-9.]+' \
-                )
+            # result=$(curl -sLN \
+            #     https://nodejs.org/en/feed/releases.xml \
+            #     | grep '\(LTS\)' \
+            #     | sort -rV \
+            #     | grep -Po -m1 '[0-9.]+' \
+            #     )
+            response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
+            if [[ -n "${response}" ]] ; then
+                result=$(echo "${response}" | grep '\(LTS\)' | sort -rV | grep -Po -m1 '[0-9.]+')
+            fi
             ;;
 
         nvm )
             # result=$(wget -qO- \
-            result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            #     https://api.github.com/repos/nvm-sh/nvm/releases/latest \
+            #     | grep -m1 "tag_name" \
+            #     | grep -Po '[0-9.]+'
+            # )
+            response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
                 https://api.github.com/repos/nvm-sh/nvm/releases/latest \
-                | grep -m1 "tag_name" \
-                | grep -Po '[0-9.]+'
             )
+            if [[ -n "${response}" ]] ; then
+                result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+            fi
             ;;
 
         postman )
@@ -47,22 +63,38 @@ main() {
             #     | grep -m1 "version" \
             #     | grep -Po '[0-9.]+'
             # )
+            # response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable")
+            # if [[ -n "${response}" ]] ; then
+            #     result=$(echo "${response}" | grep -m1 "version" | grep -Po '[0-9.]+')
+            # fi 
             ;;
 
         vscode )
             # result=$(wget -qO- \
-            result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+            #     https://api.github.com/repos/microsoft/vscode/releases/latest \
+            #     | grep -m1 "tag_name" \
+            #     | grep -Po '[0-9.]+'
+            # )
+            response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
                 https://api.github.com/repos/microsoft/vscode/releases/latest \
-                | grep -m1 "tag_name" \
-                | grep -Po '[0-9.]+'
             )
+            if [[ -n "${response}" ]] ; then
+                result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+            fi
             ;;
 
         vscode-file )
             # result=$(wget -qO- \
-            result="$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable \
-                | grep -Po -m1 '(?<=location: )[^\r]+'
-            )"
+            # result="$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable \
+            #     | grep -Po -m1 '(?<=location: )[^\r]+'
+            # )"
+            # result="${result##*/}"
+            response=$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable)
+            if [[ -n "${response}" ]] ; then
+                result=$(echo ${response} | grep -Po -m1 '(?<=location: )[^\r]+')
+            fi
             result="${result##*/}"
             ;;
 
@@ -78,7 +110,10 @@ main() {
 
         echo "${result}"
     else
-        echo "Exiting '${0}' with code '1' because unable to get version of '$1'"
+        echo "ERROR: Exiting '${0}' with code '1' because unable to get version of '$1'"
+        echo "ERROR: Unexpected HTTPS response (truncated to $truncateMax):"
+        ### don't use quotes here
+        echo ${response:0:truncateMax}
         return 1
     fi
 }

@@ -2,7 +2,7 @@
 
 ## Project `accetto/headless-coding-g3`
 
-Version: G3v5
+Version: G3v6
 
 ***
 
@@ -95,14 +95,18 @@ The **first generation** (G1) contains the GitHub repository [accetto/ubuntu-vnc
 
 ### Project versions
 
-This file describes the **fifth version** (G3v5) of the project.
+This file describes the **sixth version** (G3v6) of the project.
+
+However, also this version keeps evolving.
+Please check the [CHANGELOG][this-changelog] for more information about the changes.
+
+The previous versions are still available in this **GitHub** repository as the branches named as `archived-generation-g3v{d}`.
 
 *Remark*: The version number `G3v4` has been skipped, to align the numbering with the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
 
-The **second version** (G3v2) and the **first version** (G3v1, or simply G3) will still be available in this GitHub repository as the branches `archived-generation-g3v2-ubuntu` and `archived-generation-g3v1`.
-The **third version** (G3v3) was not archived, because the changes are minor.
+The main purpose of the version `G3v6` is to keep the project and the images uniform with the ones from the sibling `Ubuntu` projects.
 
-The version `G3v5` brings only one significant change comparing to the previous version `G3v3` and it also introduces the [portable Visual Studio Code][vscode-portable] installation.
+The version `G3v5` has brought only one significant change comparing to the previous version `G3v3` and it also introduces the [portable Visual Studio Code][vscode-portable] installation.
 
 - The updated script `set_user_permissions.sh`, which is part of Dockerfiles, skips the hidden files and directories now.
 It generally should not have any unwanted side effects, but it may make a difference in some scenarios, hence the version increase.
