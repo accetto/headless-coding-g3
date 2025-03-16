@@ -82,7 +82,7 @@ Changes:
 - Default user `headless:headless (1000:1000)` has been changed to `headless:headless (1001:1001)`.
   - This change has been only done to keep the containers uniform with the ones from the sibling `Ubuntu` projects.
 
-### Release 24.09
+### Release 24.09 (G3v6)
 
 This is the first `G3v6` release.
 However, it's a maintenance release and the version number has been increased just to keep it synchronized with the **sibling project** [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3].
@@ -105,7 +105,7 @@ Other changes:
 
 - Readme files for Docker Hub have got a new section `Sharing Visual Studio Code profiles`
 
-### Release 24.03
+### Release 24.03 (G3v5)
 
 This is the first `G3v5` release.
 It also introduces the [portable Visual Studio Code][vscode-portable] installation.
@@ -291,7 +291,7 @@ This is a maintenance release aiming to improve the scripts and documentation.
 - updated with `TigerVNC 1.13.1` bugfix release
 - also some updates in readme files
 
-### Release 23.02 (Milestone)
+### Release 23.02 (G3v3)
 
 This is the first `G3v3` release, switching the images from `Ubuntu 20.04 LTS` to `Debian 11` and introducing the updated startup scripts. The previous version `G3v2` will still be available in this repository as the branch `archived-generation-g3v2-ubuntu`.
 
@@ -359,7 +359,7 @@ This is a maintenance release.
 
 This is a quick fix release, because `Chromium Browser` has changed its package naming pattern.
 
-### Release 22.11 (Milestone)
+### Release 22.11 (G3v2)
 
 This is a milestone release. It's the first release of the new building pipeline version `G3v2`. The previous version `G3v1` will still be available in this repository as the branch `archived-generation-g3v1`.
 
@@ -395,7 +395,7 @@ Many other files have been updated, some of them significantly.
 
 Hoverer, the changes affect only the building pipeline, not the Docker images themselves. The `Dockerfile`, apart from using the new local `g3-cache`, stays conceptually unchanged.
 
-### Release 22.10 (Milestone)
+### Release 22.10 (G3v1)
 
 This is the last release of the current building pipeline generation `G3v1`, which will still be available in the repository as the branch `archived-generation-g3v1`.
 
