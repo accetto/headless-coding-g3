@@ -93,7 +93,7 @@ main() {
             # result="${result##*/}"
             response=$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable)
             if [[ -n "${response}" ]] ; then
-                result=$(echo ${response} | grep -Po -m1 '(?<=location: )[^\r]+')
+                result=$(echo ${response} | grep -Po -m1 '(?<=Location: )[^\r]+')
             fi
             result="${result##*/}"
             ;;
