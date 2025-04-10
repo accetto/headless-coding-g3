@@ -6,6 +6,27 @@
 
 ***
 
+### Release 25.04
+
+Availability checking of the `wget` utility has been added.
+The utility is used by the `cache` hook script for downloading of selected packages into the `g3-cache` folders.
+It's generally not available on Windows environments by default.
+You can install it or to build on an environment, where the utility is available (e.g. WSL or Linux).
+
+The checking can be skipped by setting the environment variable `IGNORE_MISSING_WGET=1`.
+
+The selected packages still will be downloaded into a temporary image layer, but not into the project's
+`.g3-cache` folder nor the shared one, defined by the variable `SHARED_G3_CACHE_PATH`.
+
+Other changes:
+
+- The `ci-builder.sh` script's command `log get errors` now lists building errors and also warnings.
+
+Updated components:
+
+- `noVNC` to version **1.6.0**
+- `websockify` to version **0.13.0**
+
 ### Release 25.03 (G3v7)
 
 This is the first `G3v7` release, bringing an improved building pipeline.
@@ -44,20 +65,6 @@ Updated components:
 
 - `noVNC` to version **1.5.0**
 - `websockify` to version **0.12.0**
-
-#### Remarks about `xfce4-about`
-
-The version of the currently running `Xfce4` can be checked by the utility `xfce4-about`.
-It can be executed from the terminal window or by the start menu item `Applications/About Xfce`.
-
-However, the utility requires the module `libGL.so.1`, which is excluded from some images, to keep them smaller.
-
-The module can be added in running containers as follows:
-
-```shell
-sudo apt-get update
-sudo install libgl1
-```
 
 #### Remarks about `xfce4-about`
 

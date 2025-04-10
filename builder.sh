@@ -1,6 +1,4 @@
 #!/bin/bash -e
-### @accetto, August 2021
-### updated: September 2022, January 2023, December 2023
 
 ### depends on the hook scripts
 ### set the environment variables first, e.g. 'source .secrets'
@@ -83,7 +81,9 @@ main() {
             clear_log
             "${_build_context}"/hooks/"${cmd}" dev "${blend}" $@
             exit_code=$?
-            if [[ ${exit_code} -ne 0 ]] ; then die "Hook script '${cmd}' failed with code ${exit_code}." ${exit_code} ; fi
+            if [[ ${exit_code} -ne 0 ]] ; then
+                die "Hook script '${cmd}' failed with code ${exit_code}." ${exit_code}
+            fi
             ;;
 
         all | all-no-push )
@@ -91,7 +91,9 @@ main() {
             clear_log
             "${_build_context}"/hooks/pre_build dev "${blend}" $@
             exit_code=$?
-            if [[ ${exit_code} -ne 0 ]] ; then die "Hook script 'pre_build' failed with code ${exit_code}." ${exit_code} ; fi
+            if [[ ${exit_code} -ne 0 ]] ; then
+                die "Hook script 'pre_build' failed with code ${exit_code}." ${exit_code}
+            fi
 
             if [[ ! -f "${_build_context}"/scrap-demand-stop-building ]] ; then
 
@@ -99,9 +101,9 @@ main() {
                     all-no-push ) all_pipeline=("build")                    ;;
                     all         ) all_pipeline=("build" "push" "post_push") ;;
 
-                    * )
-                        show_error "Unknown command: '${cmd}'"
-                        ;;
+                * )
+                    show_error "Unknown command: '${cmd}'"
+                    ;;
                 esac
 
                 for c in ${all_pipeline[@]} ; do
@@ -112,7 +114,9 @@ main() {
 
                     "${_build_context}"/hooks/"${c}" dev "${blend}" $@
                     exit_code=$?
-                    if [[ ${exit_code} -ne 0 ]] ; then die "Hook script '${c}' failed with code ${exit_code}." ${exit_code} ; fi
+                    if [[ ${exit_code} -ne 0 ]] ; then
+                        die "Hook script '${c}' failed with code ${exit_code}." ${exit_code}
+                    fi
                 done
 
                 echo

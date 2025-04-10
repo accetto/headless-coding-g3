@@ -97,7 +97,7 @@ Installing `wxPython`:
 ### install required libraries
 sudo apt-get -y install libsdl2-2.0-0 libxtst6
 
-### install wxPynton
+### install wxPython
 pip install -U \
     -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 \
     wxPython

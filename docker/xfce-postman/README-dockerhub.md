@@ -37,7 +37,7 @@ extra_hosts:
     - "dl.pstmn.io=127.0.0.1"
 ```
 
-Alternativelly you can add the following line to the file `/etc/hosts` in the container:
+Alternatively you can add the following line to the file `/etc/hosts` in the container:
 
 ```text
 127.0.0.1   dl.pstmn.io

@@ -61,7 +61,7 @@ electron-test-app --no-sandbox %U
 
 ## Packaging `electron` applications
 
-If you want to package your application inside the container, 
+If you want to package your application inside the container,
 you should install `electron` locally inside the project directory.
 
 You also need to install some additional utilities, that are not included by default, to keep the image slimmer:

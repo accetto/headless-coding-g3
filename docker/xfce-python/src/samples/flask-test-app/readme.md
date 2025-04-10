@@ -21,7 +21,7 @@ The test application can be started by:
 flask run
 ```
 
-Then navigate the local web browser (inside the container) to the URL http://localhost:5000.
+Then navigate the local web browser (inside the container) to the URL `http://localhost:5000`.
 
 ## What next
 

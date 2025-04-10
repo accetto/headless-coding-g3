@@ -259,7 +259,6 @@ Credit goes to all the countless people and companies, who contribute to open so
 [vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [xfce]: http://www.xfce.org
 
-
 [badge-github-release]: https://badgen.net/github/release/accetto/headless-coding-g3?icon=github&label=release
 
 [badge-github-release-date]: https://img.shields.io/github/release-date/accetto/headless-coding-g3?logo=github

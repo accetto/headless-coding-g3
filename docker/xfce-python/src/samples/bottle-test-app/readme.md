@@ -21,7 +21,7 @@ The test application can be started by:
 python app.py
 ```
 
-Then navigate the local web browser (inside the container) to the URL http://localhost:8080/hello/world.
+Then navigate the local web browser (inside the container) to the URL `http://localhost:8080/hello/world`.
 
 ## What next
 
