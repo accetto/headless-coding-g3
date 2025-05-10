@@ -17,6 +17,12 @@
       - [Timing command](#timing-command)
       - [Errors command](#errors-command)
   - [Additional building parameters](#additional-building-parameters)
+  - [Helper commands for specific scenarios](#helper-commands-for-specific-scenarios)
+    - [Command `list`](#command-list)
+    - [Command `pull`](#command-pull)
+    - [Command `update-gists`](#command-update-gists)
+    - [Command `helper-help`](#command-helper-help)
+    - [Example](#example)
 
 ## Introduction
 
@@ -41,18 +47,19 @@ The supported option values can be taken from the embedded help:
 
 ```shell
 This script can:
-    - build sets of images using the builder script '${_builder_script}'
+    - build sets of images using the builder script 'builder.sh'
     - extract selected information from the log
 
 Usage: <script> <mode> <argument> [<optional-argument>]...
 
-    ${0} [<options>] <command> group <blend> [<blend>]...
-    ${0} [<options>] <command> family <parent-blend> [<child-suffix>]...
-    ${0} [--log-all] log get (digest|stickers|timing|errors)
+    ./ci-builder.sh [<options>] <command> group <blend> [<blend>]...
+    ./ci-builder.sh [<options>] <command> family <parent-blend> [<child-suffix>]...
+    ./ci-builder.sh [--log-all] log get (digest|stickers|timing|errors)
 
 <options>      := (--log-all|--no-cache) 
 <command>      := (all|all-no-push)
-<mode>         := (family|group)
+                  |(pull|update-gists|list|helper-help)
+<mode>         := (group|family)
 <parent-blend> := (complete)|(vscode[-all]|nvm[-vscode]|python[-vscode]|postman|nodejs[-current|-vscode])
 <child-suffix> := (-chromium|-firefox), except with 'nodejs-current'
 <blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nvm|-nodejs|-postman|-python])
@@ -164,6 +171,13 @@ On Windows you have generally two choices.
 You can build your images inside the `WSL` environment or you can download the `wget.exe` application for Windows.
 Make sure to update also the `PATH` environment variable appropriately.
 
+Since the version `25.04` the availability of the utility is checked.
+
+The checking can be skipped by setting the environment variable `IGNORE_MISSING_WGET=1`.
+
+The selected packages still will be downloaded into a temporary image layer, but not into the project's
+`.g3-cache` folder nor the shared one, defined by the variable `SHARED_G3_CACHE_PATH`.
+
 ## Usage modes
 
 ### Group mode
@@ -214,7 +228,7 @@ You can also use one of the **named groups**:
 
 ### Family mode
 
-The **family mode** is intended for an efficient building of sets of dependent images.
+The **family mode** is intended for efficient building of sets of dependent images.
 
 **Remark:** Since the version G3v3 of the sibling project [accetto/ubuntu-vnc-xfce-g3][accetto-github-ubuntu-vnc-xfce-g3] is this mode for advanced use only.
 The previous images `accetto/ubuntu-vnc-xfce-g3:latest-fugo` and `accetto/ubuntu-vnc-xfce-firefox-g3:latest-plus` that used it are not published any more.
@@ -255,7 +269,7 @@ The following cases bring the efficiency advantage:
 ./ci-builder.sh all family latest-firefox -plus
 ```
 
-The following command can also be used, but there would be no benefit comparing to the equivalent **group mode** command:
+The following command could also be used, but there would be no benefit comparing to the equivalent **group mode** command:
 
 ```shell
 ./ci-builder.sh all family latest-chromium
@@ -363,6 +377,168 @@ The output is mostly empty:
 There is no notion of additional building parameters by the script `ci-builder.sh` (compare to [builder.sh][readme-builder]).
 
 There is no way to build the images only from particular Dockerfile stages using the script `ci-builder.sh`.
+
+## Helper commands for specific scenarios
+
+There has been a case when it was necessary to update the badges of all repositories because of switching from the **badgen.net** provider to the **shields.io** one.
+
+Therefore the **Release 25.05 (G3v8)** has introduced a new hook script called `helper` and also the following new commands:
+
+- list
+- pull
+- update-gists
+- helper-help
+
+The commands are forwarded by the utility script `builder.sh` to the appropriate target scripts, as it's described in the file `readme-builder.md`.
+
+There is also a new wildcard value `any`, which can be generally used for the command arguments `branch` and `blend` in all cases when the argument values are not really needed, but they are enforced purely by the command syntax.
+
+### Command `list`
+
+The **list** command displays a list of the actual names of the target build and deployment images, that would be built during the given building scenario.
+The names of possible helper images will not be included.
+
+For example:
+
+```shell
+headless-coding-g3> ./ci-builder.sh list group complete-nvm
+
+### would output
+Build target => accetto/headless-coding-g3:nvm
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:latest
+Build target => accetto/headless-coding-g3:nvm-chromium
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:chromium
+Build target => accetto/headless-coding-g3:nvm-vscode
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode
+Build target => accetto/headless-coding-g3:nvm-vscode-chromium
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode-chromium
+Build target => accetto/headless-coding-g3:nvm-vscode-firefox
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode-firefox
+```
+
+### Command `pull`
+
+The **pull** command pulls from ***Docker Hub* all the images that would be built and published during the given building scenario.
+
+For example:
+
+```shell
+headless-coding-g3> ./ci-builder.sh pull group complete-nvm
+
+### would pull the following images
+accetto/debian-vnc-xfce-nvm-g3:latest
+accetto/debian-vnc-xfce-nvm-g3:chromium
+accetto/debian-vnc-xfce-nvm-g3:vscode
+accetto/debian-vnc-xfce-nvm-g3:vscode-chromium
+accetto/debian-vnc-xfce-nvm-g3:vscode-firefox
+```
+
+### Command `update-gists`
+
+The **update-gists** command updates the deployment gists of the images that would be built and deployed in the given build scenario.
+
+It's expected that all such images are already available locally, e.g that they've been previously built or pulled from the **Docker Hub**.
+
+The values of the `created` and `version sticker` badges are extracted from the local images and the `verbose version sticker` badge values are generated using them.
+
+For example:
+
+```shell
+### would update all deployment gists belonging to the above images
+headless-coding-g3> ./ci-builder.sh update-gists group complete-nvm
+
+### excerpt from the output
+Missing builder image 'accetto/headless-coding-g3:nvm'.
+Getting badge values from deployment image 'accetto/headless-coding-g3:latest'.
+Wait... generating current verbose sticker file './docker/scrap-version_sticker-verbose_current.tmp'
+
+Badge 'created': 2025-04-10T14:49:33Z
+Badge 'version_sticker': debian12.10-nvm0.40.2
+Badge 'version_sticker_verbose':
+...
+Updating builder gists for 'accetto/headless-coding-g3:nvm'
+Updating gist 'headless-coding-g3@nvm@created.json'
+Attempt 1 of 3...
+Gist 'headless-coding-g3@nvm@created.json' updated successfully on attempt 1
+Updating gist 'headless-coding-g3@nvm@version-sticker.json'
+Attempt 1 of 3...
+Gist 'headless-coding-g3@nvm@version-sticker.json' updated successfully on attempt 1
+Updating gist 'headless-coding-g3@nvm@version-sticker-verbose.txt'
+Attempt 1 of 3...
+Gist 'headless-coding-g3@nvm@version-sticker-verbose.txt' updated successfully on attempt 1
+...
+Updating deployment gists for 'accetto/debian-vnc-xfce-nvm-g3:latest'
+Updating gist 'debian-vnc-xfce-nvm-g3@latest@created.json'
+Attempt 1 of 3...
+Gist 'debian-vnc-xfce-nvm-g3@latest@created.json' updated successfully on attempt 1
+Updating gist 'debian-vnc-xfce-nvm-g3@latest@version-sticker.json'
+Attempt 1 of 3...
+Gist 'debian-vnc-xfce-nvm-g3@latest@version-sticker.json' updated successfully on attempt 1
+Updating gist 'debian-vnc-xfce-nvm-g3@latest@version-sticker-verbose.txt'
+Attempt 1 of 3...
+Gist 'debian-vnc-xfce-nvm-g3@latest@version-sticker-verbose.txt' updated successfully on attempt 1
+...
+```
+
+### Command `helper-help`
+
+The **helper-help** command displays the embedded help of the new hook script called `helper`, which supports the other new commands.
+
+From the example below it can be also seen, that this is one of the commands, which can be used with the newly introduced wildcard value `any` for the `branch` and `blend` arguments.
+  Generally the wildcard value `any` should work in all cases when the argument values are not really needed but they are enforced purely by the command syntax.
+
+For example:
+
+```shell
+headless-coding-g3> ./ci-builder.sh helper-help group any any
+Warning from 'ci-builder.sh': Nothing to do for 'any' blend!
+Provided parameters:
+command=helper-help
+subject=any
+Warning from 'env.rc': Allowing 'any' blend!
+Warning from 'env.rc': Allowing 'any' blend!
+
+The script "./docker/hooks/helper" contains helper functions for the script 'ci-builder.sh'.
+
+Usage: ./docker/hooks/helper <branch> <blend> <command>
+
+<branch>    := (any|dev|(or see 'env.rc'))
+<blend>     (any|(or see 'env.rc'))
+<command>   := (help|--help|-h)
+            (list-target|list-build-target|list-deploy-target)
+            (pull|pull-deploy-target|pull-build-target)
+Warning from 'env.rc': Allowing 'any' blend!
+Warning from 'env.rc': Allowing 'any' blend!
+
+The script "./docker/hooks/helper" contains helper functions for the script 'ci-builder.sh'.
+
+Usage: ./docker/hooks/helper <branch> <blend> <command>
+
+<branch>    := (any|dev|(or see 'env.rc'))
+<blend>     (any|(or see 'env.rc'))
+<command>   := (help|--help|-h)
+            (list-target|list-build-target|list-deploy-target)
+            (pull|pull-deploy-target|pull-build-target)
+```
+
+### Example
+
+This is how you would update the deployment gists of the building group `pivotal` using the "historical" data from the previously published images.
+
+```shell
+### Step 1: Pull the previously published images
+headless-coding-g3> ./ci-builder.sh pull group pivotal
+
+### Step 2: Update the gists
+headless-coding-g3> ./ci-builder.sh update-gists group pivotal
+```
+
+If you don't want to use the "historical" data, but to build and publish fresh images, then you would do the following:
+
+```shell
+### Step 1: build fresh new images and publish them and update their deployment gists
+headless-coding-g3> ./ci-builder.sh all group pivotal
+```
 
 ***
 

@@ -4,9 +4,10 @@
 
 [User Guide][this-user-guide] - [GitHub][this-github] - [Dockerfile][this-dockerfile] - [Readme][this-readme-full] - [Changelog][this-changelog]
 
-![badge-docker-pulls][badge-docker-pulls]
+<!-- markdownlint-disable MD038 MD052 -->
+![badge-github-release][badge-github-release]` `
+![badge-docker-pulls][badge-docker-pulls]` `
 ![badge-docker-stars][badge-docker-stars]
-![badge-github-release][badge-github-release]
 
 ***
 
@@ -50,17 +51,17 @@ The following image tags are regularly built and published on Docker Hub:
 
 - `latest` implements VNC and noVNC
 
-    ![badge_latest_created][badge_latest_created]
+    ![badge_latest_created][badge_latest_created]` `
     [![badge_latest_version-sticker][badge_latest_version-sticker]][link_latest_version-sticker-verbose]
 
 - `chromium` adds [Chromium Browser][chromium]
 
-    ![badge_chromium_created][badge_chromium_created]
+    ![badge_chromium_created][badge_chromium_created]` `
     [![badge_chromium_version-sticker][badge_chromium_version-sticker]][link_chromium_version-sticker-verbose]
 
 - `firefox` adds [Firefox][firefox]
 
-    ![badge_firefox_created][badge_firefox_created]
+    ![badge_firefox_created][badge_firefox_created]` `
     [![badge_firefox_version-sticker][badge_firefox_version-sticker]][link_firefox_version-sticker-verbose]
 
 <!-- markdownlint-enable MD052 -->
@@ -155,10 +156,10 @@ If you have a question or an idea and you don't want to open an issue, you can a
 [tini]: https://github.com/krallin/tini
 [xfce]: http://www.xfce.org
 
-[badge-github-release]: https://badgen.net/github/release/accetto/headless-coding-g3?icon=github&label=release
+[badge-github-release]: https://img.shields.io/github/v/release/accetto/headless-coding-g3
 
-[badge-docker-pulls]: https://badgen.net/docker/pulls/accetto/debian-vnc-xfce-postman-g3?icon=docker&label=pulls
+[badge-docker-pulls]: https://img.shields.io/docker/pulls/accetto/debian-vnc-xfce-postman-g3
 
-[badge-docker-stars]: https://badgen.net/docker/stars/accetto/debian-vnc-xfce-postman-g3?icon=docker&label=stars
+[badge-docker-stars]: https://img.shields.io/docker/stars/accetto/debian-vnc-xfce-postman-g3
 
 <!-- Appendix will be added by util-readme.sh -->

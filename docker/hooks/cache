@@ -12,7 +12,7 @@ ensure_wget() {
     local -i enforced_error_code=1
 
     ### checking can be disabled by passing 'enforced_error_code=0'
-    if [[ "${IGNORE_MISSING_WGET:-0}" == "0" ]] ; then
+    if [[ "${IGNORE_MISSING_WGET:-0}" == "0" ]]; then
         enforced_error_code=1
     else
         enforced_error_code=0
@@ -20,7 +20,7 @@ ensure_wget() {
     ensure_utility wget ${enforced_error_code}
 
     error_code=$?
-    if [[ ${error_code} -ne 0 ]] ; then
+    if [[ ${error_code} -ne 0 ]]; then
         echo
         echo "WARNING! Utility 'wget' not found."
         echo "It's recommended to install the utility or to switch to an environment where it's available (e.g. WSL)."
@@ -52,11 +52,11 @@ use_wget() {
         wget --show-progress --progress=bar:force:noscroll ${_quiet:+-q} -O "${target}" "${source}"
 
     ) ; {
-        
+
         ### catch - this block is entered only by errors in the try-block
         error_code=$?
 
-        if [[ ${error_code} -ne 0 ]] ; then
+        if [[ ${error_code} -ne 0 ]]; then
 
             echo -e "${_mark} error '${error_code}' by downloading file '${file}' in section '${section}'" >&2
 
@@ -79,10 +79,10 @@ refresh_file() {
 
     local source="${_shared_cache_path}/${section}/${file}"
 
-    if [[ ! -s "${target}" ]] ; then
+    if [[ ! -s "${target}" ]]; then
 
         ### first try to copy the file from the shared cache
-        if [[ -s "${source}" ]] ; then
+        if [[ -s "${source}" ]]; then
 
             echo -e "${_mark} refreshing section '${section}' by copying shared file '${file}'\n"
             cp "${source}" "${target}"
@@ -93,13 +93,29 @@ refresh_file() {
             echo -e "${_mark} refreshing section '${section}' by downloading file '${file}'\n"
             use_wget "${section}" "${file}" "${source_url}" "${target}"
 
-            ### copy the downloaded file to the shared cache
-            if [[ -n "${_shared_cache_path}" && -s "${target}" ]] ; then
+            ### ensure the shared G3-CACHE directory
+            if [[ -n "${SHARED_G3_CACHE_PATH}" ]]; then
 
+                echo "WARNING! Environment variable 'SHARED_G3_CACHE_PATH' is not set."
+
+            elif [[ ! -d "${_shared_cache_path}" ]]; then
+
+                echo "WARNING! Shared G3-CACHE directory not found: ${_shared_cache_path}"
+
+            elif [[ ! -w "${_shared_cache_path}" ]]; then
+
+                echo "WARNING! Shared G3-CACHE directory is not writable: ${_shared_cache_path}"
+
+            elif [[ ! -s "${target}" ]]; then
+
+                echo "WARNING! Downloaded file in local G3-CACHE intended for the shared G3-CACHE is empty: ${target}"
+                
+            else
+                ### copy the downloaded file to the shared cache
                 echo -e "${_mark} refreshing shared section '${section}' by copying downloaded file '${file}'\n"
 
                 mkdir -p "${_shared_cache_path}/${section}"
-                
+
                 cp "${target}" "${source}"
             fi
         fi
@@ -198,17 +214,17 @@ cache_postman() {
     # refresh_file "${section}" "${file}" "${source_url}" "${target}"
 
     ## new implementation (since the release 23.06)
-    if [[ "${POSTMAN_VERSION}" != "10.13.6" ]] ; then
+    if [[ "${POSTMAN_VERSION}" != "10.13.6" ]]; then
 
         echo "GUARD ERROR: Postman version ${POSTMAN_VERSION} not matching the required value '10.13.6'."
         return 1
     else
-        if [[ ! -s "${target}" ]] ; then
+        if [[ ! -s "${target}" ]]; then
 
             source="${_shared_cache_path}/${section}/${file}"
 
             ### only copying from the local 'g3-cache' is supported
-            if [[ -s "${source}" ]] ; then
+            if [[ -s "${source}" ]]; then
 
                 echo -e "${_mark} refreshing section '${section}' by copying shared file '${file}'\n"
                 cp "${source}" "${target}"
@@ -254,37 +270,37 @@ main() {
 
     ensure_wget
 
-    if [[ "${FEATURES_VNC}" == "1" ]] ; then
+    if [[ "${FEATURES_VNC}" == "1" ]]; then
 
         cache_tigervnc
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
     fi
 
-    if [[ "${FEATURES_NOVNC}" == "1" ]] ; then
+    if [[ "${FEATURES_NOVNC}" == "1" ]]; then
 
         cache_novnc
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
 
         cache_websockify
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
     fi
 
-    if [[ "${FEATURES_NODEJS}" == "1" ]] ; then
+    if [[ "${FEATURES_NODEJS}" == "1" ]]; then
 
         cache_nodejs
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
     fi
 
-    if [[ "${FEATURES_POSTMAN}" == "1" ]] ; then
+    if [[ "${FEATURES_POSTMAN}" == "1" ]]; then
 
         cache_postman
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
     fi
 
-    if [[ "${FEATURES_VSCODE}" == "1" ]] ; then
+    if [[ "${FEATURES_VSCODE}" == "1" ]]; then
 
         cache_vscode
-        if [[ $? -ne 0 ]] ; then return 1 ; fi
+        if [[ $? -ne 0 ]]; then return 1; fi
     fi
 
     echo
@@ -295,7 +311,7 @@ declare _mark="\n==> G3-CACHE"
 declare _cache="${_build_context}/.g3-cache"
 declare _shared_cache_path="${SHARED_G3_CACHE_PATH}"
 
-if [[ $# -gt 0 && "${1}" =~ -q|--quiet ]] ; then 
+if [[ $# -gt 0 && "${1}" =~ -q|--quiet ]]; then
 
     _quiet="q"
     shift

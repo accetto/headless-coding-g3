@@ -3,40 +3,40 @@
 
 <!-- latest -->
 
-[badge_latest_created]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@latest@created.json
+[badge_latest_created]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@latest@created.json
 
-[badge_latest_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@latest@version-sticker.json
+[badge_latest_version-sticker]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@latest@version-sticker.json
 
 [link_latest_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@latest@version-sticker-verbose.txt
 
 <!-- chromium -->
 
-[badge_chromium_created]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@chromium@created.json
+[badge_chromium_created]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@chromium@created.json
 
-[badge_chromium_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@chromium@version-sticker.json
+[badge_chromium_version-sticker]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@chromium@version-sticker.json
 
 [link_chromium_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@chromium@version-sticker-verbose.txt
 
 <!-- vscode -->
 
-[badge_vscode_created]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode@created.json
+[badge_vscode_created]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode@created.json
 
-[badge_vscode_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode@version-sticker.json
+[badge_vscode_version-sticker]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode@version-sticker.json
 
 [link_vscode_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode@version-sticker-verbose.txt
 
 <!-- vscode-chromium -->
 
-[badge_vscode-chromium_created]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-chromium@created.json
+[badge_vscode-chromium_created]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-chromium@created.json
 
-[badge_vscode-chromium_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-chromium@version-sticker.json
+[badge_vscode-chromium_version-sticker]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-chromium@version-sticker.json
 
 [link_vscode-chromium_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-chromium@version-sticker-verbose.txt
 
 <!-- vscode-firefox -->
 
-[badge_vscode-firefox_created]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@created.json
+[badge_vscode-firefox_created]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@created.json
 
-[badge_vscode-firefox_version-sticker]: https://badgen.net/https/gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@version-sticker.json
+[badge_vscode-firefox_version-sticker]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@version-sticker.json
 
 [link_vscode-firefox_version-sticker-verbose]: https://gist.githubusercontent.com/${OWNER}/${GIST}/raw/${REPO}@vscode-firefox@version-sticker-verbose.txt

@@ -14,7 +14,6 @@ ARG ARG_HEADLESS_USER_GROUP_NAME=headless
 ARG ARG_SUDO_INITIAL_PW=headless
 ARG ARG_HOME=/home/headless
 
-
 ###############
 ### stage_cache
 ###############
@@ -302,15 +301,14 @@ RUN \
     chmod 744 "${HOME}"/firefox.plus/*.sh \
     && envsubst <"${HOME}/Desktop/Copy FF Preferences.desktop" >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}/Desktop/Copy FF Preferences.desktop" \
     && install -o root -g root -m 644 "${HOME}"/firefox.plus/accetto.svg /usr/share/icons/hicolor/scalable/apps/ \
-    && gtk-update-icon-cache -f /usr/share/icons/hicolor
-
+    && gtk-update-icon-cache -f /usr/share/icons/hicolor 
+    
 
 #######################
 ### merge_stage_browser
 #######################
 
 FROM ${ARG_MERGE_STAGE_BROWSER_BASE} AS merge_stage_browser
-
 
 ### ############
 ### stage-nodejs
@@ -332,14 +330,14 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
-        curl \
-        git \
-        xz-utils
-        # fakeroot \
-        # gdebi-core \
-        # git \
-        # rpm \
-        # libxshmfence1 \
+    curl \
+    git \
+    xz-utils
+# fakeroot \
+# gdebi-core \
+# git \
+# rpm \
+# libxshmfence1 \
 
 RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
@@ -347,22 +345,21 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/tmp/g3-cache/,target=/tmp/g3-cache/ \
     NODEJS_VERSION="${ARG_NODEJS_VERSION}" \
     NODEJS_DISTRO="${ARG_NODEJS_DISTRO}" \
-    NODEJS_PATH="/usr/local" \
-    &&  if [ ! -s "/tmp/g3-cache/nodejs/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" ] ; then \
-            wget --show-progress --progress=bar:force:noscroll \
-                -q "https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" \
-                -P "/tmp/g3-cache/nodejs" ; \
-        fi \
-    &&  tar xJf "/tmp/g3-cache/nodejs/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" --strip 1 -C "${NODEJS_PATH}" \
-    &&  mkdir -p "${HOME}/projects/samples" "${NPM_GLOBAL_MODULES}" \
-    &&  npm config set prefix="${NPM_GLOBAL_MODULES}" \
-    &&  npm install npm@"$(npm --version)" --global
+    NODEJS_PATH="/usr/local" &&
+    if [ ! -s "/tmp/g3-cache/nodejs/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" ]; then
+        wget --show-progress --progress=bar:force:noscroll \
+            -q "https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" \
+            -P "/tmp/g3-cache/nodejs"
+    fi &&
+    tar xJf "/tmp/g3-cache/nodejs/node-v${NODEJS_VERSION}-${NODEJS_DISTRO}.tar.xz" --strip 1 -C "${NODEJS_PATH}" &&
+    mkdir -p "${HOME}/projects/samples" "${NPM_GLOBAL_MODULES}" &&
+    npm config set prefix="${NPM_GLOBAL_MODULES}" &&
+    npm install npm@"$(npm --version)" --global
 
 COPY ./xfce-nodejs/src/home/readme*.md "${HOME}"/
 COPY ./xfce-nodejs/src/samples "${HOME}"/projects/samples
 
 EXPOSE "${NODEJS_PORT}"
-
 
 ################
 ### stage_vscode
@@ -384,12 +381,12 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/lib/apt,target=/var/lib/apt \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
-        curl \
-        git \
-        gpg \
-        libasound2 \
-        libgbm1 \
-        libnss3 
+    curl \
+    git \
+    gpg \
+    libasound2 \
+    libgbm1 \
+    libnss3
 
 RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/var/cache/apt,target=/var/cache/apt \
@@ -397,24 +394,23 @@ RUN \
     --mount=type=cache,from=stage_cache,sharing=locked,source=/tmp/g3-cache/,target=/tmp/g3-cache/ \
     VSCODE_DISTRO="${ARG_VSCODE_DISTRO}" \
     VSCODE_VERSION="${ARG_VSCODE_VERSION}" \
-    VSCODE_FILE="${ARG_VSCODE_FILE}" \
-    &&  if [ ! -s "/tmp/g3-cache/vscode/${VSCODE_FILE}" ] ; then \
-            wget --show-progress --progress=bar:force:noscroll \
-                -q -O "/tmp/g3-cache/vscode/${VSCODE_FILE}" \
-                "https://update.code.visualstudio.com/${VSCODE_VERSION}/${VSCODE_DISTRO}/stable" \
-                -P "/tmp/g3-cache/vscode" ; \
-        fi \
-    && mkdir -p "${VSCODE_PATH}" "${VSCODE_PATH}/data" \
-    && tar xzf "/tmp/g3-cache/vscode/${VSCODE_FILE}" --strip 1 -C "${VSCODE_PATH}" \
-    && ln -s "${VSCODE_PATH}/bin/code" /usr/bin/code
+    VSCODE_FILE="${ARG_VSCODE_FILE}" &&
+    if [ ! -s "/tmp/g3-cache/vscode/${VSCODE_FILE}" ]; then
+        wget --show-progress --progress=bar:force:noscroll \
+            -q -O "/tmp/g3-cache/vscode/${VSCODE_FILE}" \
+            "https://update.code.visualstudio.com/${VSCODE_VERSION}/${VSCODE_DISTRO}/stable" \
+            -P "/tmp/g3-cache/vscode"
+    fi &&
+    mkdir -p "${VSCODE_PATH}" "${VSCODE_PATH}/data" &&
+    tar xzf "/tmp/g3-cache/vscode/${VSCODE_FILE}" --strip 1 -C "${VSCODE_PATH}" &&
+    ln -s "${VSCODE_PATH}/bin/code" /usr/bin/code
 
 COPY "./xfce-vscode/src/home/Desktop" "${HOME}/Desktop"/
 COPY "./xfce-vscode/src/vscode/data" "${VSCODE_PATH}/data"/
 
 RUN \
-    envsubst <"${HOME}/Desktop/code.desktop" >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}/Desktop/code.desktop" \
-    && cp "${HOME}/Desktop/code.desktop" /usr/share/applications/
-
+    envsubst <"${HOME}/Desktop/code.desktop" >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}/Desktop/code.desktop" &&
+    cp "${HOME}/Desktop/code.desktop" /usr/share/applications/
 
 ###############
 ### FINAL STAGE

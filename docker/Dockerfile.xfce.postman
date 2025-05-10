@@ -14,7 +14,6 @@ ARG ARG_HEADLESS_USER_GROUP_NAME=headless
 ARG ARG_SUDO_INITIAL_PW=headless
 ARG ARG_HOME=/home/headless
 
-
 ###############
 ### stage_cache
 ###############
@@ -302,8 +301,8 @@ RUN \
     chmod 744 "${HOME}"/firefox.plus/*.sh \
     && envsubst <"${HOME}/Desktop/Copy FF Preferences.desktop" >/tmp/esub.tmp && mv -f /tmp/esub.tmp "${HOME}/Desktop/Copy FF Preferences.desktop" \
     && install -o root -g root -m 644 "${HOME}"/firefox.plus/accetto.svg /usr/share/icons/hicolor/scalable/apps/ \
-    && gtk-update-icon-cache -f /usr/share/icons/hicolor
-
+    && gtk-update-icon-cache -f /usr/share/icons/hicolor 
+    
 
 #######################
 ### merge_stage_browser
