@@ -5,6 +5,7 @@ _current_dir="$(dirname "$(readlink -f "$0")")"
 
 debian=$("${_current_dir}/version_of.sh" debian)
 ubuntu=$("${_current_dir}/version_of.sh" ubuntu)
+brave=$("${STARTUPDIR}/version_of.sh" brave)
 chromium=$("${STARTUPDIR}/version_of.sh" chromium)
 firefox=$("${STARTUPDIR}/version_of.sh" firefox)
 nodejs=$("${STARTUPDIR}/version_of.sh" nodejs)
@@ -45,6 +46,7 @@ main() {
                     ;;
 
                 -v )
+                    if [[ -n "${brave}" ]] ; then echo "Brave ${brave}" ; fi
                     if [[ -n "${chromium}" ]] ; then echo "Chromium ${chromium}" ; fi
                     if [[ -n "${firefox}" ]] ; then echo "Firefox ${firefox}" ; fi
                     if [[ -n "${nodejs}" ]] ; then echo "Node.js ${nodejs}" ; fi
@@ -64,6 +66,7 @@ main() {
                     ;;
 
                 -V )
+                    if [[ -n "${brave}" ]] ; then echo "Brave ${brave}" ; fi
                     if [[ -n "${chromium}" ]] ; then echo "Chromium ${chromium}" ; fi
 
                     version=$("${_current_dir}/version_of.sh" curl)
@@ -168,7 +171,11 @@ main() {
             sticker="${sticker}"-"code${vscode}"
         fi
 
-        if [[ -n "${chromium}" ]] ; then
+        if [[ -n "${brave}" ]] ; then
+
+            sticker="${sticker}-brave${brave}"
+            
+        elif [[ -n "${chromium}" ]] ; then
 
             sticker="${sticker}-chromium${chromium}"
 
