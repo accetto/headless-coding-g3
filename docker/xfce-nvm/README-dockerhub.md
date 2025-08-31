@@ -17,9 +17,9 @@ However, instead of a particular `Node.js` version they contain the free open-so
 
 For example, the command `nvm install --lts` will install the latest LTS (Long Term Support) version of `Node.js`.
 
-The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
+The images are based on the current [Debian 13][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
-The free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable] and the popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
+The free open-source programming editor [Visual Studio Code][vscode] in [portable installation][vscode-portable] and the popular web browsers [Brave][brave], [Chromium][chromium] or [Firefox][firefox] are also included.
 
 Adding more tools like [TypeScript][typescript], [Angular][angular] or [Electron][electron] usually requires only a single or just a few commands.
 The instructions are in the provided README files and some simple test applications are also already included.
@@ -65,6 +65,11 @@ The following image tags are regularly built and published on Docker Hub:
     ![badge_latest_created][badge_latest_created]` `
     [![badge_latest_version-sticker][badge_latest_version-sticker]][link_latest_version-sticker-verbose]
 
+- `brave` adds [Brave Browser][brave]
+
+    ![badge_brave_created][badge_brave_created]` `
+    [![badge_brave_version-sticker][badge_brave_version-sticker]][link_brave_version-sticker-verbose]
+
 - `chromium` adds [Chromium Browser][chromium]
 
     ![badge_chromium_created][badge_chromium_created]` `
@@ -74,6 +79,11 @@ The following image tags are regularly built and published on Docker Hub:
 
     ![badge_vscode_created][badge_vscode_created]` `
     [![badge_vscode_version-sticker][badge_vscode_version-sticker]][link_vscode_version-sticker-verbose]
+
+- `vscode-brave` adds [portable][vscode-portable] [Visual Studio Code][vscode] and [Brave Browser][brave]
+
+    ![badge_vscode-brave_created][badge_vscode-brave_created]` `
+    [![badge_vscode-brave_version-sticker][badge_vscode-brave_version-sticker]][link_vscode-brave_version-sticker-verbose]
 
 - `vscode-chromium` adds [portable][vscode-portable] [Visual Studio Code][vscode] and [Chromium Browser][chromium]
 
@@ -104,6 +114,7 @@ The main features and components of the images in the default configuration are:
 - current version of [tini][tini] as the entry-point initial process (PID 1)
 - support for overriding environment variables, VNC parameters, user and group (see [User guide][this-user-guide-using-containers])
 - support of **version sticker** (see [User guide][this-user-guide-version-sticker])
+- current version of [Brave Browser][brave] open-source web browser (official Brave distribution)
 - current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
 - current version of [Firefox ESR (Extended Support Release)][firefox] web browser and also the additional **Firefox plus** feature (see [User guide][this-user-guide-firefox-plus])
 - current version of free open-source utility [NVM][nvm] (Node Version Manager)
@@ -174,6 +185,7 @@ If you have a question or an idea and you don't want to open an issue, you can a
 [doc-compose-volumes]: https://docs.docker.com/compose/compose-file/07-volumes/
 
 [angular]: https://angular.io/
+[brave]: https://www.brave.com/
 [chromium]: https://www.chromium.org/Home
 [curl]: http://manpages.ubuntu.com/manpages/bionic/man1/curl.1.html
 [electron]: https://www.electronjs.org/

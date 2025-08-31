@@ -42,7 +42,7 @@ This script can:
 
 Usage: $0 <blend> <command> [<docker-cli-options>]
 
-blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(chromium|firefox)]))|nodejs-current)
+blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(brave|chromium|firefox)]))|nodejs-current)
 command := (all|all-no-push)|(pre_build|build|push|post_push|cache)
 
 The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.

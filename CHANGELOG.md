@@ -6,6 +6,16 @@
 
 ***
 
+### Release 25.08 (Milestone)
+
+This release brings new images based on the current **Debian 13** and also images with the open-source [Brave Browser][brave], which is based on the open-source [Chromium Browser][chromium] and includes a built-in private AI assistant.
+
+Also the way the `Firefox Browser` is installed has been changed, following the [official Mozilla recommendations](https://support.mozilla.org/en-US/kb/install-firefox-linux?as=u&utm_source=inproduct).
+
+The warning `Some of Firefox's security features may offer less protection on your current operation system` should not come any more.
+
+Please note that the container screenshots in the README files for the Docker Hub are not updated yet.
+
 ### Release 25.05.1
 
 This is a maintenance release.
@@ -653,6 +663,9 @@ This is just a maintenance release.
 [dashboard-dockerhub]: https://github.com/accetto/dashboard/blob/master/dockerhub-dashboard.md
 
 <!-- Other links -->
+
+[brave]: https://brave.com/
+[chromium]: https://www.chromium.org/Home
 
 [vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [service-shields-io]: https://shields.io/

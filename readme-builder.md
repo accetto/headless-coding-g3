@@ -33,7 +33,7 @@ This script can:
 
 Usage: ./builder.sh <blend> <command> [<docker-cli-options>]
 
-blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(chromium|firefox)]))|nodejs-current)
+blend   := (((nodejs|nodejs-vscode|nvm|nvm-vscode|postman|python|python-vscode|vscode)[-(brave|chromium|firefox)]))|nodejs-current)
 command := (all|all-no-push)|(pre_build|build|push|post_push|cache)
 
 The <docker-cli-options> (e.g. '--no-cache') are passed to the Docker CLI commands used internally.
@@ -141,6 +141,9 @@ Building the individual images and publishing them to the **Docker Hub**:
 
 ### debian-vnc-xfce-nvm-g3:latest
 ./builder.sh nvm all
+
+### debian-vnc-xfce-nvm-g3:brave
+./builder.sh nvm-brave all
 
 ### debian-vnc-xfce-nvm-g3:chromium
 ./builder.sh nvm-chromium all
