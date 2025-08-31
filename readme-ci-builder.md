@@ -61,21 +61,21 @@ Usage: <script> <mode> <argument> [<optional-argument>]...
                   |(pull|update-gists|list|helper-help)
 <mode>         := (group|family)
 <parent-blend> := (complete)|(vscode[-all]|nvm[-vscode]|python[-vscode]|postman|nodejs[-current|-vscode])
-<child-suffix> := (-chromium|-firefox), except with 'nodejs-current'
-<blend>        := (pivotal|complete[-chromium|-firefox|-vscode|-nvm|-nodejs|-postman|-python])
+<child-suffix> := (-brave|-chromium|-firefox), except with 'nodejs-current'
+<blend>        := (pivotal|complete[-brave|-chromium|-firefox|-vscode|-nvm|-nodejs|-postman|-python])
                   |(vscode|postman)
-                  |(nvm[-chromium|-vscode[-chromium|-firefox]])
-                  |(nodejs[-current|-chromium|-vscode[-chromium|-firefox]])
-                  |(python[-chromium|-vscode[-chromium|-firefox]])
+                  |(nvm[-brave|-chromium|-vscode[-brave|-chromium|-firefox]])
+                  |(nodejs[-current|-brave|-chromium|-vscode[-brave|-chromium|-firefox]])
+                  |(python[-brave|-chromium|-vscode[-brave|-chromium|-firefox]])
 
 Group mode : All images are processed independently.
 Family mode: The children are skipped if a new parent image was not actually built.
 Remark: Currently are both modes equivalent, because there are no child suffixes supported.
 
-Note that the groups 'pivotal|complete|complete-chromium|complete-firefox|complete-vscode' do not include
+Note that the groups 'pivotal|complete|complete-brave|complete-chromium|complete-firefox|complete-vscode' do not include
 the 'nodejs' and 'postman' images. Those should be built explicitly.
 
-Note that the group 'complete-vscode' includes only 'vscode[-chromium|-firefox]' images.
+Note that the group 'complete-vscode' includes only 'vscode[-brave|-chromium|-firefox]' images.
 The group 'complete-vscode-all' includes all images containing 'vscode' (excluding 'nodejs').
 
 The command and the blend are passed to the builder script.
@@ -212,6 +212,9 @@ You can also use one of the **named groups**:
 ### includes all images featuring Firefox
 ./ci-builder.sh all group complete-firefox
 
+### includes all images featuring Brave
+./ci-builder.sh all group complete-brave
+
 ### includes all images featuring Chromium
 ./ci-builder.sh all group complete-chromium
 
@@ -308,9 +311,11 @@ The output can look out like this:
 --> Log digest:
 
 Building image 'headless-coding-g3:postman'
+Building image 'headless-coding-g3:postman-brave'
 Building image 'headless-coding-g3:postman-chromium'
 Building image 'headless-coding-g3:postman-firefox'
 Built new 'headless-coding-g3:postman'.
+Built new 'headless-coding-g3:postman-brave'.
 Built new 'headless-coding-g3:postman-chromium'.
 Built new 'headless-coding-g3:postman-firefox'.
 ```
@@ -406,10 +411,14 @@ headless-coding-g3> ./ci-builder.sh list group complete-nvm
 ### would output
 Build target => accetto/headless-coding-g3:nvm
 Deploy target => accetto/debian-vnc-xfce-nvm-g3:latest
+Build target => accetto/headless-coding-g3:nvm-brave
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:brave
 Build target => accetto/headless-coding-g3:nvm-chromium
 Deploy target => accetto/debian-vnc-xfce-nvm-g3:chromium
 Build target => accetto/headless-coding-g3:nvm-vscode
 Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode
+Build target => accetto/headless-coding-g3:nvm-vscode-brave
+Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode-brave
 Build target => accetto/headless-coding-g3:nvm-vscode-chromium
 Deploy target => accetto/debian-vnc-xfce-nvm-g3:vscode-chromium
 Build target => accetto/headless-coding-g3:nvm-vscode-firefox
@@ -427,8 +436,10 @@ headless-coding-g3> ./ci-builder.sh pull group complete-nvm
 
 ### would pull the following images
 accetto/debian-vnc-xfce-nvm-g3:latest
+accetto/debian-vnc-xfce-nvm-g3:brave
 accetto/debian-vnc-xfce-nvm-g3:chromium
 accetto/debian-vnc-xfce-nvm-g3:vscode
+accetto/debian-vnc-xfce-nvm-g3:vscode-brave
 accetto/debian-vnc-xfce-nvm-g3:vscode-chromium
 accetto/debian-vnc-xfce-nvm-g3:vscode-firefox
 ```

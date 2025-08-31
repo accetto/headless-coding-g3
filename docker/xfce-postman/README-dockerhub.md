@@ -13,9 +13,9 @@
 
 This Docker Hub repository contains Docker images for headless working with the [Postman][postman] desktop application.
 
-The images are based on the current [Debian 12][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
+The images are based on the current [Debian 13][docker-debian] and include [Xfce][xfce] desktop, [TigerVNC][tigervnc] server and [noVNC][novnc] client.
 
-The popular web browsers [Chromium][chromium] or [Firefox][firefox] are also included.
+The popular web browsers [Brave][brave], [Chromium][chromium] or [Firefox][firefox] are also included.
 
 Adding more tools like, for example, [Newman][newman] usually requires only a single or just a few commands. The instructions are in the [provided README file][this-readme-postman-newman].
 
@@ -54,6 +54,11 @@ The following image tags are regularly built and published on Docker Hub:
     ![badge_latest_created][badge_latest_created]` `
     [![badge_latest_version-sticker][badge_latest_version-sticker]][link_latest_version-sticker-verbose]
 
+- `brave` adds [Brave Browser][brave]
+
+    ![badge_brave_created][badge_brave_created]` `
+    [![badge_brave_version-sticker][badge_brave_version-sticker]][link_brave_version-sticker-verbose]
+
 - `chromium` adds [Chromium Browser][chromium]
 
     ![badge_chromium_created][badge_chromium_created]` `
@@ -83,6 +88,7 @@ The main features and components of the images in the default configuration are:
 - current version of [tini][tini] as the entry-point initial process (PID 1)
 - support for overriding environment variables, VNC parameters, user and group (see [User guide][this-user-guide-using-containers])
 - support of **version sticker** (see [User guide][this-user-guide-version-sticker])
+- current version of [Brave Browser][brave] open-source web browser (official Brave distribution)
 - current version of [Chromium Browser][chromium] open-source web browser (Debian distribution)
 - current version of [Firefox ESR (Extended Support Release)][firefox] web browser and also the additional **Firefox plus** feature (see [User guide][this-user-guide-firefox-plus])
 - [Postman App][postman] desktop application (version `10.13.6`, the last one still including `Scratch Pad`)
@@ -141,6 +147,7 @@ If you have a question or an idea and you don't want to open an issue, you can a
 
 [docker-debian]: https://hub.docker.com/_/debian/
 
+[brave]: https://www.brave.com/
 [chromium]: https://www.chromium.org/Home
 [curl]: http://manpages.ubuntu.com/manpages/bionic/man1/curl.1.html
 [firefox]: https://www.mozilla.org
