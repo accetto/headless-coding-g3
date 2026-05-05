@@ -18,7 +18,16 @@ Updated files:
 
 - `vnc_startup.rc`
   - The `TigerVNC 1.16.2` has deprecated the folder `$HOME/.vnc` and the new path for the configuration files (`config`, `passwd`) is now `$HOME/.config/tigervnc`
-  - a new variable `VNC_CONFIG_HOME` is used for configuring the correct path for the VNC configuration files
+  - A new variable `VNC_CONFIG_HOME` is used for configuring the correct path for the VNC configuration files
+  - All required environment variables are validated individually one-by-one. There are listed in the array `required_vars`.
+
+  - An empty VNC password is not working any more and therefore a non-empty one is enforced. Do not set the environment variable `VNC_PW` to an empty string!
+    - Note that you can provide the password also
+      - as part of the connection string if you're using a WebBrowser and `noVNC`
+        - example: `http://localhost:36901/vnc_lite.html?password=headless`
+      - via the command line parameter `-PasswordFile` if you're using the `TigerVNCViewer`
+        - example: `vncviewer64.exe" -PasswordFile my.pass :35901`
+        - you'll need to generate the `my.pass` file using the `vncpasswd` utility
 
 - all Dockerfiles
   - The standard Linux help viewer `man` has been added (at `stage_tools`).
