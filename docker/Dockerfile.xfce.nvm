@@ -118,6 +118,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y "${ARG_APT_NO_RECOMMENDS:+--no-install-recommends}" \
         curl \
         git \
+        man \
         mousepad \
         python3 \
         systemctl \
@@ -237,13 +238,15 @@ ARG ARG_HEADLESS_USER_NAME
 ARG ARG_HEADLESS_USER_GROUP_ID
 ARG ARG_HEADLESS_USER_GROUP_NAME
 ARG ARG_HOME
+ARG ARG_VNC_CONFIG_HOME
 
 ENV \
     HEADLESS_USER_ID="${ARG_HEADLESS_USER_ID}" \
     HEADLESS_USER_NAME="${ARG_HEADLESS_USER_NAME}" \
     HEADLESS_USER_GROUP_ID="${ARG_HEADLESS_USER_GROUP_ID}" \
     HEADLESS_USER_GROUP_NAME="${ARG_HEADLESS_USER_GROUP_NAME}" \
-    HOME="${ARG_HOME:-/home/${ARG_HEADLESS_USER_NAME}}"
+    HOME="${ARG_HOME:-/home/${ARG_HEADLESS_USER_NAME}}" \
+    VNC_CONFIG_HOME="${ARG_VNC_CONFIG_HOME:-/home/${ARG_HEADLESS_USER_NAME}/.config/tigervnc}"
 
 WORKDIR "${HOME}"
 

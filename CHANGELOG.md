@@ -6,13 +6,22 @@
 
 ***
 
-### Release 26.04
+### Release 26.05
 
-This is a maintenance release.
+This is a maintenance release. Most of the updates are related to the `TigerVNC v1.16.2`, which has been introduced in the previous release.
 
 Updated versions:
 
 - `TigerVNC` to version **1.16.2**
+
+Updated files:
+
+- `vnc_startup.rc`
+  - The `TigerVNC 1.16.2` has deprecated the folder `$HOME/.vnc` and the new path for the configuration files (`config`, `passwd`) is now `$HOME/.config/tigervnc`
+  - a new variable `VNC_CONFIG_HOME` is used for configuring the correct path for the VNC configuration files
+
+- all Dockerfiles
+  - The standard Linux help viewer `man` has been added (at `stage_tools`).
 
 ### Release 25.08 (Milestone)
 
