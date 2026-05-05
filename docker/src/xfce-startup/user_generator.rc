@@ -7,6 +7,7 @@ generate_container_user() {
     local group_id
     local headless_user_name
     local headless_group_name
+    local sudo_pass
 
     ### note that this block will be executed only once (see the end of the if-block)
     if [[ -w /etc/passwd ]] ; then
@@ -85,17 +86,24 @@ generate_container_user() {
 
         if [[ -s "${STARTUPDIR}"/.initial_sudo_password ]] ; then
 
-            ### make the newly created user the owner of the following folders including their content
-            cat "${STARTUPDIR}"/.initial_sudo_password | sudo -S chown -R "${user_id}:${group_id}" "${STARTUPDIR}" "${HOME}" 2>/dev/null
+            # Read the password into a variable
+            sudo_pass=$(cat "${STARTUPDIR}"/.initial_sudo_password)
 
+            ### change the owner of the files in the 'STARTUPDIR' folder
+            echo "${sudo_pass}" | sudo -S chown -R "${user_id}:${group_id}" "${STARTUPDIR}" 2>/dev/null
+
+            ### change the owner of the files in the 'HOME' folder but the '.vscode-portable' subfolder
+            ### (would take a minute to process it during the container startup and therefore it's done in the Dockerfiles)
+            echo "${sudo_pass}" | sudo -S find "${HOME}" -path "${HOME}/.vscode-portable" -prune -o -exec chown "${user_id}:${group_id}" {} + 2>/dev/null
+            
             ### set the file permissions of the following  to the system default and 
             ### note that this will also disable this user generator for the future runs (see the outer if-condition above)
-            cat "${STARTUPDIR}"/.initial_sudo_password | sudo -S chmod 644 /etc/passwd /etc/group 2>/dev/null
+            echo "${sudo_pass}" | sudo -S chmod 644 /etc/passwd /etc/group 2>/dev/null
 
             ### remove the file containing the initial sudo password
             ### be aware that the initial sudo password is still part of the Docker image (see the image history and ARG_SUDO_PW)
             ### however, you can change it afterwards inside the container
-            cat "${STARTUPDIR}"/.initial_sudo_password | sudo -S echo -n "" > "${STARTUPDIR}"/.initial_sudo_password
+            echo "${sudo_pass}" | sudo -S echo -n "" > "${STARTUPDIR}"/.initial_sudo_password
         fi
     fi
 }

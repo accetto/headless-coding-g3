@@ -23,6 +23,10 @@ Updated files:
 - all Dockerfiles
   - The standard Linux help viewer `man` has been added (at `stage_tools`).
 
+Fixed:
+
+- Issue [#4](https://github.com/accetto/headless-coding-g3/issues/4) `Containers with VSCode take about 1 minute to start`
+
 ### Release 25.08 (Milestone)
 
 This release brings new images based on the current **Debian 13** and also images with the open-source [Brave Browser][brave], which is based on the open-source [Chromium Browser][chromium] and includes a built-in private AI assistant.
