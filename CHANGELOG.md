@@ -6,6 +6,14 @@
 
 ***
 
+### Release 26.05.1
+
+This is a maintenance release.
+
+Fixes:
+
+- [Issue #5](https://github.com/accetto/headless-coding-g3/issues/5) `Build errors by images not actually including VSCode`
+
 ### Release 26.05
 
 This is a maintenance release. Most of the updates are related to the `TigerVNC v1.16.2`, which has been introduced in the previous release.
