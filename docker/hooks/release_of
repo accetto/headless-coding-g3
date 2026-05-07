@@ -18,8 +18,6 @@ main() {
             #     )
             response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
             if [[ -n "${response}" ]] ; then
-                # DEVV
-                # result=$(echo "${response}" | grep '\(Current\)' | sort -rV | grep -Po -m1 '[0-9.]+')
                 result=$(echo "${response}" | grep '\(Current\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
             fi
             ;;
@@ -34,14 +32,8 @@ main() {
             #     )
             response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
             if [[ -n "${response}" ]] ; then
-                # DEVV
-                # result=$(echo "${response}" | grep '\(LTS\)' | sort -rV | grep -Po -m1 '[0-9.]+')
                 result=$(echo "${response}" | grep '\(LTS\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
             fi
-            # NUKE
-            # echo $result
-            # echo $response
-            # exit
             ;;
 
         nvm )
