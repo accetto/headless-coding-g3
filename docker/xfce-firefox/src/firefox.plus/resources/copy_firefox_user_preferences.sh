@@ -132,8 +132,21 @@ fn_die()
 
 ### source and target folders must be provided
 # : ${_arg_source?} ${_arg_target?}
-[[ ! ${_arg_source} ]] && fn_die "Source path must be provided!"
-[[ ! ${_arg_target} ]] && fn_die "Target path must be provided!"
+[[ ! ${_arg_source} ]] && fn_die "Source path must be provided and it must exist!"
+
+if [[ -d "${_arg_target_legacy}" ]] ; then
+
+	_arg_target="${HOME}/.mozilla/firefox"
+
+elif [[ -d "${_arg_target}" ]] ; then
+
+	_arg_target="${HOME}/.config/mozilla/firefox"
+
+else
+	_arg_target=""
+fi
+
+[[ ! ${_arg_target} ]] && fn_die "Target path must be provided and it must exist!"
 
 _full_userjs="${_arg_source}/${_file_userjs}"
 _full_profilesini="${_arg_target}/${_file_profilesini}"
