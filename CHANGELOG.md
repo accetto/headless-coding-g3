@@ -6,6 +6,21 @@
 
 ***
 
+### Release 26.08 (never published)
+
+This is a maintenance release.
+
+Updated files:
+
+- script `ci-builder.sh` has got a new command `log get deploy` for extracting the beginnings of all deployments (pushes) from the log file; it also includes pushing of builder images (when `FORCE_PUBLISHING_BUILDER_REPO=1`)
+  - Usage example: `./ci-builder.sh log get deploy`
+- script `docker/hooks/release_of` now logs the unexpected `curl` responses into the file `docker/scrap_release_of.log`, which will be cleared by the script `builder.sh` whenever the builder log is cleared. The log is always created and it can be empty if there have been no failures.
+- Mozilla has changed the `Firefox` profile root path from `${HOME}/.mozilla/firefox` to `${HOME}/.config/mozilla/firefox`. The updated script `copy_firefox_user_preferences.sh` handles both paths now.
+
+Updated versions:
+
+- `noVNC` to version **1.7.0**
+
 ### Release 26.05.1
 
 This is a maintenance release.
