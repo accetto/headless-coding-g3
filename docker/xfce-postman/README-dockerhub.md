@@ -1,4 +1,4 @@
-# Headless Debian/Xfce container with VNC/noVNC and Postman desktop app
+# Headless Debian/Xfce container with VNC/noVNC and Postman desktop (incl. Scratch Pad)
 
 ## accetto/debian-vnc-xfce-postman-g3
 
