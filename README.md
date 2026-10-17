@@ -117,6 +117,10 @@ The usage of the `stage_cache` layers has been also improved in all Dockerfiles,
 Also the optional building parameter `--pull` has been introduced for both builder scripts `builder.sh` and `ci-builder.sh`.
 It prevents builds from relying only on a possibly stale local base image.
 
+The new version also introduces a possibility to override the result of the hook script `release_of` by setting the environment variables like `RELEASE_OF_OVERRIDE_nvm` and similar.
+
+Note that the `postman` is still pinned in any case directly in the script `release_of` to the version `10.13.6`, which is the last version still containing `Scratch Pad`.
+
 Please note that the project keeps evolving, so always check the [CHANGELOG][this-changelog] for the latest changes.
 
 #### Previous versions
