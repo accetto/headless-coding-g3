@@ -36,6 +36,21 @@ This is the first `G3v9` release. It brings the following changes.
     - `./builder.sh latest build --pull`
     - `./ci-builder.sh --pull all-no-push group latest`
 
+- It introduces a possibility to override the result of the hook script `release_of`, which returns current dynamic data (e.g. version numbers) used by installing of some products.
+  - It can be done by setting the following environment variables (in the `secrets.rc` script or otherwise):
+    - `RELEASE_OF_OVERRIDE_nodejs_current`
+    - `RELEASE_OF_OVERRIDE_nodejs_lts`
+    - `RELEASE_OF_OVERRIDE_nvm`
+    - `RELEASE_OF_OVERRIDE_postman`
+    - `RELEASE_OF_OVERRIDE_vscode` and `RELEASE_OF_OVERRIDE_vscode_file`
+  - It can be useful for pinning a specific application version or by mitigating building errors because of reaching the request limits, which can sometimes happen by e.g. `Visual Studio Code`.
+  - Note that the `postman` is still pinned in any case directly in the script `release_of` to the version `10.13.6`, which is the last version still containing `Scratch Pad`.
+  - The script `example-secrets.rc` contains the overriding examples.
+
+Fixed:
+
+- missing `NPM_GLOBAL_MODULES` variable initialization in `nvm` and `nodejs` Dockerfiles
+
 ### Release 26.08 (never published)
 
 This is a maintenance release.
