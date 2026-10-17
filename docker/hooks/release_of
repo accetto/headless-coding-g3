@@ -15,93 +15,123 @@ main() {
     case "${subject}" in
 
         nodejs-current )
-            # result=$(wget -qO- \
-            # result=$(curl -sLN \
-            #     https://nodejs.org/en/feed/releases.xml \
-            #     | grep '\(Current\)' \
-            #     | sort -rV \
-            #     | grep -Po -m1 '[0-9.]+' \
-            #     )
-            response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
-            if [[ -n "${response}" ]] ; then
-                result=$(echo "${response}" | grep '\(Current\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
+            if [[ -n "${RELEASE_OF_OVERRIDE_nodejs_current}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_nodejs_current}"
+                echo "Using forced RELEASE_OF_OVERRIDE_nodejs_current=${result}" >&2
+            else
+                # result=$(wget -qO- \
+                # result=$(curl -sLN \
+                #     https://nodejs.org/en/feed/releases.xml \
+                #     | grep '\(Current\)' \
+                #     | sort -rV \
+                #     | grep -Po -m1 '[0-9.]+' \
+                #     )
+                response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
+                if [[ -n "${response}" ]] ; then
+                    result=$(echo "${response}" | grep '\(Current\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
+                fi
             fi
             ;;
 
         nodejs-lts )
-            # result=$(wget -qO- \
-            # result=$(curl -sLN \
-            #     https://nodejs.org/en/feed/releases.xml \
-            #     | grep '\(LTS\)' \
-            #     | sort -rV \
-            #     | grep -Po -m1 '[0-9.]+' \
-            #     )
-            response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
-            if [[ -n "${response}" ]] ; then
-                result=$(echo "${response}" | grep '\(LTS\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
+            if [[ -n "${RELEASE_OF_OVERRIDE_nodejs_lts}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_nodejs_lts}"
+                echo "Using forced RELEASE_OF_OVERRIDE_nodejs_lts=${result}" >&2
+            else
+                # result=$(wget -qO- \
+                # result=$(curl -sLN \
+                #     https://nodejs.org/en/feed/releases.xml \
+                #     | grep '\(LTS\)' \
+                #     | sort -rV \
+                #     | grep -Po -m1 '[0-9.]+' \
+                #     )
+                response=$(curl -sLN https://nodejs.org/en/feed/releases.xml)
+                if [[ -n "${response}" ]] ; then
+                    result=$(echo "${response}" | grep '\(LTS\)' | sort -rV | grep -Po -m1 '[0-9][0-9.]+')
+                fi
             fi
             ;;
 
         nvm )
-            # result=$(wget -qO- \
-            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-            #     https://api.github.com/repos/nvm-sh/nvm/releases/latest \
-            #     | grep -m1 "tag_name" \
-            #     | grep -Po '[0-9.]+'
-            # )
-            response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-                https://api.github.com/repos/nvm-sh/nvm/releases/latest \
-            )
-            if [[ -n "${response}" ]] ; then
-                result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+            if [[ -n "${RELEASE_OF_OVERRIDE_nvm}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_nvm}"
+                echo "Using forced RELEASE_OF_OVERRIDE_nvm=${result}" >&2
+            else
+                # result=$(wget -qO- \
+                # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                #     https://api.github.com/repos/nvm-sh/nvm/releases/latest \
+                #     | grep -m1 "tag_name" \
+                #     | grep -Po '[0-9.]+'
+                # )
+                response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                    https://api.github.com/repos/nvm-sh/nvm/releases/latest \
+                )
+                if [[ -n "${response}" ]] ; then
+                    result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+                fi
             fi
             ;;
 
         postman )
-            ### The 'Postman' version is locked to '10.13.6', the last one that still includes 'Scratch Pad'.
-            ### The last 'Postman' version containing Scratch Pad is '10.13.6'.
-            ### The first 'Postman' version not containing Scratch Pad is '10.14.2' (since May 15, 2023).
-            result="10.13.6"
+            if [[ -n "${RELEASE_OF_OVERRIDE_postman}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_postman}"
+                echo "Using forced RELEASE_OF_OVERRIDE_postman=${result}" >&2
+            else
+                ### The 'Postman' version is locked to '10.13.6', the last one that still includes 'Scratch Pad'.
+                ### The last 'Postman' version containing Scratch Pad is '10.13.6'.
+                ### The first 'Postman' version not containing Scratch Pad is '10.14.2' (since May 15, 2023).
+                result="10.13.6"
             
-            # result=$(wget -qO- \
-            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-            #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
-            #     | grep -m1 "version" \
-            #     | grep -Po '[0-9.]+'
-            # )
-            # response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-            #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable")
-            # if [[ -n "${response}" ]] ; then
-            #     result=$(echo "${response}" | grep -m1 "version" | grep -Po '[0-9.]+')
-            # fi 
+                # result=$(wget -qO- \
+                # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable" \
+                #     | grep -m1 "version" \
+                #     | grep -Po '[0-9.]+'
+                # )
+                # response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                #     "https://dl.pstmn.io/api/version/latest?platform=linux64&channel=stable")
+                # if [[ -n "${response}" ]] ; then
+                #     result=$(echo "${response}" | grep -m1 "version" | grep -Po '[0-9.]+')
+                # fi 
+            fi
             ;;
 
         vscode )
-            # result=$(wget -qO- \
-            # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-            #     https://api.github.com/repos/microsoft/vscode/releases/latest \
-            #     | grep -m1 "tag_name" \
-            #     | grep -Po '[0-9.]+'
-            # )
-            response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
-                https://api.github.com/repos/microsoft/vscode/releases/latest \
-            )
-            if [[ -n "${response}" ]] ; then
-                result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+            if [[ -n "${RELEASE_OF_OVERRIDE_vscode}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_vscode}"
+                echo "Using forced RELEASE_OF_OVERRIDE_vscode=${result}" >&2
+            else
+                # result=$(wget -qO- \
+                # result=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                #     https://api.github.com/repos/microsoft/vscode/releases/latest \
+                #     | grep -m1 "tag_name" \
+                #     | grep -Po '[0-9.]+'
+                # )
+                response=$(curl -sLN -H "Accept: application/vnd.github.v3+json" \
+                    https://api.github.com/repos/microsoft/vscode/releases/latest \
+                )
+                if [[ -n "${response}" ]] ; then
+                    result=$(echo "${response}" | grep -m1 "tag_name" | grep -Po '[0-9.]+')
+                fi
             fi
             ;;
 
         vscode-file )
-            # result=$(wget -qO- \
-            # result="$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable \
-            #     | grep -Po -m1 '(?<=location: )[^\r]+'
-            # )"
-            # result="${result##*/}"
-            response=$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable)
-            if [[ -n "${response}" ]] ; then
-                result=$(echo ${response} | grep -i -Po -m1 '(?<=Location: )[^\r]+')
+            if [[ -n "${RELEASE_OF_OVERRIDE_vscode_file}" ]] ; then
+                result="${RELEASE_OF_OVERRIDE_vscode_file}"
+                echo "Using forced RELEASE_OF_OVERRIDE_vscode_file=${result}" >&2
+            else
+                # result=$(wget -qO- \
+                # result="$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable \
+                #     | grep -Po -m1 '(?<=location: )[^\r]+'
+                # )"
+                # result="${result##*/}"
+                response=$(curl -sLNI https://update.code.visualstudio.com/${version:-latest}/linux-x64/stable)
+                if [[ -n "${response}" ]] ; then
+                    result=$(echo ${response} | grep -i -Po -m1 '(?<=Location: )[^\r]+')
+                fi
+                result="${result##*/}"
             fi
-            result="${result##*/}"
             ;;
 
             

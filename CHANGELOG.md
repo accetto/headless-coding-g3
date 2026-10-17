@@ -6,6 +6,51 @@
 
 ***
 
+### Release 26.10 (G3v9)
+
+This is the first `G3v9` release. It brings the following changes.
+
+- It goes around the problem with the current `containerd` and the improved building pipeline, which has been introduced in the release `25.05 (G3v8)`. See also the [feedback-issue-603].
+
+  - Since the *Docker Desktop* option `Use containerd for pulling and storing images` has been introduced some time ago, the command `docker build --cache-from=<local-helper-image-used-as-cache>` ignores the local helper image if the option is enabled.
+  It always tries to pull the cache image from the registry instead of using the local image.
+    - This release uses the local file system for caching the helper images.
+    This option seems to perform better and it is easier to maintain than the other possible option with a local registry.
+      - The path to the local helper cache is configurable via the environment variable `HELPER_IMAGE_CACHE_PATH`.
+        - The variable is expected to be set in the file `hooks/secrets.rc`.
+        - The default local cache path value is `./.buildx-cache`.
+        - The local cache is automatically cleaned during the building.
+
+- It improves usage of the `stage_cache` layers in all Dockerfiles, avoiding possible stale cache data.
+
+- Both builder scripts `builder.sh` and `ci-builder.sh` can now take a new optional build parameter `--pull`, which is passed to the underlying [docker build][docker-build-command] command.
+
+  - Command `docker build --pull` tells Docker to check the registry for a newer version of every base image referenced by `FROM`, even if a local copy already exists.
+  - Benefits:
+    - Incorporates updated base-image patches and security fixes.
+    - Prevents builds from relying only on a possibly stale local base image.
+    - Rebuilds dependent layers when the base image changes.
+    - Does not disable the build cache or pull every dependency used by later commands.
+  - Use it in CI or security-focused rebuilds. For fully reproducible builds, pin the base image by digest instead.
+  - Note the difference in the command line syntax. For example:
+    - `./builder.sh latest build --pull`
+    - `./ci-builder.sh --pull all-no-push group latest`
+
+- It introduces a possibility to override the result of the hook script `release_of`, which returns current dynamic data (e.g. version numbers) used by installing of some products.
+  - It can be done by setting the following environment variables (in the `secrets.rc` script or otherwise):
+    - `RELEASE_OF_OVERRIDE_nodejs_current`
+    - `RELEASE_OF_OVERRIDE_nodejs_lts`
+    - `RELEASE_OF_OVERRIDE_nvm`
+    - `RELEASE_OF_OVERRIDE_postman`
+    - `RELEASE_OF_OVERRIDE_vscode` and `RELEASE_OF_OVERRIDE_vscode_file`
+  - It can be useful for pinning a specific application version or by mitigating building errors because of reaching the request limits, which can sometimes happen by e.g. `Visual Studio Code`.
+  - Note that the `postman` is still pinned in any case directly in the script `release_of` to the version `10.13.6`, which is the last version still containing `Scratch Pad`.
+  - The script `example-secrets.rc` contains the overriding examples.
+
+Fixed:
+
+- missing `NPM_GLOBAL_MODULES` variable initialization in `nvm` and `nodejs` Dockerfiles
+
 ### Release 26.08 (never published)
 
 This is a maintenance release.
@@ -722,3 +767,7 @@ This is just a maintenance release.
 
 [vscode-portable]: https://code.visualstudio.com/docs/editor/portable
 [service-shields-io]: https://shields.io/
+
+[feedback-issue-603]: https://github.com/docker/desktop-feedback/issues/603
+
+[docker-build-command]: https://docs.docker.com/reference/cli/docker/buildx/build/
