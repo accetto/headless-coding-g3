@@ -6,6 +6,14 @@
 
 ***
 
+### Release 26.10.1
+
+This is a maintenance release.
+
+Fixes:
+
+- Fix in the script `ci-builder.sh`, related to the new `--pull` build option.
+
 ### Release 26.10 (G3v9)
 
 This is the first `G3v9` release. It brings the following changes.
